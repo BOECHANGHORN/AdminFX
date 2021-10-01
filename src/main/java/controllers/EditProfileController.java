@@ -1,10 +1,8 @@
 package controllers;
 
-import Agent.Agent;
-import Agent.AgentDatabase;
+import Admin.Admin;
+import Admin.AdminDatabase;
 import AppHolder.AppHolder;
-import Owner.Owner;
-import Owner.OwnerDatabase;
 import Phone.Phone;
 import Role.Role;
 import Utils.Utils;
@@ -40,21 +38,12 @@ public class EditProfileController {
                 String newPassword = passwordField.getText();
                 String newPhoneNo = phoneNoField.getText();
 
-                if (role.equals("Owner")) {
-                    OwnerDatabase ownerDB = OwnerDatabase.getInstance();
-                    Owner ownerUser = ownerDB.searchUser(currentUsername);
-                    ownerUser.setUserName(newUsername);
-                    ownerUser.setPassword(newPassword);
-                    ownerUser.setPhone(new Phone(newPhoneNo));
-                    ownerDB.update(ownerUser);
-                } else if (role.equals("Agent")) {
-                    AgentDatabase agentDB = AgentDatabase.getInstance();
-                    Agent agentUser = agentDB.searchUser(currentUsername);
-                    agentUser.setUserName(newUsername);
-                    agentUser.setPassword(newPassword);
-                    agentUser.setPhone(new Phone(newPhoneNo));
-                    agentDB.update(agentUser);
-                }
+                AdminDatabase adminDB = AdminDatabase.getInstance();
+                Admin adminUser = adminDB.searchUser(currentUsername);
+                adminUser.setUserName(newUsername);
+                adminUser.setPassword(newPassword);
+                adminUser.setPhone(new Phone(newPhoneNo));
+                adminDB.update(adminUser);
 
                 Utils.showAlert("Updated Successful!!", true);
             } else {

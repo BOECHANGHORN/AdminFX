@@ -11,6 +11,9 @@ public class IntegerFormatter {
         UnaryOperator<TextFormatter.Change> integerValidationFormatter = change -> {
             if (change.getControlNewText().matches("\\d+")) {
                 return change;
+            } else if (change.getControlNewText().equals("")){
+                change.setText("0");
+                return change;
             } else {
                 return null;
             }

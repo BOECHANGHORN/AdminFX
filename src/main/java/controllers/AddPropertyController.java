@@ -4,7 +4,6 @@ import Agent.*;
 import AppHolder.AppHolder;
 import Owner.*;
 import Property.*;
-import Property.PropertySearch.PropertyFilterBuilder;
 import Role.Role;
 import Utils.*;
 import com.app.main.Main;
@@ -13,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 
@@ -60,6 +58,8 @@ public class AddPropertyController {
     private TextField rateTxt;
     @FXML
     private CheckBox isPublished;
+    @FXML
+    private TextField comment;
 
     AppHolder holder = AppHolder.getInstance();
     private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
@@ -78,21 +78,8 @@ public class AddPropertyController {
         IntegerFormatter integerFormatter2 = new IntegerFormatter();
         DoubleFormatter doubleFormatter = new DoubleFormatter();
 
-        // Owner role only able to create property owned by himself/herself, same concepts applied for agent role
-        Role currentUser = holder.getUser();
-        if (currentUser != null) {
-            String role = currentUser.getRole();
-            if (role.equals("Owner")) {
-                Owner ownerUser = OwnerDatabase.getInstance().searchByID(currentUser.getId()); //try get from OwnerDB
-                ownerChoices.getItems().addAll(ownerUser);
-                agentChoices.getItems().addAll(agentList.values());
-
-            } else if (role.equals("Agent")) {
-                Agent agentUser = AgentDatabase.getInstance().searchByID(currentUser.getId()); //try get from AgentDB
-                ownerChoices.getItems().addAll(ownerList.values());
-                agentChoices.getItems().addAll(agentUser);
-            }
-        }
+        ownerChoices.getItems().addAll(ownerList.values());
+        agentChoices.getItems().addAll(agentList.values());
 
         typeChoices.getItems().addAll(PropertyType.values());
         typeChoices.setConverter(propertyTypeStringConverter);
@@ -135,6 +122,7 @@ public class AddPropertyController {
             pb.setSize(size);
             pb.setRate(rate);
             pb.setPublished(isPublished.isSelected());
+            pb.setComment(comment.getText());
             Property property = new Property(pb);
             propertyDB.create(property);
             if (propertyDB.searchByID(id) != null) {
@@ -173,6 +161,7 @@ public class AddPropertyController {
         sizeTxt.setText("0");
         rateTxt.setText("0.0");
         isPublished.setSelected(false);
+        comment.setText("");
     }
 
     @FXML

@@ -1,6 +1,5 @@
 package Property.PropertySearch;
 
-
 import Agent.Agent;
 import Owner.Owner;
 import Property.*;
@@ -50,7 +49,7 @@ public class PropertyFilter {
     }
 
     private void filterStatus(Boolean availability) {
-        properties.removeIf(p -> (p.getTenant() == null) == availability);
+        properties.removeIf(p -> (p.getTenant() != null) == availability);
     }
 
     private void filterComment(Boolean commentStatus) {

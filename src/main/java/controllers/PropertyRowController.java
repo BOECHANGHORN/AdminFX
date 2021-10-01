@@ -31,6 +31,8 @@ public class PropertyRowController {
     private Label wifiLabel;
     @FXML
     private Label spLabel;
+    @FXML
+    private Label commentLabel;
 
     private Property property;
     private PropertyListener myListener;
@@ -56,6 +58,7 @@ public class PropertyRowController {
         airCondNumLabel.setText(Integer.toString(property.getFacilities().getAirCond()));
         wifiLabel.setText(Utils.getYesOrNo(property.getFacilities().isWifi()));
         spLabel.setText(Utils.getYesOrNo(property.getFacilities().isSwimmingPool()));
+        commentLabel.setText(property.getComment());
     }
 }
 

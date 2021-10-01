@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="OwnerAgentFX" />
+        <module name="AdminFX" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="OwnerAgentFX" target="11" />
+      <module name="AdminFX" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

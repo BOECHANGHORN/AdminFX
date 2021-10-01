@@ -58,7 +58,9 @@ public class UpdatePropertyController {
     @FXML
     private TextField rateTxt;
     @FXML
-    private  CheckBox isPublished;
+    private CheckBox isPublished;
+    @FXML
+    private TextField comment;
 
     AppHolder holder = AppHolder.getInstance();
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
@@ -90,6 +92,7 @@ public class UpdatePropertyController {
                 selectedProperty.setSize(size);
                 selectedProperty.setRate(rate);
                 selectedProperty.setPublished(isPublished.isSelected());
+                selectedProperty.setComment(comment.getText());
                 propertyDB.update(selectedProperty);
 
                 if (propertyDB.searchByID(selectedProperty.getId()) != null) {
@@ -110,21 +113,8 @@ public class UpdatePropertyController {
             IntegerFormatter integerFormatter2 = new IntegerFormatter();
             DoubleFormatter doubleFormatter = new DoubleFormatter();
 
-            // Owner role only able to create property owned by himself/herself, same concepts applied for agent role
-            Role currentUser = holder.getUser();
-            if (currentUser != null) {
-                String role = currentUser.getRole();
-                if (role.equals("Owner")) {
-                    Owner ownerUser = OwnerDatabase.getInstance().searchByID(currentUser.getId()); //try get from OwnerDB
-                    ownerChoices.getItems().addAll(ownerUser);
-                    agentChoices.getItems().addAll(agentList.values());
-
-                } else if (role.equals("Agent")) {
-                    Agent agentUser = AgentDatabase.getInstance().searchByID(currentUser.getId()); //try get from AgentDB
-                    ownerChoices.getItems().addAll(selectedProperty.getOwner());
-                    agentChoices.getItems().addAll(agentUser);
-                }
-            }
+            ownerChoices.getItems().addAll(selectedProperty.getOwner());
+            agentChoices.getItems().addAll(selectedProperty.getAgent());
 
             typeChoices.getItems().addAll(PropertyType.values());
             typeChoices.setConverter(propertyTypeStringConverter);
@@ -158,6 +148,7 @@ public class UpdatePropertyController {
             rateTxt.setTextFormatter(doubleFormatter.getInstance());
             rateTxt.setText(Double.toString(selectedProperty.getRate()));
             isPublished.setSelected(selectedProperty.isPublished());
+            comment.setText(selectedProperty.getComment());
         }
 
     }

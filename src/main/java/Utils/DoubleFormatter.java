@@ -10,12 +10,17 @@ public class DoubleFormatter {
 
     public DoubleFormatter() {
         UnaryOperator<TextFormatter.Change> doubleNumValidationFormatter = change -> {
-            if (change.getControlNewText().matches("\\d+\\.\\d+")) {
+            if (change.getControlNewText().matches("\\d+\\.\\d{0,2}")
+            || change.getControlNewText().matches("\\d+")) {
+                return change;
+            } else if (change.getControlNewText().equals("")) {
+                change.setText("0");
                 return change;
             } else {
                return null;
             }
         };
+
         StringConverter<Double> converter = new StringConverter<>() {
 
             @Override

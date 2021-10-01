@@ -1,15 +1,9 @@
 package controllers;
 
-import Agent.Agent;
-import Agent.AgentDatabase;
 import AppHolder.*;
-import Owner.Owner;
-import Owner.OwnerDatabase;
-import Phone.Phone;
 import Property.*;
 import Property.PropertySearch.FacilitiesPicker;
 import Property.PropertySearch.PropertyFilterBuilder;
-import Role.Role;
 import Utils.PropertyListener;
 import Utils.Utils;
 import com.app.main.Main;
@@ -78,21 +72,8 @@ public class ViewBoardController {
     }
 
     private PropertyFilterBuilder getOwnPropertyFilterBuilder(){
-
-        Role currentUser = holder.getUser();
         PropertyFilterBuilder propertyFilterBuilder = new PropertyFilterBuilder();
 
-        if (currentUser != null) {
-            String role = currentUser.getRole();
-            if (role.equals("Owner")) {
-                Owner ownerUser = OwnerDatabase.getInstance().searchByID(currentUser.getId()); //try get from OwnerDB
-                propertyFilterBuilder.setOwner(ownerUser);
-            } else if (role.equals("Agent")) {
-                Agent agentUser = AgentDatabase.getInstance().searchByID(currentUser.getId()); //try get from AgentDB
-                propertyFilterBuilder.setAgent(agentUser);
-
-            }
-        }
         return propertyFilterBuilder;
     }
 

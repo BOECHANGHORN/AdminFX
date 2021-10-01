@@ -13,7 +13,7 @@
 
 <AnchorPane onMouseClicked="#onClick" prefHeight="200.0" prefWidth="700.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyRowController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="700.0" spacing="5.0">
+      <VBox prefHeight="215.0" prefWidth="700.0" spacing="5.0">
          <children>
             <HBox prefHeight="54.0" prefWidth="680.0">
                <children>
@@ -39,7 +39,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label fx:id="buildingDetailLabel" minWidth="-Infinity" prefHeight="17.0" prefWidth="668.0" styleClass="grey-text" stylesheets="@../../../styles.css" text="Bungalow • 18186 sqft" />
+                  <Label fx:id="buildingDetailLabel" minWidth="-Infinity" prefHeight="36.0" prefWidth="668.0" styleClass="grey-text" stylesheets="@../../../styles.css" text="Bungalow • 18186 sqft" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -105,10 +105,15 @@
                         <Label fx:id="wifiLabel" prefHeight="31.0" prefWidth="24.0" text="Yes" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="31.0" prefWidth="188.0">
+                  <HBox prefHeight="30.0" prefWidth="188.0">
                      <children>
                         <Label prefHeight="31.0" prefWidth="96.0" text="Swimming Pool:" />
                         <Label fx:id="spLabel" prefHeight="31.0" prefWidth="30.0" text="No" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="426.0">
+                     <children>
+                        <Label fx:id="commentLabel" prefHeight="30.0" prefWidth="451.0" />
                      </children>
                   </HBox>
                </children>

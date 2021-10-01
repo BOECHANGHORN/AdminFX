@@ -1,16 +1,13 @@
 package Login;
 
-import Agent.AgentDatabase;
-import Owner.OwnerDatabase;
+import Admin.AdminDatabase;
 import Role.Role;
 
 public class LoginController {
 
     public Role login(String userName, String password) throws UserNotExistExcpt, WrongPwdExcpt {
 
-        Role user = AgentDatabase.getInstance().searchUser(userName); //try get from AgentDB
-        if (user == null)
-            user = OwnerDatabase.getInstance().searchUser(userName); //try get from OwnerDB
+        Role user = AdminDatabase.getInstance().searchUser(userName); //try get from AdminDB
 
         if (user == null)
             throw new UserNotExistExcpt("User does not exist");
