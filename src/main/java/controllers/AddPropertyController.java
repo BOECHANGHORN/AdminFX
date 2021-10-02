@@ -71,7 +71,6 @@ public class AddPropertyController {
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
     private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
 
-
     @FXML
     private void initialize() {
         // Setup Input
@@ -196,7 +195,7 @@ public class AddPropertyController {
 
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddPropertyPage();
+        Main.goToAddMenuPage();
     }
 
     @FXML

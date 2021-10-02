@@ -206,6 +206,13 @@
                </font>
             </Label>
             <TextField fx:id="comment" prefHeight="25.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label alignment="CENTER" layoutX="469.0" layoutY="565.0" prefHeight="86.0" prefWidth="371.0" text="Tenant:" GridPane.columnIndex="2" GridPane.rowIndex="9">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="tenantChoices" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <CheckBox fx:id="isTenant" mnemonicParsing="false" onMouseClicked="#onTenantCheck" GridPane.columnIndex="3" GridPane.rowIndex="9" />
          </children>
          <BorderPane.margin>
             <Insets />

@@ -1,6 +1,8 @@
 package controllers;
 
+import Agent.*;
 import AppHolder.*;
+import Owner.*;
 import Property.PropertyType;
 import Role.Role;
 import Utils.*;
@@ -8,13 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.TreeMap;
+
 public class PropertyFilterController {
     public static final String[] STATUSES = {Utils.ACTIVE, Utils.INACTIVE};
     public static final String[] SORT_CHOICES = {Utils.LOWEST_FIRST, Utils.HIGHEST_FIRST};
 
     @FXML
     private DialogPane dialogPane;
-
     @FXML
     private CheckBox typeChecked;
     @FXML
@@ -70,6 +73,8 @@ public class PropertyFilterController {
     @FXML
     private ChoiceBox<Role> agentChoices;
 
+    private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
+    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
 
     @FXML
     private void initialize() {
@@ -93,7 +98,8 @@ public class PropertyFilterController {
         propertyFilterHolder.setMinRateChecked(minRateChecked.isSelected());
         propertyFilterHolder.setMaxRateChecked(maxRateChecked.isSelected());
         propertyFilterHolder.setSortChecked(sortChecked.isSelected());
-
+        propertyFilterHolder.setOwnerChecked(ownerChecked.isSelected());
+        propertyFilterHolder.setAgentChecked(agentChecked.isSelected());
 
         propertyFilterHolder.setTypeChoice(typeChoices.getValue());
         propertyFilterHolder.setStatusChoice(statusChoices.getValue());
@@ -110,6 +116,8 @@ public class PropertyFilterController {
         propertyFilterHolder.setMinRate(minRate.getText());
         propertyFilterHolder.setMaxRate(maxRate.getText());
         propertyFilterHolder.setSortChoice(sortChoices.getValue());
+        propertyFilterHolder.setOwnerChoice((Owner) ownerChoices.getValue());
+        propertyFilterHolder.setAgentChoice((Agent) agentChoices.getValue());
 
         holder.setPropertyFilterHolder((propertyFilterHolder));
     }
@@ -117,6 +125,7 @@ public class PropertyFilterController {
     @FXML
     private void populateData() {
         PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
+        RoleStringConverter roleStringConverter = new RoleStringConverter();
         IntegerFormatter integerFormatter = new IntegerFormatter();
         DoubleFormatter doubleFormatter1 = new DoubleFormatter();
         DoubleFormatter doubleFormatter2 = new DoubleFormatter();
@@ -129,6 +138,10 @@ public class PropertyFilterController {
         minRate.setTextFormatter(doubleFormatter1.getInstance());
         maxRate.setTextFormatter(doubleFormatter2.getInstance());
         sortChoices.getItems().addAll(SORT_CHOICES);
+        ownerChoices.getItems().addAll(ownerList.values());
+        agentChoices.getItems().addAll(agentList.values());
+        ownerChoices.setConverter(roleStringConverter);
+        agentChoices.setConverter(roleStringConverter);
 
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = holder.getPropertyFilterHolder();
@@ -141,6 +154,9 @@ public class PropertyFilterController {
             minRateChecked.setSelected(propertyFilterHolder.isMinRateChecked());
             maxRateChecked.setSelected(propertyFilterHolder.isMaxRateChecked());
             sortChecked.setSelected(propertyFilterHolder.isSortChecked());
+            ownerChecked.setSelected(propertyFilterHolder.isOwnerChecked());
+            agentChecked.setSelected(propertyFilterHolder.isAgentChecked());
+
             typeChoices.setValue(propertyFilterHolder.getTypeChoice());
             statusChoices.setValue(propertyFilterHolder.getStatusChoice());
             isCommented.setSelected(propertyFilterHolder.isCommented());
@@ -156,6 +172,8 @@ public class PropertyFilterController {
             minRate.setText(propertyFilterHolder.getMinRate());
             maxRate.setText(propertyFilterHolder.getMaxRate());
             sortChoices.setValue(propertyFilterHolder.getSortChoice());
+            ownerChoices.setValue(propertyFilterHolder.getOwnerChoice());
+            agentChoices.setValue(propertyFilterHolder.getAgentChoice());
         }
     }
 }

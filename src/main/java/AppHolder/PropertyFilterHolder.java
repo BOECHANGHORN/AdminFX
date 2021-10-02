@@ -1,7 +1,10 @@
 package AppHolder;
 
 
+import Agent.Agent;
+import Owner.Owner;
 import Property.PropertyType;
+import Role.Role;
 
 public class PropertyFilterHolder {
     private boolean typeChecked;
@@ -12,6 +15,8 @@ public class PropertyFilterHolder {
     private boolean minRateChecked;
     private boolean maxRateChecked;
     private boolean sortChecked;
+    private boolean ownerChecked;
+    private boolean agentChecked;
     private PropertyType typeChoice;;
     private String statusChoice;;
     private boolean isCommented;
@@ -21,12 +26,14 @@ public class PropertyFilterHolder {
     private boolean isAirCond;
     private boolean isWaterHeater;
     private boolean isSwimmingPool;
-    private String addressField ;
+    private String addressField;
     private String stateChoice ;;
     private String postcodeField ;;
     private String minRate;
     private String maxRate;
     private String sortChoice;
+    private Role ownerChoice;
+    private Role agentChoice;
 
     public String getSortChoice() {
         return sortChoice;
@@ -114,6 +121,22 @@ public class PropertyFilterHolder {
 
     public void setMaxRateChecked(boolean maxRateChecked) {
         this.maxRateChecked = maxRateChecked;
+    }
+
+    public boolean isOwnerChecked() {
+        return ownerChecked;
+    }
+
+    public void setOwnerChecked(boolean ownerChecked) {
+        this.ownerChecked = ownerChecked;
+    }
+
+    public boolean isAgentChecked() {
+        return agentChecked;
+    }
+
+    public void setAgentChecked(boolean agentChecked) {
+        this.agentChecked = agentChecked;
     }
 
     public PropertyType getTypeChoice() {
@@ -211,5 +234,22 @@ public class PropertyFilterHolder {
     public void setMaxRate(String maxRate) {
         this.maxRate = maxRate;
     }
+
+    public Role getOwnerChoice() {
+        return ownerChoice;
+    }
+
+    public void setOwnerChoice(Owner ownerChoice) {
+        this.ownerChoice = ownerChoice;
+    }
+
+    public Role getAgentChoice() {
+        return agentChoice;
+    }
+
+    public void setAgentChoice(Agent agentChoice) {
+        this.agentChoice = agentChoice;
+    }
+
 
 }

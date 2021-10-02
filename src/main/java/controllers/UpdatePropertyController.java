@@ -189,7 +189,7 @@ public class UpdatePropertyController {
 
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddPropertyPage();
+        Main.goToAddMenuPage();
     }
 
     @FXML

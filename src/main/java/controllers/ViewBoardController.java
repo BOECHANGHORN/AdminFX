@@ -1,6 +1,8 @@
 package controllers;
 
+import Agent.Agent;
 import AppHolder.*;
+import Owner.Owner;
 import Property.*;
 import Property.PropertySearch.FacilitiesPicker;
 import Property.PropertySearch.PropertyFilterBuilder;
@@ -42,7 +44,7 @@ public class ViewBoardController {
     @FXML
     void onClearFilter() {
         holder.setPropertyFilterHolder(null);
-        displayPropertyList( this.ownedPropertyList);
+        displayPropertyList(this.ownedPropertyList);
     }
 
     @FXML
@@ -116,6 +118,12 @@ public class ViewBoardController {
             boolean isSortedByLowestFirst = propertyFilterHolder.getSortChoice() == Utils.LOWEST_FIRST;
             propertyFilterBuilder.setSorted(isSortedByLowestFirst);
         }
+        if (propertyFilterHolder.isOwnerChecked() && propertyFilterHolder.getOwnerChoice() != null) {
+            propertyFilterBuilder.setOwner((Owner) propertyFilterHolder.getOwnerChoice());
+        }
+        if (propertyFilterHolder.isAgentChecked() && propertyFilterHolder.getAgentChoice() != null) {
+            propertyFilterBuilder.setAgent((Agent) propertyFilterHolder.getAgentChoice());
+        }
 
         ArrayList<Property> filteredPropertyList = propertyFilterBuilder.build().getResult();
         return filteredPropertyList;
@@ -183,7 +191,7 @@ public class ViewBoardController {
 
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddPropertyPage();
+        Main.goToAddMenuPage();
     }
 
     @FXML
