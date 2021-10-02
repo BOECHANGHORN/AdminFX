@@ -5,6 +5,7 @@ import AppHolder.AppHolder;
 import Owner.*;
 import Property.*;
 import Role.Role;
+import Tenant.*;
 import Utils.*;
 import com.app.main.Main;
 import javafx.fxml.FXML;
@@ -61,9 +62,14 @@ public class UpdatePropertyController {
     private CheckBox isPublished;
     @FXML
     private TextField comment;
+    @FXML
+    private ChoiceBox<Role> tenantChoices;
+    @FXML
+    private CheckBox isTenant;
 
     AppHolder holder = AppHolder.getInstance();
-    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    //private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
     private Property selectedProperty = AppHolder.getInstance().getSelectedProperty();
 
 
@@ -91,7 +97,14 @@ public class UpdatePropertyController {
                 selectedProperty.setSize(size);
                 selectedProperty.setRate(rate);
                 selectedProperty.setPublished(isPublished.isSelected());
-                selectedProperty.setComment(comment.getText());
+                selectedProperty.setComment(comment.getText() == null || comment.getText().isEmpty() ? null : comment.getText());
+
+                if (isTenant.isSelected()) {
+                    selectedProperty.setTenant((Tenant) tenantChoices.getValue());
+                } else {
+                    selectedProperty.setTenant(null);
+                }
+
                 propertyDB.update(selectedProperty);
 
                 if (propertyDB.searchByID(selectedProperty.getId()) != null) {
@@ -114,16 +127,23 @@ public class UpdatePropertyController {
 
             ownerChoices.getItems().addAll(selectedProperty.getOwner());
             agentChoices.getItems().addAll(selectedProperty.getAgent());
+            //agentChoices.getItems().addAll(agentList.values());
+            tenantChoices.getItems().addAll(tenantList.values());
+
+            isTenant.setSelected(selectedProperty.getTenant() != null);
+            tenantChoices.setVisible(selectedProperty.getTenant() != null);
 
             typeChoices.getItems().addAll(PropertyType.values());
             typeChoices.setConverter(propertyTypeStringConverter);
             ownerChoices.setConverter(roleStringConverter);
             agentChoices.setConverter(roleStringConverter);
+            tenantChoices.setConverter(roleStringConverter);
             stateChoices.getItems().addAll(Utils.STATES);
             name.setText(selectedProperty.getName());
             typeChoices.setValue(selectedProperty.getType());
             ownerChoices.setValue(selectedProperty.getOwner());
             agentChoices.setValue(selectedProperty.getAgent());
+            tenantChoices.setValue(selectedProperty.getTenant());
             stateChoices.setValue(selectedProperty.getAddress().getState());
             address.setText(selectedProperty.getAddress().getDetailAddress());
             postcode.setTextFormatter(integerFormatter1.getInstance());
@@ -150,6 +170,11 @@ public class UpdatePropertyController {
             comment.setText(selectedProperty.getComment());
         }
 
+    }
+
+    @FXML
+    private void onTenantCheck(MouseEvent mouseEvent) {
+        tenantChoices.setVisible(isTenant.isSelected());
     }
 
     private boolean isValid() {

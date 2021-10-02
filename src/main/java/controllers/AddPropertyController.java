@@ -5,6 +5,7 @@ import AppHolder.AppHolder;
 import Owner.*;
 import Property.*;
 import Role.Role;
+import Tenant.*;
 import Utils.*;
 import com.app.main.Main;
 import javafx.fxml.FXML;
@@ -60,10 +61,16 @@ public class AddPropertyController {
     private CheckBox isPublished;
     @FXML
     private TextField comment;
+    @FXML
+    private ChoiceBox<Role> tenantChoices;
+    @FXML
+    private CheckBox isTenant;
 
     AppHolder holder = AppHolder.getInstance();
     private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
+
 
     @FXML
     private void initialize() {
@@ -80,11 +87,15 @@ public class AddPropertyController {
 
         ownerChoices.getItems().addAll(ownerList.values());
         agentChoices.getItems().addAll(agentList.values());
+        tenantChoices.getItems().addAll(tenantList.values());
+
+        tenantChoices.setVisible(false);
 
         typeChoices.getItems().addAll(PropertyType.values());
         typeChoices.setConverter(propertyTypeStringConverter);
         ownerChoices.setConverter(roleStringConverter);
         agentChoices.setConverter(roleStringConverter);
+        tenantChoices.setConverter(roleStringConverter);
         stateChoices.getItems().addAll(Utils.STATES);
         postcode.setTextFormatter(integerFormatter1.getInstance());
         roomNumVF.setValue(0);
@@ -123,6 +134,13 @@ public class AddPropertyController {
             pb.setRate(rate);
             pb.setPublished(isPublished.isSelected());
             pb.setComment(comment.getText());
+
+            if (isTenant.isSelected()) {
+                pb.setTenant((Tenant) tenantChoices.getValue());
+            } else {
+                pb.setTenant(null);
+            }
+
             Property property = new Property(pb);
             propertyDB.create(property);
             if (propertyDB.searchByID(id) != null) {
@@ -144,6 +162,8 @@ public class AddPropertyController {
         typeChoices.setValue(null);
         ownerChoices.setValue(null);
         agentChoices.setValue(null);
+        tenantChoices.setValue(null);
+        isTenant.setSelected(false);
         stateChoices.setValue(null);
         address.setText("");
         postcode.setTextFormatter(null);
@@ -162,6 +182,11 @@ public class AddPropertyController {
         rateTxt.setText("0.0");
         isPublished.setSelected(false);
         comment.setText("");
+    }
+
+    @FXML
+    private void onTenantCheck(MouseEvent mouseEvent) {
+        tenantChoices.setVisible(isTenant.isSelected());
     }
 
     @FXML

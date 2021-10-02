@@ -1,6 +1,7 @@
 package controllers;
 
 import Property.Property;
+import Tenant.Tenant;
 import Utils.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -33,6 +34,8 @@ public class PropertyRowController {
     private Label spLabel;
     @FXML
     private Label commentLabel;
+    @FXML
+    private Label tenantLabel;
 
     private Property property;
     private PropertyListener myListener;
@@ -60,11 +63,19 @@ public class PropertyRowController {
         spLabel.setText(Utils.getYesOrNo(property.getFacilities().isSwimmingPool()));
 
         String commentStr = property.getComment();
-        if (commentStr == null || commentStr.isEmpty()) {
+        if (commentStr == null) {
             commentLabel.setText("N/A");
             commentLabel.setStyle("-fx-text-fill: #697684");
         } else {
             commentLabel.setText(property.getComment());
+        }
+
+        Tenant tenant = property.getTenant();
+        if (tenant == null) {
+            tenantLabel.setText("N/A");
+            tenantLabel.setStyle("-fx-text-fill: #697684");
+        } else {
+            tenantLabel.setText(tenant.getUserName());
         }
     }
 }

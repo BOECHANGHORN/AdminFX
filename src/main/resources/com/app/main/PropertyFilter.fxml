@@ -13,24 +13,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 
-<DialogPane fx:id="dialogPane" expanded="true" prefHeight="600.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyFilterController">
+<DialogPane fx:id="dialogPane" expanded="true" prefHeight="724.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyFilterController">
     <graphic>
-        <GridPane hgap="5.0" prefHeight="515.0" prefWidth="350.0" vgap="10.0">
+        <GridPane hgap="5.0" prefHeight="651.0" prefWidth="350.0" vgap="10.0">
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
@@ -40,9 +43,9 @@
                 <ColumnConstraints maxWidth="216.0" minWidth="10.0" prefWidth="192.0" />
             </columnConstraints>
             <children>
-                <Label prefHeight="24.0" prefWidth="127.0" text="Property Type:" GridPane.rowIndex="5" />
-                <Label GridPane.rowIndex="6" />
-            <ChoiceBox fx:id="typeChoices" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label prefHeight="24.0" prefWidth="127.0" text="Property Type:" GridPane.rowIndex="6" />
+                <Label GridPane.rowIndex="7" />
+            <ChoiceBox fx:id="typeChoices" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label prefHeight="17.0" prefWidth="144.0" text="Tick ✓ if applied." />
             <CheckBox fx:id="typeChecked" mnemonicParsing="false" text="Property Type" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -57,52 +60,58 @@
                   <CheckBox fx:id="maxRateChecked" mnemonicParsing="false" text="Max Rate" />
                </children>
             </HBox>
-            <Label layoutX="20.0" layoutY="111.0" prefHeight="25.0" prefWidth="127.0" text="Property Status:" GridPane.rowIndex="6" />
-            <Label layoutX="20.0" layoutY="136.0" prefHeight="25.0" prefWidth="127.0" text="With Comments:" GridPane.rowIndex="7" />
-            <Label layoutX="20.0" layoutY="136.0" prefHeight="25.0" prefWidth="127.0" text="Facilities:" GridPane.rowIndex="8" />
-            <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Min Rate(RM):" GridPane.rowIndex="14" />
-            <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Address:" GridPane.rowIndex="11" />
-            <TextField fx:id="addressField" promptText="Street Adress" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <ChoiceBox fx:id="statusChoices" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <CheckBox fx:id="isCommented" mnemonicParsing="false" prefHeight="24.0" prefWidth="18.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <Label layoutX="20.0" layoutY="111.0" prefHeight="25.0" prefWidth="127.0" text="Property Status:" GridPane.rowIndex="7" />
+            <Label layoutX="20.0" layoutY="136.0" prefHeight="25.0" prefWidth="127.0" text="With Comments:" GridPane.rowIndex="8" />
+            <Label layoutX="20.0" layoutY="136.0" prefHeight="25.0" prefWidth="127.0" text="Facilities:" GridPane.rowIndex="9" />
+            <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Min Rate(RM):" GridPane.rowIndex="15" />
+            <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Address:" GridPane.rowIndex="12" />
+            <TextField fx:id="addressField" promptText="Street Adress" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <ChoiceBox fx:id="statusChoices" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <CheckBox fx:id="isCommented" mnemonicParsing="false" prefHeight="24.0" prefWidth="18.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <children>
                   <CheckBox fx:id="isWifi" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="WI-FI" />
                   <CheckBox fx:id="isFridge" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Fridge" />
                   <CheckBox fx:id="isTv" mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="TV" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="10" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <children>
                   <CheckBox fx:id="isAirCond" mnemonicParsing="false" prefHeight="28.0" prefWidth="81.0" text="Air- Cond" />
                   <CheckBox fx:id="isWaterHeater" mnemonicParsing="false" prefHeight="24.0" prefWidth="106.0" text="Water Heater" />
                </children>
             </HBox>
-            <CheckBox fx:id="isSwimmingPool" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Swimming Pool" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14">
+            <CheckBox fx:id="isSwimmingPool" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Swimming Pool" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="15">
                <children>
                   <TextField fx:id="minRate" prefHeight="25.0" prefWidth="84.0" promptText="Min" />
                </children>
             </HBox>
-            <ChoiceBox fx:id="stateChoices" prefHeight="25.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <TextField fx:id="postcodeField" promptText="Postcode" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <ChoiceBox fx:id="stateChoices" prefHeight="25.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <TextField fx:id="postcodeField" promptText="Postcode" GridPane.columnIndex="1" GridPane.rowIndex="14" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
                   <CheckBox fx:id="addressChecked" mnemonicParsing="false" text="Address" />
                </children>
             </HBox>
             <CheckBox fx:id="facilitiesChecked" mnemonicParsing="false" text="Facilities" GridPane.rowIndex="3" />
-            <Label layoutX="20.0" layoutY="384.0" prefHeight="25.0" prefWidth="127.0" text="Max Rate(RM):" GridPane.rowIndex="15" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="15">
+            <Label layoutX="20.0" layoutY="384.0" prefHeight="25.0" prefWidth="127.0" text="Max Rate(RM):" GridPane.rowIndex="16" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="16">
                <children>
                   <TextField fx:id="maxRate" prefHeight="25.0" prefWidth="84.0" promptText="Max" />
                </children>
             </HBox>
             <CheckBox fx:id="sortChecked" mnemonicParsing="false" text="Sorting" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label layoutX="20.0" layoutY="435.0" prefHeight="25.0" prefWidth="127.0" text="Sorted By:" GridPane.rowIndex="16" />
-            <ChoiceBox fx:id="sortChoices" prefHeight="25.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-            <Line endX="224.5" startX="-100.0" GridPane.rowIndex="4" />
+            <Label layoutX="20.0" layoutY="435.0" prefHeight="25.0" prefWidth="127.0" text="Sorted By:" GridPane.rowIndex="17" />
+            <ChoiceBox fx:id="sortChoices" prefHeight="25.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+            <Line endX="224.5" startX="-100.0" GridPane.rowIndex="5" />
+            <CheckBox fx:id="ownerChecked" mnemonicParsing="false" text="Owner" GridPane.rowIndex="4" />
+            <CheckBox fx:id="agentChecked" mnemonicParsing="false" text="Agent" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="20.0" layoutY="553.0" prefHeight="25.0" prefWidth="127.0" text="Owner:" GridPane.rowIndex="18" />
+            <Label layoutX="20.0" layoutY="585.0" prefHeight="25.0" prefWidth="127.0" text="Agent:" GridPane.rowIndex="19" />
+            <ChoiceBox fx:id="ownerChoices" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+            <ChoiceBox fx:id="agentChoices" prefHeight="38.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="19" />
             </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

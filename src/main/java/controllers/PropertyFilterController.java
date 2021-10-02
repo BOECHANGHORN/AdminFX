@@ -2,6 +2,7 @@ package controllers;
 
 import AppHolder.*;
 import Property.PropertyType;
+import Role.Role;
 import Utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +31,10 @@ public class PropertyFilterController {
     private CheckBox maxRateChecked;
     @FXML
     private CheckBox sortChecked;
+    @FXML
+    private CheckBox ownerChecked;
+    @FXML
+    private CheckBox agentChecked;
     @FXML
     private ChoiceBox<PropertyType> typeChoices;
     @FXML
@@ -60,6 +65,10 @@ public class PropertyFilterController {
     private TextField maxRate;
     @FXML
     private ChoiceBox<String> sortChoices;
+    @FXML
+    private ChoiceBox<Role> ownerChoices;
+    @FXML
+    private ChoiceBox<Role> agentChoices;
 
 
     @FXML
@@ -84,6 +93,8 @@ public class PropertyFilterController {
         propertyFilterHolder.setMinRateChecked(minRateChecked.isSelected());
         propertyFilterHolder.setMaxRateChecked(maxRateChecked.isSelected());
         propertyFilterHolder.setSortChecked(sortChecked.isSelected());
+
+
         propertyFilterHolder.setTypeChoice(typeChoices.getValue());
         propertyFilterHolder.setStatusChoice(statusChoices.getValue());
         propertyFilterHolder.setIsCommented(isCommented.isSelected());
