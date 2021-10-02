@@ -73,7 +73,6 @@ public class UpdatePropertyController {
         populateData();
     }
 
-
     @FXML
     private void onUpdate(MouseEvent mouseEvent) {
         if (selectedProperty != null) {

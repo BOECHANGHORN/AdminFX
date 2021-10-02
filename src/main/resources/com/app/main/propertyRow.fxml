@@ -13,7 +13,7 @@
 
 <AnchorPane onMouseClicked="#onClick" prefHeight="200.0" prefWidth="700.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyRowController">
    <children>
-      <VBox prefHeight="215.0" prefWidth="700.0" spacing="5.0">
+      <VBox prefHeight="239.0" prefWidth="700.0" spacing="5.0">
          <children>
             <HBox prefHeight="54.0" prefWidth="680.0">
                <children>
@@ -111,11 +111,12 @@
                         <Label fx:id="spLabel" prefHeight="31.0" prefWidth="30.0" text="No" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="30.0" prefWidth="426.0">
-                     <children>
-                        <Label fx:id="commentLabel" prefHeight="30.0" prefWidth="451.0" />
-                     </children>
-                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="66.0" text="Comment:" />
+                  <Label fx:id="commentLabel" prefHeight="47.0" prefWidth="603.0" text="N/A" />
                </children>
             </HBox>
          </children>

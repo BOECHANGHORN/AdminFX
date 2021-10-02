@@ -58,7 +58,13 @@ public class PropertyRowController {
         airCondNumLabel.setText(Integer.toString(property.getFacilities().getAirCond()));
         wifiLabel.setText(Utils.getYesOrNo(property.getFacilities().isWifi()));
         spLabel.setText(Utils.getYesOrNo(property.getFacilities().isSwimmingPool()));
-        commentLabel.setText(property.getComment());
+
+        String commentStr = property.getComment();
+        if (commentStr == null || commentStr.isEmpty()) {
+            commentLabel.setText("N/A");
+            commentLabel.setStyle("-fx-text-fill: #697684");
+        } else {
+            commentLabel.setText(property.getComment());
+        }
     }
 }
-
