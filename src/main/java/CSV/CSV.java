@@ -1,6 +1,7 @@
 package CSV;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +22,8 @@ public class CSV {
         ArrayList<ArrayList<String>> data = new ArrayList<>();
 
         try {
-            Scanner fileInput = new Scanner(file);
+            Scanner fileInput = new Scanner(new BufferedReader(new FileReader(file, StandardCharsets.UTF_8)));
+            System.out.println(file);
             while (fileInput.hasNextLine()) {
                 String innerData = fileInput.nextLine();
 
@@ -40,6 +42,8 @@ public class CSV {
             fileInput.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error");
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -61,7 +65,7 @@ public class CSV {
         }
 
         try {
-            FileWriter writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8);
             writer.write(writeData.toString());
             writer.close();
         } catch (IOException e) {
