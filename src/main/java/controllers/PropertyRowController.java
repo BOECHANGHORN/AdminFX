@@ -1,11 +1,14 @@
 package controllers;
 
-import Property.Property;
+import Property.*;
 import Tenant.Tenant;
 import Utils.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class PropertyRowController {
     @FXML
@@ -14,6 +17,12 @@ public class PropertyRowController {
     private Label addressLabel;
     @FXML
     private Label rateLabel;
+    @FXML
+    private Label ownerLabel;
+    @FXML
+    private Label agentLabel;
+    @FXML
+    private Label tenantLabel;
     @FXML
     private Label buildingDetailLabel;
     @FXML
@@ -35,7 +44,10 @@ public class PropertyRowController {
     @FXML
     private Label commentLabel;
     @FXML
-    private Label tenantLabel;
+    private AnchorPane propertyPane;
+    @FXML
+    private Button deleteBtn;
+
 
     private Property property;
     private PropertyListener myListener;
@@ -43,6 +55,17 @@ public class PropertyRowController {
     @FXML
     private void onClick(MouseEvent mouseEvent) {
         myListener.onClickListener(property);
+    }
+
+    @FXML
+    private void onDelete(MouseEvent mouseEvent) {
+        boolean confirm = Utils.showConfirm("Confirm to delete " + property.getName() + " ?");
+
+        if (confirm) {
+            PropertyDatabase.getInstance().delete(property);
+            propertyPane.setVisible(false);
+            Utils.showAlert(property.getName() + " is deleted successfully", true);
+        }
     }
 
     public void setData(Property property, PropertyListener myListener) {
@@ -61,6 +84,8 @@ public class PropertyRowController {
         airCondNumLabel.setText(Integer.toString(property.getFacilities().getAirCond()));
         wifiLabel.setText(Utils.getYesOrNo(property.getFacilities().isWifi()));
         spLabel.setText(Utils.getYesOrNo(property.getFacilities().isSwimmingPool()));
+        ownerLabel.setText(property.getOwner().getUserName());
+        agentLabel.setText(property.getAgent().getUserName());
 
         String commentStr = property.getComment();
         if (commentStr == null) {
@@ -76,6 +101,10 @@ public class PropertyRowController {
             tenantLabel.setStyle("-fx-text-fill: #697684");
         } else {
             tenantLabel.setText(tenant.getUserName());
+        }
+
+        if (!property.isPublished()) {
+            propertyPane.setStyle("-fx-background-color: #CCCCCC");
         }
     }
 }

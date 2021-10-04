@@ -66,7 +66,7 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
 
     @Override
     public void delete(Agent agent) {
-        agentList.remove(agent);
+        agentList.remove(agent.getId());
         writeData();
     }
 

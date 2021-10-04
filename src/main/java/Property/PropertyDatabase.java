@@ -112,7 +112,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
 
     @Override
     public void delete(Property property) {
-        propertyList.remove(property);
+        propertyList.remove(property.getId());
         writeData();
     }
 

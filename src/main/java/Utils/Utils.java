@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 
+import java.util.Optional;
+
 public class Utils {
     public static final String[] STATES = {"Johor", "Kedah", "Kelantan", "Malacca", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Sabah", "Sarawak", "Selangor", "Terengganu"};
     public static final String CURRENCY = "RM";
@@ -56,6 +58,13 @@ public class Utils {
             dialogPane.getStyleClass().add("error");
         }
         alert.show();
+    }
+
+    public static boolean showConfirm(String msg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return (result.isPresent()) && (result.get() == ButtonType.OK);
     }
 
 }

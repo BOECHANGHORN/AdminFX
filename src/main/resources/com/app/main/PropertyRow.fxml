@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,17 +12,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#onClick" prefHeight="200.0" prefWidth="700.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyRowController">
+<AnchorPane fx:id="propertyPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#onClick" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PropertyRowController">
    <children>
-      <VBox prefHeight="255.0" prefWidth="700.0" spacing="5.0">
+      <VBox prefHeight="312.0" prefWidth="700.0" spacing="5.0">
          <children>
-            <HBox prefHeight="54.0" prefWidth="680.0">
+            <HBox maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="54.0">
                <children>
-                  <Label fx:id="nameLabel" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="680.0" text="Lucentia Residence @ Bukit Bintang">
+                  <Label fx:id="nameLabel" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="574.0" text="Lucentia Residence @ Bukit Bintang">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <HBox alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="264.0">
+                     <children>
+                        <Button fx:id="deleteBtn" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#onDelete" text="X" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <HBox prefHeight="26.0" prefWidth="670.0">
@@ -40,6 +46,24 @@
             <HBox>
                <children>
                   <Label fx:id="buildingDetailLabel" minWidth="-Infinity" prefHeight="36.0" prefWidth="668.0" styleClass="grey-text" stylesheets="@../../../styles.css" text="Bungalow • 18186 sqft" />
+               </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="66.0" text="Owner:" />
+                  <Label fx:id="ownerLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
+               </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="196.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="66.0" text="Agent:" />
+                  <Label fx:id="agentLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="66.0" text="Tenant:" />
+                  <Label fx:id="tenantLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -117,12 +141,6 @@
                <children>
                   <Label prefHeight="32.0" prefWidth="66.0" text="Comment:" />
                   <Label fx:id="commentLabel" prefHeight="47.0" prefWidth="603.0" text="N/A" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label prefHeight="26.0" prefWidth="66.0" text="Tenant:" />
-                  <Label fx:id="tenantLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
                </children>
             </HBox>
          </children>

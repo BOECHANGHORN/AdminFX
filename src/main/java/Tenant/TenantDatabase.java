@@ -65,7 +65,7 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
 
     @Override
     public void delete(Tenant tenant) {
-        tenantList.remove(tenant);
+        tenantList.remove(tenant.getId());
         writeData();
     }
 

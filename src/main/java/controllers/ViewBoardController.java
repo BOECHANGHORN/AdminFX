@@ -147,7 +147,7 @@ public class ViewBoardController {
                 };
                 for (Property p : propertyList) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation((Main.class.getResource("propertyRow.fxml")));
+                    fxmlLoader.setLocation((Main.class.getResource("PropertyRow.fxml")));
                     AnchorPane anchorPane = fxmlLoader.load();
                     PropertyRowController propertyRowController = fxmlLoader.getController();
                     propertyRowController.setData(p, myListener);

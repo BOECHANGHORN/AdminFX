@@ -1,6 +1,5 @@
 package Owner;
 
-import Agent.Agent;
 import CSV.*;
 import Initializer.Initialization;
 import Phone.Phone;
@@ -65,7 +64,7 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
 
     @Override
     public void delete(Owner owner) {
-        ownerList.remove(owner);
+        ownerList.remove(owner.getId());
         writeData();
     }
 

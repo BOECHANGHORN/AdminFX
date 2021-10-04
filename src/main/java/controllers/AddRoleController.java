@@ -8,10 +8,9 @@ import Role.Role;
 import Tenant.*;
 import Utils.*;
 import com.app.main.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -27,15 +26,19 @@ public class AddRoleController {
     @FXML
     private TextField phoneNoField;
     @FXML
-    private ChoiceBox<Role> dltRoleChoices;
+    private CheckBox addCheck;
     @FXML
-    private CheckBox ownerCheck;
+    private CheckBox editDltCheck;
     @FXML
-    private CheckBox agentCheck;
+    private ChoiceBox<Role> userChoices;
     @FXML
-    private CheckBox tenantCheck;
+    private Button createBtn;
     @FXML
-    private CheckBox adminCheck;
+    private Button editBtn;
+    @FXML
+    private Button dltBtn;
+    @FXML
+    private Label userLabel;
 
     private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
@@ -44,7 +47,60 @@ public class AddRoleController {
 
     @FXML
     private void initialize() {
+        addSelected();
         populateData();
+    }
+
+    private void addSelected() {
+        addCheck.setSelected(true);
+        editDltCheck.setSelected(false);
+        createBtn.setVisible(true);
+        editBtn.setVisible(false);
+        dltBtn.setVisible(false);
+        userChoices.setVisible(false);
+        userLabel.setVisible(false);
+        clearAll();
+    }
+
+    private void editDltSelected() {
+        addCheck.setSelected(false);
+        editDltCheck.setSelected(true);
+        createBtn.setVisible(false);
+        editBtn.setVisible(true);
+        dltBtn.setVisible(true);
+        userChoices.setVisible(true);
+        userLabel.setVisible(true);
+        clearAll();
+    }
+
+    private void clearAll() {
+        roleChoices.setValue(null);
+        userChoices.getItems().clear();
+        clearText();
+    }
+
+    private void clearText() {
+        usernameField.setText("");
+        passwordField.setText("");
+        phoneNoField.setText("");
+    }
+
+    @FXML
+    private void onAddClick(MouseEvent mouseEvent) {
+        if (addCheck.isSelected()) {
+            addSelected();
+        } else {
+            editDltSelected();
+        }
+    }
+
+    @FXML
+    private void onEditDltClick(MouseEvent mouseEvent) {
+        if (editDltCheck.isSelected()) {
+            editDltSelected();
+        } else {
+            addSelected();
+        }
     }
 
     private void populateData() {
@@ -56,80 +112,173 @@ public class AddRoleController {
         roleChoices.getItems().add("Tenant");
         roleChoices.getItems().add("Admin");
 
-        phoneNoField.setTextFormatter(integerFormatter.getInstance());
-
-        dltRoleChoices.setConverter(roleStringConverter);
+        userChoices.setConverter(roleStringConverter);
     }
 
     @FXML
-    private void onDelete(MouseEvent mouseEvent) {
-        if (dltRoleChoices.getValue() != null) {
+    private void onRoleRequest(ActionEvent actionEvent) {
+        onSelectRole();
+    }
 
-            if (ownerCheck.isSelected()) {
-                System.out.println(dltRoleChoices.getValue().getUserName());
-                OwnerDatabase ownerDB = OwnerDatabase.getInstance();
-                ownerDB.delete((Owner) dltRoleChoices.getValue());
+    private void onSelectRole() {
+        userChoices.getItems().clear();
 
-            } else if (agentCheck.isSelected()) {
+        if (editDltCheck.isSelected()) {
+            if (roleChoices.getValue() == "Owner") {
+                userChoices.getItems().addAll(ownerList.values());
 
-            } else if (tenantCheck.isSelected()) {
+            } else if (roleChoices.getValue() == "Agent") {
+                userChoices.getItems().addAll(agentList.values());
 
-            } else if (adminCheck.isSelected()) {
+            } else if (roleChoices.getValue() == "Tenant") {
+                userChoices.getItems().addAll(tenantList.values());
 
+            } else if (roleChoices.getValue() == "Admin") {
+                userChoices.getItems().addAll(adminList.values());
             }
-
-            Utils.showAlert("Updated Successful!!", true);
-        } else {
-            Utils.showAlert("All fields are required", false);
         }
     }
 
     @FXML
-    private void onOwnerClick(MouseEvent mouseEvent) {
-        dltRoleChoices.getItems().clear();
+    private void onUserRequest(ActionEvent actionEvent) {
+        if (userChoices.getValue() != null) {
+            Role role = userChoices.getValue();
 
-        agentCheck.setSelected(false);
-        tenantCheck.setSelected(false);
-        adminCheck.setSelected(false);
-
-        dltRoleChoices.getItems().addAll(ownerList.values());
+            usernameField.setText(role.getUserName());
+            passwordField.setText(role.getPassword());
+            phoneNoField.setText(role.getPhone().getNumber());
+        } else {
+            clearText();
+        }
     }
 
     @FXML
-    private void onAgentClick(MouseEvent mouseEvent) {
-        dltRoleChoices.getItems().clear();
+    private void onEdit(MouseEvent mouseEvent) {
+        if (!inputValidate()){
+            return;
+        }
 
-        ownerCheck.setSelected(false);
-        tenantCheck.setSelected(false);
-        adminCheck.setSelected(false);
+        if (roleChoices.getValue() == "Owner") {
 
-        dltRoleChoices.getItems().addAll(agentList.values());
+            Owner owner = (Owner) userChoices.getValue();
+            owner.setUserName(usernameField.getText());
+            owner.setPassword(passwordField.getText());
+            owner.setPhone(new Phone(phoneNoField.getText()));
+            OwnerDatabase.getInstance().update(owner);
+
+        } else if (roleChoices.getValue() == "Agent") {
+
+            Agent agent = (Agent) userChoices.getValue();
+            agent.setUserName(usernameField.getText());
+            agent.setPassword(passwordField.getText());
+            agent.setPhone(new Phone(phoneNoField.getText()));
+            AgentDatabase.getInstance().update(agent);
+
+        } else if (roleChoices.getValue() == "Tenant") {
+
+            Tenant tenant = (Tenant) userChoices.getValue();
+            tenant.setUserName(usernameField.getText());
+            tenant.setPassword(passwordField.getText());
+            tenant.setPhone(new Phone(phoneNoField.getText()));
+            TenantDatabase.getInstance().update(tenant);
+
+        } else if (roleChoices.getValue() == "Admin") {
+
+            Admin admin = (Admin) userChoices.getValue();
+            admin.setUserName(usernameField.getText());
+            admin.setPassword(passwordField.getText());
+            admin.setPhone(new Phone(phoneNoField.getText()));
+            AdminDatabase.getInstance().update(admin);
+        }
+        Utils.showAlert("Edit Successful!!", true);
+
+        Role selectedUser = userChoices.getValue();
+        onSelectRole();
+        userChoices.setValue(selectedUser);
     }
 
     @FXML
-    private void onTenantClick(MouseEvent mouseEvent) {
-        dltRoleChoices.getItems().clear();
+    private void onDlt(MouseEvent mouseEvent) {
+        if (!inputValidate()){
+            return;
+        }
+        Set<String> affectedRole = Set.of("Owner, Agent");
+        if ((roleChoices.getValue() == "Owner" || roleChoices.getValue() == "Agent") && !deleteProperty(userChoices.getValue())){
+            return;
+        }
+        if (roleChoices.getValue() == "Tenant" && !unlinkProperty((Tenant) userChoices.getValue())) {
+            return;
+        }
 
-        agentCheck.setSelected(false);
-        ownerCheck.setSelected(false);
-        adminCheck.setSelected(false);
+        if (roleChoices.getValue() == "Owner") {
+            OwnerDatabase ownerDB = OwnerDatabase.getInstance();
+            ownerDB.delete((Owner) userChoices.getValue());
 
-        dltRoleChoices.getItems().addAll(tenantList.values());
+        } else if (roleChoices.getValue() == "Agent") {
+            AgentDatabase agentDB = AgentDatabase.getInstance();
+            agentDB.delete((Agent) userChoices.getValue());
+
+        } else if (roleChoices.getValue() == "Tenant") {
+            TenantDatabase tenantDB = TenantDatabase.getInstance();
+            tenantDB.delete((Tenant) userChoices.getValue());
+
+        } else if (roleChoices.getValue() == "Admin") {
+            AdminDatabase adminDB = AdminDatabase.getInstance();
+            adminDB.delete((Admin) userChoices.getValue());
+        }
+        Utils.showAlert("Deleted Successful!!", true);
+
+        userChoices.setValue(null);
+        clearText();
+        onSelectRole();
+    }
+
+    private boolean deleteProperty(Role role) {
+        PropertyFilterBuilder pfb = new PropertyFilterBuilder();
+
+        if (roleChoices.getValue() == "Owner")
+            pfb.setOwner((Owner) role);
+        else
+            pfb.setAgent((Agent) role);
+
+        ArrayList<Property> properties = pfb.build().getResult();
+
+        if (properties.isEmpty())
+            return true;
+
+        String asked = role.getUserName() + " has " + properties.size() + " properties.";
+        asked += " Do you want to delete " + role.getUserName() + " which will delete all the affected properties ?";
+
+        if (Utils.showConfirm(asked)) {
+            for (Property p : properties)
+                PropertyDatabase.getInstance().delete(p);
+            Utils.showAlert("All affected properties have been deleted", true);
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean unlinkProperty(Tenant tenant) {
+        ArrayList<Property> properties = new PropertyFilterBuilder().setTenant(tenant).build().getResult();
+        if (properties.isEmpty())
+            return true;
+
+        String asked = tenant.getUserName() + " is still renting " + properties.size() + " properties.";
+        asked += " Do you want to delete " + tenant.getUserName() + " which will unlink all the affected properties ?";
+
+        if (Utils.showConfirm(asked)) {
+            for (Property p : properties) {
+                p.setTenant(null);
+                PropertyDatabase.getInstance().update(p);
+            }
+            Utils.showAlert("All affected properties have been unlinked", true);
+            return true;
+        } else
+            return false;
     }
 
     @FXML
-    private void onAdminClick(MouseEvent mouseEvent) {
-        dltRoleChoices.getItems().clear();
-
-        agentCheck.setSelected(false);
-        tenantCheck.setSelected(false);
-        ownerCheck.setSelected(false);
-
-        dltRoleChoices.getItems().addAll(adminList.values());
-    }
-
-    @FXML
-    private void onUpdate(MouseEvent mouseEvent) {
+    private void onCreate(MouseEvent mouseEvent) {
         if (isValid()) {
 
             if (roleChoices.getValue() == "Owner") {
@@ -165,8 +314,7 @@ public class AddRoleController {
                 adminDB.create(admin);
 
             }
-
-            Utils.showAlert("Updated Successful!!", true);
+            Utils.showAlert("Create Successful!!", true);
         } else {
             Utils.showAlert("All fields are required", false);
         }
@@ -174,6 +322,18 @@ public class AddRoleController {
 
     private boolean isValid() {
         return roleChoices.getValue() != null && !usernameField.getText().isEmpty() && !passwordField.getText().isEmpty() && !phoneNoField.getText().isEmpty();
+    }
+
+    private boolean inputValidate() {
+        if (userChoices.getValue() == null) {
+            Utils.showAlert("Please select a user", false);
+            return false;
+        }
+        if (!isValid()) {
+            Utils.showAlert("All fields are required", false);
+            return false;
+        }
+        return true;
     }
 
     @FXML
