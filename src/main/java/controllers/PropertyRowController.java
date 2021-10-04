@@ -48,8 +48,6 @@ public class PropertyRowController {
     private Label commentLabel;
     @FXML
     private AnchorPane propertyPane;
-    @FXML
-    private Button deleteBtn;
 
 
     private Property property;
@@ -89,8 +87,8 @@ public class PropertyRowController {
         airCondNumLabel.setText(Integer.toString(property.getFacilities().getAirCond()));
         wifiLabel.setText(Utils.getYesOrNo(property.getFacilities().isWifi()));
         spLabel.setText(Utils.getYesOrNo(property.getFacilities().isSwimmingPool()));
-        ownerLabel.setText(property.getOwner().getUserName());
-        agentLabel.setText(property.getAgent().getUserName());
+        ownerLabel.setText(property.getOwner().getUserName() + " ( " + property.getOwner().getPhone().getNumber() + " )");
+        agentLabel.setText(property.getAgent().getUserName() + " ( " + property.getAgent().getPhone().getNumber() + " )");
 
         String commentStr = property.getComment();
         if (commentStr == null) {
@@ -105,7 +103,7 @@ public class PropertyRowController {
             tenantLabel.setText("N/A");
             tenantLabel.setStyle("-fx-text-fill: #697684");
         } else {
-            tenantLabel.setText(tenant.getUserName());
+            tenantLabel.setText(tenant.getUserName()+ " ( " + tenant.getPhone().getNumber() + " )");
         }
 
         if (!property.isPublished()) {

@@ -48,38 +48,38 @@
                   <Label fx:id="buildingDetailLabel" minWidth="-Infinity" prefHeight="36.0" prefWidth="668.0" styleClass="grey-text" stylesheets="@../../../styles.css" text="Bungalow • 18186 sqft" />
                </children>
             </HBox>
-            <HBox layoutX="25.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="ownerRow" layoutX="25.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="66.0" text="Owner:" />
-                  <Label fx:id="ownerLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
+                  <Label fx:id="ownerTitle" prefHeight="26.0" prefWidth="66.0" text="Owner:" />
+                  <Label fx:id="ownerLabel" prefHeight="24.0" prefWidth="380.0" text="N/A" />
                </children>
             </HBox>
-            <HBox layoutX="25.0" layoutY="196.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="agentRow" layoutX="25.0" layoutY="196.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="66.0" text="Agent:" />
-                  <Label fx:id="agentLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
+                  <Label fx:id="agentTitle" prefHeight="26.0" prefWidth="66.0" text="Agent:" />
+                  <Label fx:id="agentLabel" prefHeight="24.0" prefWidth="379.0" text="N/A" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="66.0" text="Tenant:" />
-                  <Label fx:id="tenantLabel" prefHeight="26.0" prefWidth="115.0" text="N/A" />
+                  <Label fx:id="tenantLabel" prefHeight="24.0" prefWidth="380.0" text="N/A" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="83.0" />
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="83.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="111.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="74.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="90.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="97.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="145.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="145.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
