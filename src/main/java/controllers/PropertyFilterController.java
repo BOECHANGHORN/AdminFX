@@ -5,6 +5,7 @@ import AppHolder.*;
 import Owner.*;
 import Property.PropertyType;
 import Role.Role;
+import Tenant.*;
 import Utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +40,8 @@ public class PropertyFilterController {
     @FXML
     private CheckBox agentChecked;
     @FXML
+    private CheckBox tenantChecked;
+    @FXML
     private ChoiceBox<PropertyType> typeChoices;
     @FXML
     private ChoiceBox<String> statusChoices;
@@ -72,9 +75,12 @@ public class PropertyFilterController {
     private ChoiceBox<Role> ownerChoices;
     @FXML
     private ChoiceBox<Role> agentChoices;
+    @FXML
+    private ChoiceBox<Role> tenantChoices;
 
     private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
 
     @FXML
     private void initialize() {
@@ -100,6 +106,7 @@ public class PropertyFilterController {
         propertyFilterHolder.setSortChecked(sortChecked.isSelected());
         propertyFilterHolder.setOwnerChecked(ownerChecked.isSelected());
         propertyFilterHolder.setAgentChecked(agentChecked.isSelected());
+        propertyFilterHolder.setTenantChecked(tenantChecked.isSelected());
 
         propertyFilterHolder.setTypeChoice(typeChoices.getValue());
         propertyFilterHolder.setStatusChoice(statusChoices.getValue());
@@ -118,6 +125,7 @@ public class PropertyFilterController {
         propertyFilterHolder.setSortChoice(sortChoices.getValue());
         propertyFilterHolder.setOwnerChoice((Owner) ownerChoices.getValue());
         propertyFilterHolder.setAgentChoice((Agent) agentChoices.getValue());
+        propertyFilterHolder.setTenantChoice((Tenant) tenantChoices.getValue());
 
         holder.setPropertyFilterHolder((propertyFilterHolder));
     }
@@ -140,8 +148,10 @@ public class PropertyFilterController {
         sortChoices.getItems().addAll(SORT_CHOICES);
         ownerChoices.getItems().addAll(ownerList.values());
         agentChoices.getItems().addAll(agentList.values());
+        tenantChoices.getItems().addAll(tenantList.values());
         ownerChoices.setConverter(roleStringConverter);
         agentChoices.setConverter(roleStringConverter);
+        tenantChoices.setConverter(roleStringConverter);
 
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = holder.getPropertyFilterHolder();
@@ -156,6 +166,7 @@ public class PropertyFilterController {
             sortChecked.setSelected(propertyFilterHolder.isSortChecked());
             ownerChecked.setSelected(propertyFilterHolder.isOwnerChecked());
             agentChecked.setSelected(propertyFilterHolder.isAgentChecked());
+            tenantChecked.setSelected(propertyFilterHolder.isTenantChecked());
 
             typeChoices.setValue(propertyFilterHolder.getTypeChoice());
             statusChoices.setValue(propertyFilterHolder.getStatusChoice());
@@ -174,6 +185,7 @@ public class PropertyFilterController {
             sortChoices.setValue(propertyFilterHolder.getSortChoice());
             ownerChoices.setValue(propertyFilterHolder.getOwnerChoice());
             agentChoices.setValue(propertyFilterHolder.getAgentChoice());
+            tenantChoices.setValue(propertyFilterHolder.getTenantChoice());
         }
     }
 }

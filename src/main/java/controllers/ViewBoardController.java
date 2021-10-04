@@ -6,6 +6,7 @@ import Owner.Owner;
 import Property.*;
 import Property.PropertySearch.FacilitiesPicker;
 import Property.PropertySearch.PropertyFilterBuilder;
+import Tenant.Tenant;
 import Utils.PropertyListener;
 import Utils.Utils;
 import com.app.main.Main;
@@ -129,6 +130,9 @@ public class ViewBoardController {
         }
         if (propertyFilterHolder.isAgentChecked() && propertyFilterHolder.getAgentChoice() != null) {
             propertyFilterBuilder.setAgent((Agent) propertyFilterHolder.getAgentChoice());
+        }
+        if (propertyFilterHolder.isTenantChecked() && propertyFilterHolder.getTenantChoice() != null) {
+            propertyFilterBuilder.setTenant((Tenant) propertyFilterHolder.getTenantChoice());
         }
 
         ArrayList<Property> filteredPropertyList = propertyFilterBuilder.build().getResult();

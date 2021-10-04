@@ -17,6 +17,7 @@ public class PropertyFilterHolder {
     private boolean sortChecked;
     private boolean ownerChecked;
     private boolean agentChecked;
+    private boolean tenantChecked;
     private PropertyType typeChoice;;
     private String statusChoice;;
     private boolean isCommented;
@@ -34,6 +35,7 @@ public class PropertyFilterHolder {
     private String sortChoice;
     private Role ownerChoice;
     private Role agentChoice;
+    private Role tenantChoice;
 
     public String getSortChoice() {
         return sortChoice;
@@ -137,6 +139,14 @@ public class PropertyFilterHolder {
 
     public void setAgentChecked(boolean agentChecked) {
         this.agentChecked = agentChecked;
+    }
+
+    public boolean isTenantChecked() {
+        return tenantChecked;
+    }
+
+    public void setTenantChecked(boolean tenantChecked) {
+        this.tenantChecked = tenantChecked;
     }
 
     public PropertyType getTypeChoice() {
@@ -251,5 +261,11 @@ public class PropertyFilterHolder {
         this.agentChoice = agentChoice;
     }
 
+    public Role getTenantChoice() {
+        return tenantChoice;
+    }
 
+    public void setTenantChoice(Role tenantChoice) {
+        this.tenantChoice = tenantChoice;
+    }
 }
