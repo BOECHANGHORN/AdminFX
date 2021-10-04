@@ -1,6 +1,9 @@
 package Role;
 
+import Agent.Agent;
+import Owner.Owner;
 import Phone.Phone;
+import Tenant.Tenant;
 
 public abstract class Role {
     private String role;
@@ -15,6 +18,20 @@ public abstract class Role {
         this.userName = userName;
         this.password = password;
         this.phone = phone;
+    }
+
+    public static Role newRole(String role, int id, String userName, String password, Phone phone) {
+        switch (role) {
+            case "Agent":
+                return new Agent(id, userName, password, phone);
+            case "Owner":
+                return new Owner(id, userName, password, phone);
+            case "Tenant":
+                return new Tenant(id, userName, password, phone);
+            default:
+                return null;
+        }
+        //  return new Admin(id, userName, password, phone);
     }
 
     public String getRole() {
