@@ -3,12 +3,15 @@ package controllers;
 import Property.*;
 import Tenant.Tenant;
 import Utils.*;
+import com.app.main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class PropertyRowController {
     @FXML
@@ -58,7 +61,7 @@ public class PropertyRowController {
     }
 
     @FXML
-    private void onDelete(MouseEvent mouseEvent) {
+    private void onDelete(MouseEvent mouseEvent) throws IOException {
         boolean confirm = Utils.showConfirm("Confirm to delete " + property.getName() + " ?");
 
         if (confirm) {
@@ -66,6 +69,8 @@ public class PropertyRowController {
             propertyPane.setVisible(false);
             Utils.showAlert(property.getName() + " is deleted successfully", true);
         }
+
+        Main.goToViewBoardPage();
     }
 
     public void setData(Property property, PropertyListener myListener) {
