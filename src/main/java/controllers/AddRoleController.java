@@ -4,6 +4,8 @@ import Admin.*;
 import Agent.*;
 import Owner.*;
 import Phone.Phone;
+import Property.*;
+import Property.PropertySearch.PropertyFilterBuilder;
 import Role.Role;
 import Tenant.*;
 import Utils.*;
@@ -14,6 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class AddRoleController {

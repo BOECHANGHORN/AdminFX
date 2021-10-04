@@ -3,6 +3,7 @@ package Property.PropertySearch;
 import Agent.Agent;
 import Owner.Owner;
 import Property.*;
+import Tenant.Tenant;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -18,6 +19,7 @@ public class PropertyFilter {
         if (psb.getName() != null) filterName(psb.getName());
         if (psb.getOwner() != null) filterOwner(psb.getOwner());
         if (psb.getAgent() != null) filterAgent(psb.getAgent());
+        if (psb.getTenant() != null) filterTenant(psb.getTenant());
         if (psb.isAvailability() != null) filterStatus(psb.isAvailability());
         if (psb.isComment() != null) filterComment(psb.isComment());
         if (psb.getFacilitiesPicker() != null) filterFacilitiesPicker(psb.getFacilitiesPicker());
@@ -46,6 +48,10 @@ public class PropertyFilter {
 
     private void filterAgent(Agent agent) {
         properties.removeIf(p -> !p.getAgent().equals(agent));
+    }
+
+    private void filterTenant(Tenant tenant) {
+        properties.removeIf(p -> (p.getTenant() == null || !p.getTenant().equals(tenant)));
     }
 
     private void filterStatus(Boolean availability) {
