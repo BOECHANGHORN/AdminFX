@@ -5,6 +5,7 @@ import com.app.main.Main;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.input.MouseEvent;
 
 import java.util.Optional;
 
@@ -45,9 +46,12 @@ public class Utils {
         }
     }
 
-    public static void showAlert(String msg,boolean success){
+    public static void showAlert(String msg, boolean success, MouseEvent mouseEvent){
         // Success Alert
         Alert alert = new Alert(Alert.AlertType.NONE,msg, ButtonType.CLOSE);
+        alert.setX(mouseEvent.getScreenX() - 600);
+        alert.setY(mouseEvent.getScreenY() - 200);
+
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(
                 Main.class.getResource("dialog.css").toExternalForm());
@@ -60,8 +64,10 @@ public class Utils {
         alert.show();
     }
 
-    public static boolean showConfirm(String msg) {
+    public static boolean showConfirm(String msg,MouseEvent mouseEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
+        alert.setX(mouseEvent.getScreenX() - 600);
+        alert.setY(mouseEvent.getScreenY() - 200);
         Optional<ButtonType> result = alert.showAndWait();
 
         return (result.isPresent()) && (result.get() == ButtonType.OK);

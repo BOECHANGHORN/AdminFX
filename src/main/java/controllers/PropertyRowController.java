@@ -60,12 +60,12 @@ public class PropertyRowController {
 
     @FXML
     private void onDelete(MouseEvent mouseEvent) throws IOException {
-        boolean confirm = Utils.showConfirm("Confirm to delete " + property.getName() + " ?");
+        boolean confirm = Utils.showConfirm("Confirm to delete " + property.getName() + " ?", mouseEvent);
 
         if (confirm) {
             PropertyDatabase.getInstance().delete(property);
             propertyPane.setVisible(false);
-            Utils.showAlert(property.getName() + " is deleted successfully", true);
+            Utils.showAlert(property.getName() + " is deleted successfully", true, mouseEvent);
         }
 
         Main.goToViewBoardPage();

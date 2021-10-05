@@ -144,10 +144,10 @@ public class AddPropertyController {
             propertyDB.create(property);
             if (propertyDB.searchByID(id) != null) {
                 resetInput();
-                Utils.showAlert("Created Successful!!", true);
+                Utils.showAlert("Created Successful!!", true, mouseEvent);
             }
         } else {
-            Utils.showAlert("All fields are required", false);
+            Utils.showAlert("All fields are required", false, mouseEvent);
         }
     }
 

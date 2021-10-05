@@ -108,10 +108,10 @@ public class UpdatePropertyController {
                 propertyDB.update(selectedProperty);
 
                 if (propertyDB.searchByID(selectedProperty.getId()) != null) {
-                    Utils.showAlert("Updated Successful!!", true);
+                    Utils.showAlert("Updated Successful!!", true, mouseEvent);
                 }
             } else {
-                Utils.showAlert("All fields are required", false);
+                Utils.showAlert("All fields are required", false, mouseEvent);
             }
 
         }

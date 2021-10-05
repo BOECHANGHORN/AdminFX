@@ -93,7 +93,7 @@ public class ViewBoardController {
             propertyFilterBuilder.setType(propertyFilterHolder.getTypeChoice());
         }
         if (propertyFilterHolder.isStatusChecked() && propertyFilterHolder.getStatusChoice() != null) {
-            boolean isAvailable = propertyFilterHolder.getStatusChoice() == Utils.ACTIVE;
+            boolean isAvailable = propertyFilterHolder.getStatusChoice().equals(Utils.ACTIVE);
             propertyFilterBuilder.setAvailability(isAvailable);
         }
         if (propertyFilterHolder.isCommentsChecked()) {
@@ -122,7 +122,7 @@ public class ViewBoardController {
             propertyFilterBuilder.setRentalUpBound(doubleMaxRate);
         }
         if(propertyFilterHolder.isSortChecked() && propertyFilterHolder.getSortChoice()!= null){
-            boolean isSortedByLowestFirst = propertyFilterHolder.getSortChoice() == Utils.LOWEST_FIRST;
+            boolean isSortedByLowestFirst = propertyFilterHolder.getSortChoice().equals(Utils.LOWEST_FIRST);
             propertyFilterBuilder.setSorted(isSortedByLowestFirst);
         }
         if (propertyFilterHolder.isOwnerChecked() && propertyFilterHolder.getOwnerChoice() != null) {
