@@ -10,6 +10,7 @@ import Utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.util.TreeMap;
 
@@ -187,5 +188,39 @@ public class PropertyFilterController {
             agentChoices.setValue(propertyFilterHolder.getAgentChoice());
             tenantChoices.setValue(propertyFilterHolder.getTenantChoice());
         }
+    }
+
+
+    public void onPropertyTypeCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onStatusCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onCommentsCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onMInRateCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onMaxRateCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onAddressCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onFacilitiesCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onSortingCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onOwnerCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onAgentCheck(MouseEvent mouseEvent) {
+    }
+
+    public void onTenantCheck(MouseEvent mouseEvent) {
     }
 }
