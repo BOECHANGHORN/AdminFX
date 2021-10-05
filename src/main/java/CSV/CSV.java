@@ -84,7 +84,7 @@ public class CSV {
         writeData.setLength(writeData.length() - 1);
 
         try {
-            FileWriter writer = new FileWriter(file, true);
+            FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8, true);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(writeData.toString());
             bufferedWriter.newLine();

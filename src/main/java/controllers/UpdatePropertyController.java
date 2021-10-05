@@ -146,7 +146,7 @@ public class UpdatePropertyController {
             tenantChoices.setValue(selectedProperty.getTenant());
             stateChoices.setValue(selectedProperty.getAddress().getState());
             address.setText(selectedProperty.getAddress().getDetailAddress());
-            postcode.setTextFormatter(integerFormatter1.getInstance());
+            postcode.setTextFormatter(new PostcodeFormatter().getInstance());
             postcode.setText(selectedProperty.getAddress().getPostalCode());
             wifi.setSelected(selectedProperty.getFacilities().isWifi());
             swimmingPool.setSelected(selectedProperty.getFacilities().isSwimmingPool());

@@ -143,7 +143,7 @@ public class PropertyFilterController {
         typeChoices.setConverter(propertyTypeStringConverter);
         statusChoices.getItems().addAll(STATUSES);
         stateChoices.getItems().addAll(Utils.STATES);
-        postcodeField.setTextFormatter(integerFormatter.getInstance());
+        postcodeField.setTextFormatter(new PostcodeFormatter().getInstance());
         minRate.setTextFormatter(doubleFormatter1.getInstance());
         maxRate.setTextFormatter(doubleFormatter2.getInstance());
         sortChoices.getItems().addAll(SORT_CHOICES);

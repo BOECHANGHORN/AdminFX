@@ -96,7 +96,7 @@ public class AddPropertyController {
         agentChoices.setConverter(roleStringConverter);
         tenantChoices.setConverter(roleStringConverter);
         stateChoices.getItems().addAll(Utils.STATES);
-        postcode.setTextFormatter(integerFormatter1.getInstance());
+        postcode.setTextFormatter(new PostcodeFormatter().getInstance());
         roomNumVF.setValue(0);
         roomNum.setValueFactory(roomNumVF);
         bathRoomNumVF.setValue(0);
@@ -167,8 +167,7 @@ public class AddPropertyController {
         address.setText("");
         postcode.setTextFormatter(null);
         postcode.setText("");
-        IntegerFormatter integerFormatter = new IntegerFormatter();
-        postcode.setTextFormatter(integerFormatter.getInstance());
+        postcode.setTextFormatter(new PostcodeFormatter().getInstance());
         roomNumVF.setValue(0);
         bathRoomNumVF.setValue(0);
         tvNumVF.setValue(0);

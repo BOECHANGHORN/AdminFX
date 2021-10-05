@@ -10,7 +10,8 @@ import javafx.scene.input.MouseEvent;
 import java.util.Optional;
 
 public class Utils {
-    public static final String[] STATES = {"Johor", "Kedah", "Kelantan", "Malacca", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Sabah", "Sarawak", "Selangor", "Terengganu"};
+    public static final String[] STATES = {"Johor", "Kedah", "Kelantan", "Malacca", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Sabah", "Sarawak", "Selangor", "Terengganu",
+            "Kuala Lumpur", "Putrajaya", "Labuan"};
     public static final String CURRENCY = "RM";
     public static final String SIZE_UNIT = "sqft";
     public static final String YES = "Yes";
@@ -46,9 +47,9 @@ public class Utils {
         }
     }
 
-    public static void showAlert(String msg, boolean success, MouseEvent mouseEvent){
+    public static void showAlert(String msg, boolean success, MouseEvent mouseEvent) {
         // Success Alert
-        Alert alert = new Alert(Alert.AlertType.NONE,msg, ButtonType.CLOSE);
+        Alert alert = new Alert(Alert.AlertType.NONE, msg, ButtonType.CLOSE);
         alert.setX(mouseEvent.getScreenX() - 600);
         alert.setY(mouseEvent.getScreenY() - 200);
 
@@ -56,15 +57,15 @@ public class Utils {
         dialogPane.getStylesheets().add(
                 Main.class.getResource("dialog.css").toExternalForm());
         dialogPane.getStyleClass().add("myDialog");
-        if(success){
+        if (success) {
             dialogPane.getStyleClass().add("success");
-        }else{
+        } else {
             dialogPane.getStyleClass().add("error");
         }
         alert.show();
     }
 
-    public static boolean showConfirm(String msg,MouseEvent mouseEvent) {
+    public static boolean showConfirm(String msg, MouseEvent mouseEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
         alert.setX(mouseEvent.getScreenX() - 600);
         alert.setY(mouseEvent.getScreenY() - 200);

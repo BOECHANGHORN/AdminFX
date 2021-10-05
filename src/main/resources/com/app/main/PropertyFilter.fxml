@@ -66,7 +66,7 @@
             <Label layoutX="20.0" layoutY="136.0" prefHeight="25.0" prefWidth="127.0" text="Facilities:" GridPane.rowIndex="9" />
             <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Min Rate(RM):" GridPane.rowIndex="15" />
             <Label layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="127.0" text="Address:" GridPane.rowIndex="12" />
-            <TextField fx:id="addressField" promptText="Street Adress" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <TextField fx:id="addressField" promptText="Street Address" GridPane.columnIndex="1" GridPane.rowIndex="12" />
             <ChoiceBox fx:id="statusChoices" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <CheckBox fx:id="isCommented" mnemonicParsing="false" prefHeight="24.0" prefWidth="18.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="9">

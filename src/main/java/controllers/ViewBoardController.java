@@ -38,8 +38,9 @@ public class ViewBoardController {
     @FXML
     private void initialize() {
         // Show Property List owned by current owner/agent
+        this.ownedPropertyList = getOwnPropertyFilterBuilder().build().getResult();
+
         if (holder.getPropertyFilterHolder() == null) {
-            this.ownedPropertyList = getOwnPropertyFilterBuilder().build().getResult();
             displayPropertyList(this.ownedPropertyList);
         } else {
             ArrayList<Property> filteredPropertyList = filterPropertyList();
