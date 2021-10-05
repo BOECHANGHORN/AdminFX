@@ -48,17 +48,17 @@
                 <Label GridPane.rowIndex="7" />
             <ChoiceBox fx:id="typeChoices" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label prefHeight="17.0" prefWidth="144.0" text="Tick ✓ if applied." />
-            <CheckBox fx:id="typeChecked" mnemonicParsing="false" text="Property Type" GridPane.rowIndex="1" />
+            <CheckBox fx:id="typeChecked" mnemonicParsing="false" onMouseClicked="#onPropertyTypeCheck" text="Property Type" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <CheckBox fx:id="statusChecked" mnemonicParsing="false" prefHeight="18.0" prefWidth="101.0" text="Status" />
-                  <CheckBox fx:id="commentsChecked" mnemonicParsing="false" text="Comments" />
+                  <CheckBox fx:id="statusChecked" mnemonicParsing="false" onMouseClicked="#onStatusCheck" prefHeight="18.0" prefWidth="101.0" text="Status" />
+                  <CheckBox fx:id="commentsChecked" mnemonicParsing="false" onMouseClicked="#onCommentsCheck" text="Comments" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="152.0" layoutY="46.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <CheckBox fx:id="minRateChecked" mnemonicParsing="false" prefHeight="17.0" prefWidth="101.0" text="Min Rate  " />
-                  <CheckBox fx:id="maxRateChecked" mnemonicParsing="false" text="Max Rate" />
+                  <CheckBox fx:id="minRateChecked" mnemonicParsing="false" onMouseClicked="#onMInRateCheck" prefHeight="17.0" prefWidth="101.0" text="Min Rate  " />
+                  <CheckBox fx:id="maxRateChecked" mnemonicParsing="false" onMouseClicked="#onMaxRateCheck" text="Max Rate" />
                </children>
             </HBox>
             <Label layoutX="20.0" layoutY="111.0" prefHeight="25.0" prefWidth="127.0" text="Property Status:" GridPane.rowIndex="7" />
@@ -93,29 +93,29 @@
             <TextField fx:id="postcodeField" promptText="Postcode" GridPane.columnIndex="1" GridPane.rowIndex="14" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <CheckBox fx:id="addressChecked" mnemonicParsing="false" text="Address" />
+                  <CheckBox fx:id="addressChecked" mnemonicParsing="false" onMouseClicked="#onAddressCheck" text="Address" />
                </children>
             </HBox>
-            <CheckBox fx:id="facilitiesChecked" mnemonicParsing="false" text="Facilities" GridPane.rowIndex="3" />
+            <CheckBox fx:id="facilitiesChecked" mnemonicParsing="false" onMouseClicked="#onFacilitiesCheck" text="Facilities" GridPane.rowIndex="3" />
             <Label layoutX="20.0" layoutY="384.0" prefHeight="25.0" prefWidth="127.0" text="Max Rate(RM):" GridPane.rowIndex="16" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="16">
                <children>
                   <TextField fx:id="maxRate" prefHeight="25.0" prefWidth="84.0" promptText="Max" />
                </children>
             </HBox>
-            <CheckBox fx:id="sortChecked" mnemonicParsing="false" text="Sorting" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="sortChecked" mnemonicParsing="false" onMouseClicked="#onSortingCheck" text="Sorting" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label layoutX="20.0" layoutY="435.0" prefHeight="25.0" prefWidth="127.0" text="Sorted By:" GridPane.rowIndex="17" />
             <ChoiceBox fx:id="sortChoices" prefHeight="25.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
             <Line endX="224.5" startX="-100.0" GridPane.rowIndex="5" />
-            <CheckBox fx:id="ownerChecked" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Owner" GridPane.rowIndex="4" />
+            <CheckBox fx:id="ownerChecked" mnemonicParsing="false" onMouseClicked="#onOwnerCheck" prefHeight="26.0" prefWidth="66.0" text="Owner" GridPane.rowIndex="4" />
             <Label layoutX="20.0" layoutY="553.0" prefHeight="25.0" prefWidth="127.0" text="Owner:" GridPane.rowIndex="18" />
             <Label layoutX="20.0" layoutY="585.0" prefHeight="25.0" prefWidth="127.0" text="Agent:" GridPane.rowIndex="19" />
             <ChoiceBox fx:id="ownerChoices" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
             <ChoiceBox fx:id="agentChoices" prefHeight="38.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="19" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <CheckBox fx:id="agentChecked" mnemonicParsing="false" prefHeight="22.0" prefWidth="118.0" text="Agent" />
-                  <CheckBox fx:id="tenantChecked" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Tenant" />
+                  <CheckBox fx:id="agentChecked" mnemonicParsing="false" onMouseClicked="#onAgentCheck" prefHeight="22.0" prefWidth="118.0" text="Agent" />
+                  <CheckBox fx:id="tenantChecked" mnemonicParsing="false" onMouseClicked="#onTenantCheck" prefHeight="35.0" prefWidth="89.0" text="Tenant" />
                </children>
             </HBox>
             <Label layoutX="20.0" layoutY="599.0" prefHeight="25.0" prefWidth="127.0" text="Tenant:" GridPane.rowIndex="20" />
