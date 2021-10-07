@@ -18,4 +18,3 @@ public class Tenant extends Role {
                 '}';
     }
 }
-

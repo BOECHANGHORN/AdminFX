@@ -1,13 +1,13 @@
+
 package Agent;
 
-import CSV.*;
+import CSV.CSV;
+import CSV.ReadWriteRole;
 import Initializer.Initialization;
 import Phone.Phone;
-import Role.Role;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class AgentDatabase implements ReadWriteRole<Agent> {
@@ -16,8 +16,8 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
     private final TreeMap<Integer, Agent> agentList;
     private final static AgentDatabase instance = new AgentDatabase();
 
-    private AgentDatabase () {
-        agentList = new TreeMap<Integer, Agent>();
+    private AgentDatabase() {
+        agentList = new TreeMap<>();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
         }
     }
 
-    private ArrayList<String> rawAgent (Agent agent) {
+    private ArrayList<String> rawAgent(Agent agent) {
         ArrayList<String> result = new ArrayList<>();
 
         result.add(Integer.toString(agent.getId())); //id

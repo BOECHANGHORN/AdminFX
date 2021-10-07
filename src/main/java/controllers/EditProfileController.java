@@ -4,6 +4,7 @@ import AppHolder.AppHolder;
 import Phone.Phone;
 import Role.*;
 import Utils.Utils;
+import Utils.PhoneFormatter;
 import com.app.main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,7 +28,7 @@ public class EditProfileController {
     }
 
     @FXML
-    private void onUpdate(MouseEvent mouseEvent) throws IOException {
+    private void onUpdate(MouseEvent mouseEvent) {
         if (!isValid()) {
             Utils.showAlert("All fields are required", false, mouseEvent);
             return;
@@ -38,7 +39,7 @@ public class EditProfileController {
         String newPassword = passwordField.getText();
         String newPhoneNo = phoneNoField.getText();
 
-        if (!currentUsername.equals(newUsername) && RoleDatabase.isUserExist(newUsername))  {
+        if (!currentUsername.equals(newUsername) && RoleDatabase.isUserExist(newUsername)) {
             Utils.showAlert("User name has been taken", false, mouseEvent);
             return;
         }
@@ -61,6 +62,7 @@ public class EditProfileController {
             usernameField.setText(currentUser.getUserName());
             passwordField.setText(currentUser.getPassword());
             phoneNoField.setText(currentUser.getPhone().getNumber());
+            phoneNoField.setTextFormatter(new PhoneFormatter().getInstance());
         }
     }
 

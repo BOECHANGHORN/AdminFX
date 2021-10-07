@@ -3,11 +3,9 @@ package Admin;
 import CSV.*;
 import Initializer.Initialization;
 import Phone.Phone;
-import Role.Role;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class AdminDatabase implements ReadWriteRole<Admin> {
@@ -17,7 +15,7 @@ public class AdminDatabase implements ReadWriteRole<Admin> {
     private final static AdminDatabase instance = new AdminDatabase();
 
     private AdminDatabase () {
-        adminList = new TreeMap<Integer, Admin>();
+        adminList = new TreeMap<>();
     }
 
     @Override

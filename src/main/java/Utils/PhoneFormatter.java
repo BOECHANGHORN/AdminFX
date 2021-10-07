@@ -9,7 +9,7 @@ public class PhoneFormatter {
 
     public PhoneFormatter() {
         UnaryOperator<TextFormatter.Change> integerValidationFormatter = change -> {
-            if (change.getControlNewText().matches("\\+{0,1}\\d*")) {
+            if (change.getControlNewText().matches("\\+?\\d*")) {
                 return change;
             } else {
                 return null;

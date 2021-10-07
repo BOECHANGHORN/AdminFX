@@ -1,12 +1,12 @@
 package Tenant;
 
-import CSV.*;
+import CSV.CSV;
+import CSV.ReadWriteRole;
 import Initializer.Initialization;
 import Phone.Phone;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class TenantDatabase implements ReadWriteRole<Tenant> {
@@ -15,8 +15,8 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
     private final TreeMap<Integer, Tenant> tenantList;
     private static final TenantDatabase instance = new TenantDatabase();
 
-    private TenantDatabase () {
-        tenantList = new TreeMap<Integer, Tenant>();
+    private TenantDatabase() {
+        tenantList = new TreeMap<>();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
         }
     }
 
-    private ArrayList<String> rawTenant (Tenant tenant) {
+    private ArrayList<String> rawTenant(Tenant tenant) {
         ArrayList<String> result = new ArrayList<>();
 
         result.add(Integer.toString(tenant.getId())); //id

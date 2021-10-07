@@ -67,6 +67,8 @@ public class ViewBoardController {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(propertyFilterDialogPane);
             dialog.setTitle(dialogTitle);
+            dialog.setX(event.getScreenX());
+            dialog.setY(event.getScreenY());
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
 
@@ -81,9 +83,8 @@ public class ViewBoardController {
     }
 
     private PropertyFilterBuilder getOwnPropertyFilterBuilder(){
-        PropertyFilterBuilder propertyFilterBuilder = new PropertyFilterBuilder();
 
-        return propertyFilterBuilder;
+        return new PropertyFilterBuilder();
     }
 
     private ArrayList<Property> filterPropertyList() {
@@ -136,8 +137,7 @@ public class ViewBoardController {
             propertyFilterBuilder.setTenant((Tenant) propertyFilterHolder.getTenantChoice());
         }
 
-        ArrayList<Property> filteredPropertyList = propertyFilterBuilder.build().getResult();
-        return filteredPropertyList;
+        return propertyFilterBuilder.build().getResult();
 
     }
 

@@ -73,11 +73,11 @@ public class PropertyFilterController {
     @FXML
     private ChoiceBox<String> sortChoices;
     @FXML
-    private ChoiceBox<Role> ownerChoices;
+    private ComboBox<Role> ownerChoices;
     @FXML
-    private ChoiceBox<Role> agentChoices;
+    private ComboBox<Role> agentChoices;
     @FXML
-    private ChoiceBox<Role> tenantChoices;
+    private ComboBox<Role> tenantChoices;
 
     private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
     private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
@@ -86,12 +86,11 @@ public class PropertyFilterController {
     @FXML
     private void initialize() {
         populateData();
+        initCheck();
 
         Button okButton = (Button) dialogPane.lookupButton(ButtonType.APPLY);
         okButton.addEventFilter(
-                ActionEvent.ACTION, event -> {
-                    setPropertyFilterHolder();
-                });
+                ActionEvent.ACTION, event -> setPropertyFilterHolder());
     }
 
     private void setPropertyFilterHolder(){
@@ -150,9 +149,9 @@ public class PropertyFilterController {
         ownerChoices.getItems().addAll(ownerList.values());
         agentChoices.getItems().addAll(agentList.values());
         tenantChoices.getItems().addAll(tenantList.values());
-        ownerChoices.setConverter(roleStringConverter);
-        agentChoices.setConverter(roleStringConverter);
-        tenantChoices.setConverter(roleStringConverter);
+        new AutoCompleteRoleBox(ownerChoices);
+        new AutoCompleteRoleBox(agentChoices);
+        new AutoCompleteRoleBox(tenantChoices);
 
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = holder.getPropertyFilterHolder();
@@ -191,36 +190,124 @@ public class PropertyFilterController {
     }
 
 
-    public void onPropertyTypeCheck(MouseEvent mouseEvent) {
+    private void checkSorting() {
+        sortChoices.setDisable(!sortChecked.isSelected());
     }
 
-    public void onStatusCheck(MouseEvent mouseEvent) {
+    @FXML
+    private void onSortingCheck(MouseEvent mouseEvent) {
+        checkSorting();
     }
 
-    public void onCommentsCheck(MouseEvent mouseEvent) {
+    private void checkFacilities() {
+        isWifi.setDisable(!facilitiesChecked.isSelected());
+        isFridge.setDisable(!facilitiesChecked.isSelected());
+        isTv.setDisable(!facilitiesChecked.isSelected());
+        isAirCond.setDisable(!facilitiesChecked.isSelected());
+        isWaterHeater.setDisable(!facilitiesChecked.isSelected());
+        isSwimmingPool.setDisable(!facilitiesChecked.isSelected());
     }
 
-    public void onMInRateCheck(MouseEvent mouseEvent) {
+
+    @FXML
+    private void onFacilitiesCheck(MouseEvent mouseEvent) {
+        checkFacilities();
     }
 
-    public void onMaxRateCheck(MouseEvent mouseEvent) {
+    private void checkAddress() {
+        addressField.setDisable(!addressChecked.isSelected());
+        stateChoices.setDisable(!addressChecked.isSelected());
+        postcodeField.setDisable(!addressChecked.isSelected());
     }
 
-    public void onAddressCheck(MouseEvent mouseEvent) {
+    @FXML
+    private void onAddressCheck(MouseEvent mouseEvent) {
+        checkAddress();
     }
 
-    public void onFacilitiesCheck(MouseEvent mouseEvent) {
+    private void checkMinRate() {
+        minRate.setDisable(!minRateChecked.isSelected());
     }
 
-    public void onSortingCheck(MouseEvent mouseEvent) {
+    @FXML
+    private void onMinRateCheck(MouseEvent mouseEvent) {
+        checkMinRate();
     }
 
-    public void onOwnerCheck(MouseEvent mouseEvent) {
+    private void checkMaxRate() {
+        maxRate.setDisable(!maxRateChecked.isSelected());
     }
 
-    public void onAgentCheck(MouseEvent mouseEvent) {
+    @FXML
+    private void onMaxRateCheck(MouseEvent mouseEvent) {
+        checkMaxRate();
     }
 
-    public void onTenantCheck(MouseEvent mouseEvent) {
+    private void checkStatus() {
+        statusChoices.setDisable(!statusChecked.isSelected());
+    }
+
+    @FXML
+    private void onStatusCheck(MouseEvent mouseEvent) {
+        checkStatus();
+    }
+
+    private void checkComments() {
+        isCommented.setDisable(!commentsChecked.isSelected());
+    }
+
+    @FXML
+    private void onCommentsCheck(MouseEvent mouseEvent) {
+        checkComments();
+    }
+
+    private void checkPropertyType() {
+        typeChoices.setDisable(!typeChecked.isSelected());
+    }
+
+    @FXML
+    private void onPropertyTypeCheck(MouseEvent mouseEvent) {
+        checkPropertyType();
+    }
+
+    private void checkOwner() {
+        ownerChoices.setDisable(!ownerChecked.isSelected());
+    }
+
+    @FXML
+    private void onOwnerCheck(MouseEvent mouseEvent) {
+        checkOwner();
+    }
+
+    private void checkAgent() {
+        agentChoices.setDisable(!agentChecked.isSelected());
+    }
+
+    @FXML
+    private void onAgentCheck(MouseEvent mouseEvent) {
+        checkAgent();
+    }
+
+    private void checkTenant() {
+        tenantChoices.setDisable(!tenantChecked.isSelected());
+    }
+
+    @FXML
+    private void onTenantCheck(MouseEvent mouseEvent) {
+        checkTenant();
+    }
+
+    private void initCheck() {
+        checkPropertyType();
+        checkStatus();
+        checkComments();
+        checkAddress();
+        checkMinRate();
+        checkMaxRate();
+        checkFacilities();
+        checkSorting();
+        checkOwner();
+        checkAgent();
+        checkTenant();
     }
 }

@@ -20,6 +20,7 @@ public class PropertyFilter {
         if (psb.getOwner() != null) filterOwner(psb.getOwner());
         if (psb.getAgent() != null) filterAgent(psb.getAgent());
         if (psb.getTenant() != null) filterTenant(psb.getTenant());
+        if (psb.getTenatOpt() != null) filterTenantOpt(psb.getTenatOpt());
         if (psb.isAvailability() != null) filterStatus(psb.isAvailability());
         if (psb.isComment() != null) filterComment(psb.isComment());
         if (psb.getFacilitiesPicker() != null) filterFacilitiesPicker(psb.getFacilitiesPicker());
@@ -53,6 +54,11 @@ public class PropertyFilter {
     private void filterTenant(Tenant tenant) {
         properties.removeIf(p -> (p.getTenant() == null || !p.getTenant().equals(tenant)));
     }
+
+    private void filterTenantOpt(Tenant tenatOpt) {
+        properties.removeIf(p -> p.getTenant() != null && !p.getTenant().equals(tenatOpt));
+    }
+
 
     private void filterStatus(Boolean availability) {
         properties.removeIf(p -> (p.getTenant() != null) == availability);

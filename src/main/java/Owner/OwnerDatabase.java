@@ -1,12 +1,12 @@
 package Owner;
 
-import CSV.*;
+import CSV.CSV;
+import CSV.ReadWriteRole;
 import Initializer.Initialization;
 import Phone.Phone;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class OwnerDatabase implements ReadWriteRole<Owner> {
@@ -15,8 +15,8 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
     private final TreeMap<Integer, Owner> ownerList;
     private final static OwnerDatabase instance = new OwnerDatabase();
 
-    private OwnerDatabase () {
-        ownerList = new TreeMap<Integer, Owner>();
+    private OwnerDatabase() {
+        ownerList = new TreeMap<>();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
     }
 
 
-    private ArrayList<String> rawOwner (Owner owner) {
+    private ArrayList<String> rawOwner(Owner owner) {
         ArrayList<String> result = new ArrayList<>();
 
         result.add(Integer.toString(owner.getId())); //id

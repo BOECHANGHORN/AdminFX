@@ -1,15 +1,13 @@
 package Role;
 
+import Admin.Admin;
 import Admin.AdminDatabase;
 import Agent.Agent;
 import Agent.AgentDatabase;
-import CSV.ReadWriteRole;
 import Owner.Owner;
 import Owner.OwnerDatabase;
 import Tenant.Tenant;
 import Tenant.TenantDatabase;
-
-import java.util.TreeMap;
 
 public class RoleDatabase {
     public static int getNewID(String role) {
@@ -21,11 +19,8 @@ public class RoleDatabase {
             case "Tenant":
                 return TenantDatabase.getInstance().getNewID();
             default:
-                return 0;
+                return AdminDatabase.getInstance().getNewID();
         }
-        /*
-            return AdminDatabase.getInstance().getNewID();
-         */
     }
 
     public static void create(Role role) {
@@ -39,11 +34,10 @@ public class RoleDatabase {
             case "Tenant":
                 TenantDatabase.getInstance().create((Tenant) role);
                 break;
+            default:
+                AdminDatabase.getInstance().create((Admin) role);
+                break;
         }
-        /*
-        else
-            AdminDatabase.getInstance().create((Admin) role);
-         */
     }
 
     public static void delete(Role role) {
@@ -57,11 +51,12 @@ public class RoleDatabase {
             case "Tenant":
                 TenantDatabase.getInstance().delete((Tenant) role);
                 break;
+            default:
+                AdminDatabase.getInstance().delete((Admin) role);
+                break;
         }
-        /*
-        else
-            AdminDatabase.getInstance().delete((Admin) role);
-         */
+
+
     }
 
     public static void update(Role role) {
@@ -75,11 +70,11 @@ public class RoleDatabase {
             case "Tenant":
                 TenantDatabase.getInstance().update((Tenant) role);
                 break;
+            default:
+                AdminDatabase.getInstance().update((Admin) role);
+                break;
         }
-        /*
-        else
-            AdminDatabase.getInstance().update((Admin) role);
-         */
+
     }
 
     public static Role searchUser(String username) {
@@ -87,12 +82,12 @@ public class RoleDatabase {
         if (r != null) return r;
         r = OwnerDatabase.getInstance().searchUser(username);
         if (r != null) return r;
-        r =  TenantDatabase.getInstance().searchUser(username);
+        r = TenantDatabase.getInstance().searchUser(username);
         if (r != null) return r;
         return AdminDatabase.getInstance().searchUser(username);
     }
 
-    public static boolean isUserExist(String userName) {
-        return searchUser(userName) != null;
+    public static boolean isUserExist(String username) {
+        return searchUser(username) != null;
     }
 }

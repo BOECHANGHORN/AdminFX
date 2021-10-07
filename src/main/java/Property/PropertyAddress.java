@@ -35,8 +35,8 @@ public class PropertyAddress {
         this.state = state;
     }
 
-    public String getFullAddress(){
-        return detailAddress+", "+ postalCode +", " + state;
+    public String getFullAddress() {
+        return detailAddress + ", " + postalCode + ", " + state;
     }
 
     @Override

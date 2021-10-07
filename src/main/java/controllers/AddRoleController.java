@@ -34,7 +34,7 @@ public class AddRoleController {
     @FXML
     private CheckBox editDltCheck;
     @FXML
-    private ChoiceBox<Role> userChoices;
+    private ComboBox<Role> userChoices;
     @FXML
     private Button createBtn;
     @FXML
@@ -63,7 +63,8 @@ public class AddRoleController {
         roleChoices.getItems().add("Tenant");
         roleChoices.getItems().add("Admin");
 
-        userChoices.setConverter(roleStringConverter);
+        new AutoCompleteRoleBox(userChoices);
+        phoneNoField.setTextFormatter(new PhoneFormatter().getInstance());
     }
 
     private void addSelected() {
@@ -127,17 +128,22 @@ public class AddRoleController {
         userChoices.getItems().clear();
 
         if (editDltCheck.isSelected()) {
-            if (roleChoices.getValue().equals("Owner")) {
-                userChoices.getItems().addAll(ownerList.values());
+            if (roleChoices.getValue() == null)
+                return;
 
-            } else if (roleChoices.getValue().equals("Agent")) {
-                userChoices.getItems().addAll(agentList.values());
-
-            } else if (roleChoices.getValue().equals("Tenant")) {
-                userChoices.getItems().addAll(tenantList.values());
-
-            } else if (roleChoices.getValue().equals("Admin")) {
-                userChoices.getItems().addAll(adminList.values());
+            switch (roleChoices.getValue()) {
+                case "Owner":
+                    userChoices.getItems().addAll(ownerList.values());
+                    break;
+                case "Agent":
+                    userChoices.getItems().addAll(agentList.values());
+                    break;
+                case "Tenant":
+                    userChoices.getItems().addAll(tenantList.values());
+                    break;
+                case "Admin":
+                    userChoices.getItems().addAll(adminList.values());
+                    break;
             }
         }
     }
@@ -165,39 +171,15 @@ public class AddRoleController {
                 return;
             }
 
-            if (roleChoices.getValue().equals("Owner")) {
+            String role = roleChoices.getValue();
+            int id = RoleDatabase.getNewID(role);
+            String password = passwordField.getText();
+            Phone phone = new Phone(phoneNoField.getText());
 
-                OwnerDatabase ownerDB = OwnerDatabase.getInstance();
-                int id = ownerDB.getNewID();
-                Phone phone = new Phone(phoneNoField.getText());
-                Owner owner = new Owner(id, newUsername, passwordField.getText(), phone);
-                ownerDB.create(owner);
+            Role newUser = Role.newRole(role, id, newUsername, password, phone);
+            assert newUser != null;
+            RoleDatabase.create(newUser);
 
-            } else if (roleChoices.getValue().equals("Agent")) {
-
-                AgentDatabase agentDB = AgentDatabase.getInstance();
-                int id = agentDB.getNewID();
-                Phone phone = new Phone(phoneNoField.getText());
-                Agent agent = new Agent(id, newUsername, passwordField.getText(), phone);
-                agentDB.create(agent);
-
-            } else if (roleChoices.getValue().equals("Tenant")) {
-
-                TenantDatabase tenantDB = TenantDatabase.getInstance();
-                int id = tenantDB.getNewID();
-                Phone phone = new Phone(phoneNoField.getText());
-                Tenant tenant = new Tenant(id, newUsername, passwordField.getText(), phone);
-                tenantDB.create(tenant);
-
-            } else if (roleChoices.getValue().equals("Admin")) {
-
-                AdminDatabase adminDB = AdminDatabase.getInstance();
-                int id = adminDB.getNewID();
-                Phone phone = new Phone(phoneNoField.getText());
-                Admin admin = new Admin(id, newUsername, passwordField.getText(), phone);
-                adminDB.create(admin);
-
-            }
             Utils.showAlert("Create Successful!!", true, mouseEvent);
         } else {
             Utils.showAlert("All fields are required", false, mouseEvent);
@@ -211,45 +193,20 @@ public class AddRoleController {
         }
 
         String newUsername = usernameField.getText();
-        if (RoleDatabase.isUserExist(newUsername))  {
+        Role selectedUser = userChoices.getValue();
+
+        if (!selectedUser.getUserName().equals(newUsername) && RoleDatabase.isUserExist(newUsername))  {
             Utils.showAlert("User name has been taken", false, mouseEvent);
             return;
         }
-        if (roleChoices.getValue().equals("Owner")) {
 
-            Owner owner = (Owner) userChoices.getValue();
-            owner.setUserName(newUsername);
-            owner.setPassword(passwordField.getText());
-            owner.setPhone(new Phone(phoneNoField.getText()));
-            OwnerDatabase.getInstance().update(owner);
+        selectedUser.setUserName(newUsername);
+        selectedUser.setPassword(passwordField.getText());
+        selectedUser.setPhone(new Phone(phoneNoField.getText()));
+        RoleDatabase.update(selectedUser);
 
-        } else if (roleChoices.getValue().equals("Agent")) {
-
-            Agent agent = (Agent) userChoices.getValue();
-            agent.setUserName(newUsername);
-            agent.setPassword(passwordField.getText());
-            agent.setPhone(new Phone(phoneNoField.getText()));
-            AgentDatabase.getInstance().update(agent);
-
-        } else if (roleChoices.getValue().equals("Tenant")) {
-
-            Tenant tenant = (Tenant) userChoices.getValue();
-            tenant.setUserName(newUsername);
-            tenant.setPassword(passwordField.getText());
-            tenant.setPhone(new Phone(phoneNoField.getText()));
-            TenantDatabase.getInstance().update(tenant);
-
-        } else if (roleChoices.getValue().equals("Admin")) {
-
-            Admin admin = (Admin) userChoices.getValue();
-            admin.setUserName(newUsername);
-            admin.setPassword(passwordField.getText());
-            admin.setPhone(new Phone(phoneNoField.getText()));
-            AdminDatabase.getInstance().update(admin);
-        }
         Utils.showAlert("Edit Successful!!", true, mouseEvent);
 
-        Role selectedUser = userChoices.getValue();
         onSelectRole();
         userChoices.setValue(selectedUser);
     }
@@ -259,30 +216,19 @@ public class AddRoleController {
         if (!inputValidate(mouseEvent)){
             return;
         }
-        Set<String> affectedRole = Set.of("Owner, Agent");
-        if ((roleChoices.getValue().equals("Owner") || roleChoices.getValue().equals("Agent")) && !deleteProperty(userChoices.getValue(), mouseEvent)){
+
+        if ((roleChoices.getValue().equals("Owner") ||
+                roleChoices.getValue().equals("Agent")) &&
+                !deleteProperty(userChoices.getValue(), mouseEvent)) {
             return;
         }
+
         if (roleChoices.getValue().equals("Tenant") && !unlinkProperty((Tenant) userChoices.getValue(), mouseEvent)) {
             return;
         }
 
-        if (roleChoices.getValue().equals("Owner")) {
-            OwnerDatabase ownerDB = OwnerDatabase.getInstance();
-            ownerDB.delete((Owner) userChoices.getValue());
+        RoleDatabase.delete(userChoices.getValue());
 
-        } else if (roleChoices.getValue().equals("Agent")) {
-            AgentDatabase agentDB = AgentDatabase.getInstance();
-            agentDB.delete((Agent) userChoices.getValue());
-
-        } else if (roleChoices.getValue().equals("Tenant")) {
-            TenantDatabase tenantDB = TenantDatabase.getInstance();
-            tenantDB.delete((Tenant) userChoices.getValue());
-
-        } else if (roleChoices.getValue().equals("Admin")) {
-            AdminDatabase adminDB = AdminDatabase.getInstance();
-            adminDB.delete((Admin) userChoices.getValue());
-        }
         Utils.showAlert("Deleted Successful!!", true, mouseEvent);
 
         userChoices.setValue(null);

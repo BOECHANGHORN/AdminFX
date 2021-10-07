@@ -1,14 +1,17 @@
 package Property;
 
-import Agent.*;
+import Agent.Agent;
+import Agent.AgentDatabase;
+import CSV.CSV;
+import CSV.ReadWrite;
 import Initializer.Initialization;
-import Tenant.*;
-import CSV.*;
-import Owner.*;
+import Owner.Owner;
+import Owner.OwnerDatabase;
+import Tenant.Tenant;
+import Tenant.TenantDatabase;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class PropertyDatabase implements ReadWrite<Property> {
@@ -18,7 +21,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
     private static final PropertyDatabase instance = new PropertyDatabase();
 
     private PropertyDatabase() {
-        propertyList = new TreeMap<Integer, Property>();
+        propertyList = new TreeMap<>();
     }
 
     @Override
@@ -70,7 +73,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
         int airCond = Integer.parseInt(splited[4]);
         int waterHeater = Integer.parseInt(splited[5]);
 
-        return new PropertyFacilities(swimmingPool,wifi,tv,fridge,airCond,waterHeater);
+        return new PropertyFacilities(swimmingPool, wifi, tv, fridge, airCond, waterHeater);
     }
 
     private String packFacilities(PropertyFacilities facilities) {
@@ -146,7 +149,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
         }
     }
 
-    private ArrayList<String> rawProperty (Property property) {
+    private ArrayList<String> rawProperty(Property property) {
         ArrayList<String> result = new ArrayList<>();
 
         result.add(Integer.toString(property.getId()));

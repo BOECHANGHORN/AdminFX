@@ -21,9 +21,9 @@ public class UpdatePropertyController {
     @FXML
     private ChoiceBox<PropertyType> typeChoices;
     @FXML
-    private ChoiceBox<Role> ownerChoices;
+    private ComboBox<Role> ownerChoices;
     @FXML
-    private ChoiceBox<Role> agentChoices;
+    private ComboBox<Role> agentChoices;
     @FXML
     private Spinner<Integer> roomNum;
     private SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
@@ -63,13 +63,16 @@ public class UpdatePropertyController {
     @FXML
     private TextField comment;
     @FXML
-    private ChoiceBox<Role> tenantChoices;
+    private ComboBox<Role> tenantChoices;
     @FXML
     private CheckBox isTenant;
 
     AppHolder holder = AppHolder.getInstance();
-    //private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+
+    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
     private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
+    private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
+
     private Property selectedProperty = AppHolder.getInstance().getSelectedProperty();
 
 
@@ -119,15 +122,12 @@ public class UpdatePropertyController {
 
     private void populateData() {
         if (selectedProperty != null) {
-            RoleStringConverter roleStringConverter = new RoleStringConverter();
             PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
-            IntegerFormatter integerFormatter1 = new IntegerFormatter();
             IntegerFormatter integerFormatter2 = new IntegerFormatter();
             DoubleFormatter doubleFormatter = new DoubleFormatter();
 
-            ownerChoices.getItems().addAll(selectedProperty.getOwner());
-            agentChoices.getItems().addAll(selectedProperty.getAgent());
-            //agentChoices.getItems().addAll(agentList.values());
+            ownerChoices.getItems().addAll(ownerList.values());
+            agentChoices.getItems().addAll(agentList.values());
             tenantChoices.getItems().addAll(tenantList.values());
 
             isTenant.setSelected(selectedProperty.getTenant() != null);
@@ -135,14 +135,15 @@ public class UpdatePropertyController {
 
             typeChoices.getItems().addAll(PropertyType.values());
             typeChoices.setConverter(propertyTypeStringConverter);
-            ownerChoices.setConverter(roleStringConverter);
-            agentChoices.setConverter(roleStringConverter);
-            tenantChoices.setConverter(roleStringConverter);
+            new AutoCompleteRoleBox(ownerChoices);
+            new AutoCompleteRoleBox(agentChoices);
+            new AutoCompleteRoleBox(tenantChoices);
             stateChoices.getItems().addAll(Utils.STATES);
             name.setText(selectedProperty.getName());
             typeChoices.setValue(selectedProperty.getType());
             ownerChoices.setValue(selectedProperty.getOwner());
             agentChoices.setValue(selectedProperty.getAgent());
+
             tenantChoices.setValue(selectedProperty.getTenant());
             stateChoices.setValue(selectedProperty.getAddress().getState());
             address.setText(selectedProperty.getAddress().getDetailAddress());

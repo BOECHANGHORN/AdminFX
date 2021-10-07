@@ -22,9 +22,9 @@ public class AddPropertyController {
     @FXML
     private ChoiceBox<PropertyType> typeChoices;
     @FXML
-    private ChoiceBox<Role> ownerChoices;
+    private ComboBox<Role> ownerChoices;
     @FXML
-    private ChoiceBox<Role> agentChoices;
+    private ComboBox<Role> agentChoices;
     @FXML
     private Spinner<Integer> roomNum;
     private SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
@@ -62,7 +62,7 @@ public class AddPropertyController {
     @FXML
     private TextField comment;
     @FXML
-    private ChoiceBox<Role> tenantChoices;
+    private ComboBox<Role> tenantChoices;
     @FXML
     private CheckBox isTenant;
 
@@ -78,9 +78,7 @@ public class AddPropertyController {
     }
 
     private void populateData() {
-        RoleStringConverter roleStringConverter = new RoleStringConverter();
         PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
-        IntegerFormatter integerFormatter1 = new IntegerFormatter();
         IntegerFormatter integerFormatter2 = new IntegerFormatter();
         DoubleFormatter doubleFormatter = new DoubleFormatter();
 
@@ -92,9 +90,9 @@ public class AddPropertyController {
 
         typeChoices.getItems().addAll(PropertyType.values());
         typeChoices.setConverter(propertyTypeStringConverter);
-        ownerChoices.setConverter(roleStringConverter);
-        agentChoices.setConverter(roleStringConverter);
-        tenantChoices.setConverter(roleStringConverter);
+        new AutoCompleteRoleBox(ownerChoices);
+        new AutoCompleteRoleBox(agentChoices);
+        new AutoCompleteRoleBox(tenantChoices);
         stateChoices.getItems().addAll(Utils.STATES);
         postcode.setTextFormatter(new PostcodeFormatter().getInstance());
         roomNumVF.setValue(0);

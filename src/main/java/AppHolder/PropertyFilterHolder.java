@@ -5,6 +5,7 @@ import Agent.Agent;
 import Owner.Owner;
 import Property.PropertyType;
 import Role.Role;
+import Tenant.Tenant;
 
 public class PropertyFilterHolder {
     private boolean typeChecked;
@@ -18,8 +19,8 @@ public class PropertyFilterHolder {
     private boolean ownerChecked;
     private boolean agentChecked;
     private boolean tenantChecked;
-    private PropertyType typeChoice;;
-    private String statusChoice;;
+    private PropertyType typeChoice;
+    private String statusChoice;
     private boolean isCommented;
     private boolean isWifi;
     private boolean isFridge;
@@ -28,8 +29,8 @@ public class PropertyFilterHolder {
     private boolean isWaterHeater;
     private boolean isSwimmingPool;
     private String addressField;
-    private String stateChoice ;;
-    private String postcodeField ;;
+    private String stateChoice ;
+    private String postcodeField ;
     private String minRate;
     private String maxRate;
     private String sortChoice;
@@ -265,7 +266,7 @@ public class PropertyFilterHolder {
         return tenantChoice;
     }
 
-    public void setTenantChoice(Role tenantChoice) {
+    public void setTenantChoice(Tenant tenantChoice) {
         this.tenantChoice = tenantChoice;
     }
 }

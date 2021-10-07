@@ -12,6 +12,7 @@ public class PropertyFilterBuilder {
     private Owner owner;
     private Agent agent;
     private Tenant tenant;
+    private Tenant tenatOpt;
     private Boolean availability;
     private Boolean comment;
     private FacilitiesPicker facilitiesPicker;
@@ -63,6 +64,15 @@ public class PropertyFilterBuilder {
 
     public PropertyFilterBuilder setTenant(Tenant tenant) {
         this.tenant = tenant;
+        return this;
+    }
+
+    public Tenant getTenatOpt() {
+        return tenatOpt;
+    }
+
+    public PropertyFilterBuilder setTenatOpt(Tenant tenatOpt) {
+        this.tenatOpt = tenatOpt;
         return this;
     }
 

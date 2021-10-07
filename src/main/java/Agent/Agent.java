@@ -1,5 +1,6 @@
 package Agent;
-import Phone.*;
+
+import Phone.Phone;
 import Role.Role;
 
 public class Agent extends Role {

@@ -9,12 +9,12 @@ public class CSV {
 
     private static String commaReplace(String str) { //replace Hankaku comma to Zenkaku comma before write
         if (str == null) return null;
-        return str.replace(',','，');
+        return str.replace(',', '，');
     }
 
     private static String commaRevert(String str) { //replace Zenkaku comma to Hankaku comma before write
         if (str == null) return null;
-        return str.replace('，',',');
+        return str.replace('，', ',');
     }
 
 
@@ -27,7 +27,7 @@ public class CSV {
             while (fileInput.hasNextLine()) {
                 String innerData = fileInput.nextLine();
 
-                if(innerData.isEmpty()) //last empty row, so skip
+                if (innerData.isEmpty()) //last empty row, so skip
                     break;
 
                 String[] output = innerData.split(",");

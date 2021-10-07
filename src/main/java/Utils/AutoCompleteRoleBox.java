@@ -9,9 +9,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class AutoCompleteRoleBox implements EventHandler{
-    private ComboBox<Role> comboBox;
-    private ObservableList<Role> data;
+public class AutoCompleteRoleBox implements EventHandler {
+    private final ComboBox<Role> comboBox;
+    private final ObservableList<Role> data;
 
     public AutoCompleteRoleBox(final ComboBox comboBox) {
         this.comboBox = comboBox;
@@ -28,21 +28,18 @@ public class AutoCompleteRoleBox implements EventHandler{
         this.comboBox.setConverter(rsc);
 
         this.comboBox.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue){//mean onfocus
+            if (newValue) {//mean onfocus
                 this.comboBox.show();
             }
         });
 
 
-
-        this.comboBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            moveCaret(this.comboBox.getEditor().getText().length());
-        });
+        this.comboBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> moveCaret(this.comboBox.getEditor().getText().length()));
 
 
         this.comboBox.setOnKeyReleased(this);
 
-}
+    }
 
     @Override
     public void handle(Event e) {
@@ -50,7 +47,7 @@ public class AutoCompleteRoleBox implements EventHandler{
             return;
 
         KeyEvent event = (KeyEvent) e;
-        if ( event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN
+        if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN
                 || event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT
                 || event.getCode() == KeyCode.HOME
                 || event.getCode() == KeyCode.END || event.getCode() == KeyCode.TAB
@@ -58,19 +55,19 @@ public class AutoCompleteRoleBox implements EventHandler{
             return;
         }
 
-        if(event.getCode() == KeyCode.BACK_SPACE){
+        if (event.getCode() == KeyCode.BACK_SPACE) {
             String str = this.comboBox.getEditor().getText();
             if (str != null && str.length() > 0) {
                 str = str.substring(0, str.length() - 1);
             }
-            if(str != null){
+            if (str != null) {
                 this.comboBox.getEditor().setText(str);
                 moveCaret(str.length());
             }
             this.comboBox.getSelectionModel().clearSelection();
         }
 
-        if(event.getCode() == KeyCode.ENTER && comboBox.getSelectionModel().getSelectedIndex()>-1)
+        if (event.getCode() == KeyCode.ENTER && comboBox.getSelectionModel().getSelectedIndex() > -1)
             return;
 
         setItems();
@@ -86,7 +83,7 @@ public class AutoCompleteRoleBox implements EventHandler{
             }
         }
 
-        if(list.isEmpty()) this.comboBox.hide();
+        if (list.isEmpty()) this.comboBox.hide();
 
         this.comboBox.setItems(list);
         this.comboBox.show();

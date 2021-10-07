@@ -1,6 +1,7 @@
 package Owner;
-import Phone.*;
-import Role.*;
+
+import Phone.Phone;
+import Role.Role;
 
 public class Owner extends Role {
     public Owner(int id, String userName, String password, Phone phone) {

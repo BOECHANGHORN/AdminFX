@@ -6,18 +6,15 @@ import javafx.util.StringConverter;
 import java.util.function.UnaryOperator;
 
 public class DoubleFormatter {
-    private TextFormatter<Double> textFormatter;
+    private final TextFormatter<Double> textFormatter;
 
     public DoubleFormatter() {
         UnaryOperator<TextFormatter.Change> doubleNumValidationFormatter = change -> {
             if (change.getControlNewText().matches("\\d+\\.\\d{0,2}")
-            || change.getControlNewText().matches("\\d+")) {
-                return change;
-            } else if (change.getControlNewText().equals("")) {
-                change.setText("0");
+                    || change.getControlNewText().matches("\\d*")) {
                 return change;
             } else {
-               return null;
+                return null;
             }
         };
 
@@ -25,13 +22,8 @@ public class DoubleFormatter {
 
             @Override
             public Double fromString(String s) {
-                if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
-                    return 0.0;
-                } else {
-                    return Double.valueOf(s);
-                }
+                return Double.valueOf(s);
             }
-
 
             @Override
             public String toString(Double d) {
