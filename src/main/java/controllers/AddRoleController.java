@@ -221,7 +221,7 @@ public class AddRoleController {
 
     @FXML
     private void onDlt(MouseEvent mouseEvent) {
-        if (!inputValidate(mouseEvent)) {
+        if (!isUserChoice(mouseEvent)) {
             return;
         }
 
@@ -293,11 +293,18 @@ public class AddRoleController {
         return roleChoices.getValue() != null && !usernameField.getText().isEmpty() && !passwordField.getText().isEmpty() && !phoneNoField.getText().isEmpty();
     }
 
-    private boolean inputValidate(MouseEvent mouseEvent) {
+    private boolean isUserChoice(MouseEvent mouseEvent) {
         if (userChoices.getValue() == null) {
             Utils.showAlert("Please select a user", false, mouseEvent);
             return false;
         }
+        return true;
+    }
+
+    private boolean inputValidate(MouseEvent mouseEvent) {
+        if (!isUserChoice(mouseEvent))
+            return false;
+
         if (!isValid()) {
             Utils.showAlert("All fields are required", false, mouseEvent);
             return false;
