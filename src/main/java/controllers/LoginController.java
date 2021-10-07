@@ -1,7 +1,8 @@
 package controllers;
 
 import AppHolder.AppHolder;
-import Role.*;
+import Role.Role;
+import Role.RoleDatabase;
 import com.app.main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -46,7 +47,7 @@ public class LoginController {
         String role = getUser.getRole();
         String password = getUser.getPassword();
 
-        if(!role.equals("Admin")) {
+        if (!role.equals("Admin")) {
             msg.setText("Wrong software. For Admin only");
             return;
         }

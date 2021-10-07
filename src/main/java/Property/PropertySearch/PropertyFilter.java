@@ -2,14 +2,19 @@ package Property.PropertySearch;
 
 import Agent.Agent;
 import Owner.Owner;
-import Property.*;
+import Property.Property;
+import Property.PropertyAddress;
+import Property.PropertyDatabase;
+import Property.PropertyType;
 import Tenant.Tenant;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedList;
 
 public class PropertyFilter {
-    private LinkedList<Property> properties;
+    private final LinkedList<Property> properties;
 
     public PropertyFilter(PropertyFilterBuilder psb) {
         Collection<Property> getData = PropertyDatabase.getInstance().read().values();

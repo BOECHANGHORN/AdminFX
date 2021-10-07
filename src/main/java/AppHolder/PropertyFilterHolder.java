@@ -29,8 +29,8 @@ public class PropertyFilterHolder {
     private boolean isWaterHeater;
     private boolean isSwimmingPool;
     private String addressField;
-    private String stateChoice ;
-    private String postcodeField ;
+    private String stateChoice;
+    private String postcodeField;
     private String minRate;
     private String maxRate;
     private String sortChoice;

@@ -11,10 +11,11 @@ import java.io.IOException;
 
 public class Main extends Application {
     private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
         Initialization.initialization();
-        this.primaryStage = stage;
+        primaryStage = stage;
         Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Rental System");
@@ -29,15 +30,15 @@ public class Main extends Application {
         primaryStage.setScene(scene);
     }
 
-    public  static void goToLoginPage() throws IOException {
+    public static void goToLoginPage() throws IOException {
         switchScene("Login.fxml");
     }
 
-    public  static void goToViewBoardPage() throws IOException {
+    public static void goToViewBoardPage() throws IOException {
         switchScene("ViewBoard.fxml");
     }
 
-    public  static void goToEditProfilePage() throws IOException {
+    public static void goToEditProfilePage() throws IOException {
         switchScene("EditProfile.fxml");
     }
 

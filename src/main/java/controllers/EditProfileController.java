@@ -2,12 +2,13 @@ package controllers;
 
 import AppHolder.AppHolder;
 import Phone.Phone;
-import Role.*;
-import Utils.Utils;
+import Role.Role;
+import Role.RoleDatabase;
 import Utils.PhoneFormatter;
+import Utils.Utils;
 import com.app.main.Main;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class EditProfileController {
     @FXML
     private TextField phoneNoField;
 
-    private Role currentUser = AppHolder.getInstance().getUser();
+    private final Role currentUser = AppHolder.getInstance().getUser();
 
     @FXML
     private void initialize() {

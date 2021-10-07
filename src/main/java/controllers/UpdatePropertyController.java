@@ -1,11 +1,14 @@
 package controllers;
 
-import Agent.*;
+import Agent.Agent;
+import Agent.AgentDatabase;
 import AppHolder.AppHolder;
-import Owner.*;
+import Owner.Owner;
+import Owner.OwnerDatabase;
 import Property.*;
 import Role.Role;
-import Tenant.*;
+import Tenant.Tenant;
+import Tenant.TenantDatabase;
 import Utils.*;
 import com.app.main.Main;
 import javafx.fxml.FXML;
@@ -26,11 +29,11 @@ public class UpdatePropertyController {
     private ComboBox<Role> agentChoices;
     @FXML
     private Spinner<Integer> roomNum;
-    private SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
 
     @FXML
     private Spinner<Integer> bathRoomNum;
-    private SpinnerValueFactory<Integer> bathRoomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> bathRoomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
 
     @FXML
     private TextArea address;
@@ -44,16 +47,16 @@ public class UpdatePropertyController {
     private CheckBox swimmingPool;
     @FXML
     private Spinner<Integer> tvNum;
-    private SpinnerValueFactory<Integer> tvNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> tvNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
     @FXML
     private Spinner<Integer> fridgeNum;
-    private SpinnerValueFactory<Integer> fridgeNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> fridgeNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
     @FXML
     private Spinner<Integer> airConNum;
-    private SpinnerValueFactory<Integer> airConNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> airConNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
     @FXML
     private Spinner<Integer> waterHeaterNum;
-    private SpinnerValueFactory<Integer> waterHeaterNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> waterHeaterNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
     @FXML
     private TextField sizeTxt;
     @FXML
@@ -69,11 +72,11 @@ public class UpdatePropertyController {
 
     AppHolder holder = AppHolder.getInstance();
 
-    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
-    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
-    private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
+    private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
+    private final TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
 
-    private Property selectedProperty = AppHolder.getInstance().getSelectedProperty();
+    private final Property selectedProperty = AppHolder.getInstance().getSelectedProperty();
 
 
     @FXML

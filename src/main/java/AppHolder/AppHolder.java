@@ -18,7 +18,8 @@ public class AppHolder {
 
     private final static AppHolder INSTANCE = new AppHolder();
 
-    private AppHolder() {}
+    private AppHolder() {
+    }
 
     public static AppHolder getInstance() {
         return INSTANCE;

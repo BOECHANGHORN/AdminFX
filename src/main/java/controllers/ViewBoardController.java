@@ -1,9 +1,11 @@
 package controllers;
 
 import Agent.Agent;
-import AppHolder.*;
+import AppHolder.AppHolder;
+import AppHolder.PropertyFilterHolder;
 import Owner.Owner;
-import Property.*;
+import Property.Property;
+import Property.PropertyAddress;
 import Property.PropertySearch.FacilitiesPicker;
 import Property.PropertySearch.PropertyFilterBuilder;
 import Tenant.Tenant;
@@ -82,7 +84,7 @@ public class ViewBoardController {
         }
     }
 
-    private PropertyFilterBuilder getOwnPropertyFilterBuilder(){
+    private PropertyFilterBuilder getOwnPropertyFilterBuilder() {
 
         return new PropertyFilterBuilder();
     }
@@ -123,7 +125,7 @@ public class ViewBoardController {
             double doubleMaxRate = Double.parseDouble(propertyFilterHolder.getMaxRate());
             propertyFilterBuilder.setRentalUpBound(doubleMaxRate);
         }
-        if(propertyFilterHolder.isSortChecked() && propertyFilterHolder.getSortChoice()!= null){
+        if (propertyFilterHolder.isSortChecked() && propertyFilterHolder.getSortChoice() != null) {
             boolean isSortedByLowestFirst = propertyFilterHolder.getSortChoice().equals(Utils.LOWEST_FIRST);
             propertyFilterBuilder.setSorted(isSortedByLowestFirst);
         }
@@ -176,7 +178,7 @@ public class ViewBoardController {
                     GridPane.setMargin(anchorPane, new Insets(10));
                     row++;
                 }
-            }else{
+            } else {
                 Label msg = new Label();
                 msg.setText("No result found.");
                 msg.setFont(new Font("System", 20));

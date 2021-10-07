@@ -1,6 +1,7 @@
 package Admin;
 
-import CSV.*;
+import CSV.CSV;
+import CSV.ReadWriteRole;
 import Initializer.Initialization;
 import Phone.Phone;
 
@@ -14,7 +15,7 @@ public class AdminDatabase implements ReadWriteRole<Admin> {
     private final TreeMap<Integer, Admin> adminList;
     private final static AdminDatabase instance = new AdminDatabase();
 
-    private AdminDatabase () {
+    private AdminDatabase() {
         adminList = new TreeMap<>();
     }
 
@@ -83,7 +84,7 @@ public class AdminDatabase implements ReadWriteRole<Admin> {
         }
     }
 
-    private ArrayList<String> rawAdmin (Admin admin) {
+    private ArrayList<String> rawAdmin(Admin admin) {
         ArrayList<String> result = new ArrayList<>();
 
         result.add(Integer.toString(admin.getId())); //id

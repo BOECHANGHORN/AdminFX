@@ -1,11 +1,15 @@
 package controllers;
 
-import Agent.*;
-import AppHolder.*;
-import Owner.*;
+import Agent.Agent;
+import Agent.AgentDatabase;
+import AppHolder.AppHolder;
+import AppHolder.PropertyFilterHolder;
+import Owner.Owner;
+import Owner.OwnerDatabase;
 import Property.PropertyType;
 import Role.Role;
-import Tenant.*;
+import Tenant.Tenant;
+import Tenant.TenantDatabase;
 import Utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,9 +83,9 @@ public class PropertyFilterController {
     @FXML
     private ComboBox<Role> tenantChoices;
 
-    private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
-    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
-    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
+    private final TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
+    private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
 
     @FXML
     private void initialize() {
@@ -93,7 +97,7 @@ public class PropertyFilterController {
                 ActionEvent.ACTION, event -> setPropertyFilterHolder());
     }
 
-    private void setPropertyFilterHolder(){
+    private void setPropertyFilterHolder() {
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = new PropertyFilterHolder();
         propertyFilterHolder.setTypeChecked(typeChecked.isSelected());
@@ -155,7 +159,7 @@ public class PropertyFilterController {
 
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = holder.getPropertyFilterHolder();
-        if(propertyFilterHolder != null){
+        if (propertyFilterHolder != null) {
             typeChecked.setSelected(propertyFilterHolder.isTypeChecked());
             statusChecked.setSelected(propertyFilterHolder.isStatusChecked());
             commentsChecked.setSelected(propertyFilterHolder.isCommentsChecked());

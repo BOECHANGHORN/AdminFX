@@ -1,14 +1,23 @@
 package controllers;
 
-import Admin.*;
-import Agent.*;
-import Owner.*;
+import Admin.Admin;
+import Admin.AdminDatabase;
+import Agent.Agent;
+import Agent.AgentDatabase;
+import Owner.Owner;
+import Owner.OwnerDatabase;
 import Phone.Phone;
-import Property.*;
+import Property.Property;
+import Property.PropertyDatabase;
 import Property.PropertySearch.PropertyFilterBuilder;
-import Role.*;
-import Tenant.*;
-import Utils.*;
+import Role.Role;
+import Role.RoleDatabase;
+import Tenant.Tenant;
+import Tenant.TenantDatabase;
+import Utils.AutoCompleteRoleBox;
+import Utils.PhoneFormatter;
+import Utils.RoleStringConverter;
+import Utils.Utils;
 import com.app.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +26,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class AddRoleController {
@@ -44,10 +52,10 @@ public class AddRoleController {
     @FXML
     private Label userLabel;
 
-    private TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
-    private TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
-    private TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
-    private TreeMap<Integer, Admin> adminList = AdminDatabase.getInstance().read();
+    private final TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
+    private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
+    private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
+    private final TreeMap<Integer, Admin> adminList = AdminDatabase.getInstance().read();
 
     @FXML
     private void initialize() {
@@ -166,7 +174,7 @@ public class AddRoleController {
         if (isValid()) {
 
             String newUsername = usernameField.getText();
-            if (RoleDatabase.isUserExist(newUsername))  {
+            if (RoleDatabase.isUserExist(newUsername)) {
                 Utils.showAlert("User name has been taken", false, mouseEvent);
                 return;
             }
@@ -188,14 +196,14 @@ public class AddRoleController {
 
     @FXML
     private void onEdit(MouseEvent mouseEvent) {
-        if (!inputValidate(mouseEvent)){
+        if (!inputValidate(mouseEvent)) {
             return;
         }
 
         String newUsername = usernameField.getText();
         Role selectedUser = userChoices.getValue();
 
-        if (!selectedUser.getUserName().equals(newUsername) && RoleDatabase.isUserExist(newUsername))  {
+        if (!selectedUser.getUserName().equals(newUsername) && RoleDatabase.isUserExist(newUsername)) {
             Utils.showAlert("User name has been taken", false, mouseEvent);
             return;
         }
@@ -213,7 +221,7 @@ public class AddRoleController {
 
     @FXML
     private void onDlt(MouseEvent mouseEvent) {
-        if (!inputValidate(mouseEvent)){
+        if (!inputValidate(mouseEvent)) {
             return;
         }
 

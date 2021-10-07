@@ -1,12 +1,12 @@
 package controllers;
 
-import Property.*;
+import Property.Property;
+import Property.PropertyDatabase;
 import Tenant.Tenant;
-import Utils.*;
+import Utils.PropertyListener;
+import Utils.Utils;
 import com.app.main.Main;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -103,7 +103,7 @@ public class PropertyRowController {
             tenantLabel.setText("N/A");
             tenantLabel.setStyle("-fx-text-fill: #697684");
         } else {
-            tenantLabel.setText(tenant.getUserName()+ " ( " + tenant.getPhone().getNumber() + " )");
+            tenantLabel.setText(tenant.getUserName() + " ( " + tenant.getPhone().getNumber() + " )");
         }
 
         if (!property.isPublished()) {
