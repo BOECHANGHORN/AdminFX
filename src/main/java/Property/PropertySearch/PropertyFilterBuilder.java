@@ -12,7 +12,7 @@ public class PropertyFilterBuilder {
     private Owner owner;
     private Agent agent;
     private Tenant tenant;
-    private Tenant tenatOpt;
+    private Tenant tenantOpt;
     private Boolean availability;
     private Boolean comment;
     private FacilitiesPicker facilitiesPicker;
@@ -20,7 +20,7 @@ public class PropertyFilterBuilder {
     private Double rentalLowBound;
     private Double rentalUpBound;
     private Boolean published;
-    private Boolean sorted;
+    private Boolean ascending;
 
     public PropertyType getType() {
         return type;
@@ -67,12 +67,12 @@ public class PropertyFilterBuilder {
         return this;
     }
 
-    public Tenant getTenatOpt() {
-        return tenatOpt;
+    public Tenant getTenantOpt() {
+        return tenantOpt;
     }
 
-    public PropertyFilterBuilder setTenatOpt(Tenant tenatOpt) {
-        this.tenatOpt = tenatOpt;
+    public PropertyFilterBuilder setTenantOpt(Tenant tenantOpt) {
+        this.tenantOpt = tenantOpt;
         return this;
     }
 
@@ -139,12 +139,12 @@ public class PropertyFilterBuilder {
         return this;
     }
 
-    public Boolean getSorted() {
-        return sorted;
+    public Boolean getAscending() {
+        return ascending;
     }
 
-    public PropertyFilterBuilder setSorted(Boolean sorted) {
-        this.sorted = sorted;
+    public PropertyFilterBuilder setAscending(Boolean ascending) {
+        this.ascending = ascending;
         return this;
     }
 

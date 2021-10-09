@@ -127,7 +127,7 @@ public class ViewBoardController {
         }
         if (propertyFilterHolder.isSortChecked() && propertyFilterHolder.getSortChoice() != null) {
             boolean isSortedByLowestFirst = propertyFilterHolder.getSortChoice().equals(Utils.LOWEST_FIRST);
-            propertyFilterBuilder.setSorted(isSortedByLowestFirst);
+            propertyFilterBuilder.setAscending(isSortedByLowestFirst);
         }
         if (propertyFilterHolder.isOwnerChecked() && propertyFilterHolder.getOwnerChoice() != null) {
             propertyFilterBuilder.setOwner((Owner) propertyFilterHolder.getOwnerChoice());

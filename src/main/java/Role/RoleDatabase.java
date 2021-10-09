@@ -9,7 +9,23 @@ import Owner.OwnerDatabase;
 import Tenant.Tenant;
 import Tenant.TenantDatabase;
 
+/**
+ * <h1>RoleDatabase Class</h1>
+ * The RoleDatabase class is a Facade design pattern class
+ * to call all the Role subclass database
+ *
+ * @author Tan Kai Yuan
+ * @version 1.0
+ * @since 2021 -10-08
+ */
 public class RoleDatabase {
+
+    /**
+     * Gets new id for specific role
+     *
+     * @param role the role
+     * @return the new id
+     */
     public static int getNewID(String role) {
         switch (role) {
             case "Agent":
@@ -23,6 +39,11 @@ public class RoleDatabase {
         }
     }
 
+    /**
+     * Create new role in database
+     *
+     * @param role the role object
+     */
     public static void create(Role role) {
         switch (role.getRole()) {
             case "Agent":
@@ -40,6 +61,11 @@ public class RoleDatabase {
         }
     }
 
+    /**
+     * Delete role in database
+     *
+     * @param role the role object
+     */
     public static void delete(Role role) {
         switch (role.getRole()) {
             case "Agent":
@@ -59,6 +85,11 @@ public class RoleDatabase {
 
     }
 
+    /**
+     * Update role in database
+     *
+     * @param role the role object
+     */
     public static void update(Role role) {
         switch (role.getRole()) {
             case "Agent":
@@ -77,6 +108,12 @@ public class RoleDatabase {
 
     }
 
+    /**
+     * Search user name and get the role object
+     *
+     * @param username the username
+     * @return the role object if found else null
+     */
     public static Role searchUser(String username) {
         Role r = AgentDatabase.getInstance().searchUser(username);
         if (r != null) return r;
@@ -87,6 +124,12 @@ public class RoleDatabase {
         return AdminDatabase.getInstance().searchUser(username);
     }
 
+    /**
+     * Is user exist by user name
+     *
+     * @param username the username
+     * @return the existence
+     */
     public static boolean isUserExist(String username) {
         return searchUser(username) != null;
     }

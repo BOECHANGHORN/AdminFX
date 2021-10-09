@@ -2,7 +2,9 @@ package CSV;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CSV {
@@ -96,5 +98,43 @@ public class CSV {
 
     }
 
+    public static void changeCSV(ArrayList<String> data, int pos, File file) {
+        StringBuilder writeData = new StringBuilder();
 
+        for (String oldStr : data)
+            writeData.append(commaReplace(oldStr)).append(",");
+
+        writeData.setLength(writeData.length() - 1);
+
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert lines != null;
+        lines.set(pos, writeData.toString());
+        try {
+            Files.write(file.toPath(), lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void deleteCSV(int pos, File file) {
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert lines != null;
+        lines.remove(pos);
+        try {
+            Files.write(file.toPath(), lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
