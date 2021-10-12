@@ -18,7 +18,15 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.util.TreeMap;
 
-
+/**
+ * <h1>AddPropertyController Class</h1>
+ * The AddPropertyController class is a controller class that
+ * connect the AddProperty screen with the models
+ *
+ * @author Boe Chang Horn
+ * @version 1.0
+ * @since 2021-10-12
+ */
 public class AddPropertyController {
     @FXML
     private TextField name;
@@ -74,16 +82,23 @@ public class AddPropertyController {
     private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
     private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
 
+    /**
+     * A private method that will be triggered when
+     * the scene initializes and trigger populateData method
+     */
     @FXML
     private void initialize() {
         // Setup Input
         populateData();
     }
 
+    /**
+     * A private method that setup all the inputs
+     */
     private void populateData() {
         PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
         IntegerFormatter integerFormatter2 = new IntegerFormatter();
-        DoubleFormatter doubleFormatter = new DoubleFormatter();
+        RinggitFormatter ringgitFormatter = new RinggitFormatter();
 
         ownerChoices.getItems().addAll(ownerList.values());
         agentChoices.getItems().addAll(agentList.values());
@@ -112,9 +127,15 @@ public class AddPropertyController {
         waterHeaterNum.setValueFactory(waterHeaterNumVF);
         sizeTxt.setTextFormatter(integerFormatter2.getInstance());
         sizeTxt.setText("0");
-        rateTxt.setTextFormatter(doubleFormatter.getInstance());
+        rateTxt.setTextFormatter(ringgitFormatter.getInstance());
     }
 
+    /**
+     * A private method that triggers creating new property object
+     * and validates input value before creating
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onSubmit(MouseEvent mouseEvent) {
         if (isValid()) {
@@ -152,11 +173,19 @@ public class AddPropertyController {
         }
     }
 
+    /**
+     * A private method that validates inputs
+     *
+     * @return boolean value that determine whether inputs value are valid
+     */
     private boolean isValid() {
         return !name.getText().isEmpty() && typeChoices.getValue() != null && ownerChoices.getValue() != null && agentChoices.getValue() != null
                 && stateChoices.getValue() != null && !address.getText().isEmpty() && !postcode.getText().isEmpty();
     }
 
+    /**
+     * A private method that resets input properties and value
+     */
     private void resetInput() {
         name.setText("");
         typeChoices.setValue(null);
@@ -183,26 +212,51 @@ public class AddPropertyController {
         comment.setText("");
     }
 
+    /**
+     * A private method that sets the visibility of tenant ComboBox
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onTenantCheck(MouseEvent mouseEvent) {
         tenantChoices.setVisible(isTenant.isSelected());
     }
 
+    /**
+     * A private method that initializes ViewBoard scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickHomeBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToViewBoardPage();
     }
 
+    /**
+     * A private method that initializes AddMenu scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToAddMenuPage();
     }
 
+    /**
+     * A private method that initializes EditProfile scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickProfileBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToEditProfilePage();
     }
 
+    /**
+     * A private method that initializes Login scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();

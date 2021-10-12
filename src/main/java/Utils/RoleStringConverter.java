@@ -4,9 +4,23 @@ import Role.Role;
 import javafx.collections.ObservableList;
 import javafx.util.StringConverter;
 
+/**
+ * <h1>RoleStringConverter</h1>
+ * The RoleStringConverter class is a class that store data fields
+ * of RoleStringConverter
+ *
+ * @author Chan Yun Hong
+ * @version 1.0
+ * @since 2021-10-11
+ */
 public class RoleStringConverter extends StringConverter<Role> {
     private ObservableList<Role> roleList;
 
+    /**
+     * Sets role list.
+     *
+     * @param roleList the role list
+     */
     public void setRoleList(ObservableList<Role> roleList) {
         this.roleList = roleList;
     }

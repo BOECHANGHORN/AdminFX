@@ -9,9 +9,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * <h1>Main Class</h1>
+ * The Main class is is a class stores the data fields of Main
+ * and acts as driver class and responsible for initialization of the app
+ *
+ * @author Boe Chang Horn
+ * @version 1.0
+ * @since 2021-10-12
+ */
+
 public class Main extends Application {
     private static Stage primaryStage;
 
+    /**
+     * Initialize the stage object, app's backend file loading and Login scene initially
+     *
+     * @param stage the Stage object
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Initialization.initialization();
@@ -24,24 +39,41 @@ public class Main extends Application {
         System.out.println("Scene loaded");
     }
 
+    /**
+     * Load the FXML file to initialize the scene
+     *
+     * @param fxml the filename of FXML file
+     */
     public static void switchScene(String fxml) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource(fxml));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
     }
 
+    /**
+     * Initialize Login scene
+     */
     public static void goToLoginPage() throws IOException {
         switchScene("Login.fxml");
     }
 
+    /**
+     * Initialize ViewBoard scene
+     */
     public static void goToViewBoardPage() throws IOException {
         switchScene("ViewBoard.fxml");
     }
 
+    /**
+     * Initialize EditProfile scene
+     */
     public static void goToEditProfilePage() throws IOException {
         switchScene("EditProfile.fxml");
     }
 
+    /**
+     * Initialize AddMenu scene
+     */
     public static void goToAddMenuPage() throws IOException {
         switchScene("AddMenu.fxml");
     }

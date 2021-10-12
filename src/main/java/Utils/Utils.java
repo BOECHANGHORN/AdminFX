@@ -9,6 +9,15 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.Optional;
 
+/**
+ * <h1>Utils Class</h1>
+ * The Utils class is a class that provide utilities methods that will be used
+ * throughout the whole apps
+ *
+ * @author Chan Yun Hong
+ * @version 1.0
+ * @since 2021-10-11
+ */
 public class Utils {
     public static final String[] STATES = {"Johor", "Kedah", "Kelantan", "Malacca", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Sabah", "Sarawak", "Selangor", "Terengganu",
             "Kuala Lumpur", "Putrajaya", "Labuan"};
@@ -21,7 +30,13 @@ public class Utils {
     public static final String HIGHEST_FIRST = "Highest First";
     public static final String LOWEST_FIRST = "Lowest First";
 
-
+    /**
+     * Converts the enum value of
+     * PropertyType into desired text
+     *
+     * @param str the enum value of PropertyType
+     * @return the text in string type
+     */
     public static String getPropertyTypeTxt(PropertyType str) {
         switch (str) {
             case BUNGALOW:
@@ -39,6 +54,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Gets the YES or NO constants value
+     *
+     * @param isExist the boolean value that determine either YES or NO
+     * @return the text in string type
+     */
     public static String getYesOrNo(boolean isExist) {
         if (isExist) {
             return YES;
@@ -47,6 +68,13 @@ public class Utils {
         }
     }
 
+    /**
+     * Show alert dialog
+     *
+     * @param msg, the alert message,
+     * @param success, whether it is a success type or fail type for message
+     * @param mouseEvent the mouse event
+     */
     public static void showAlert(String msg, boolean success, MouseEvent mouseEvent) {
         // Success Alert
         Alert alert = new Alert(Alert.AlertType.NONE, msg, ButtonType.CLOSE);
@@ -65,6 +93,12 @@ public class Utils {
         alert.show();
     }
 
+    /**
+     * Show confirmation dialog
+     *
+     * @param msg, the alert message,
+     * @param mouseEvent the mouse event
+     */
     public static boolean showConfirm(String msg, MouseEvent mouseEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg);
         alert.setX(mouseEvent.getScreenX() - 600);

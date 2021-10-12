@@ -28,6 +28,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+/**
+ * <h1>AddRoleController Class</h1>
+ * The AddRoleController class is a controller class that
+ * connect the AddRole screen with the models
+ *
+ * @author Boe Chang Horn
+ * @version 1.0
+ * @since 2021-10-12
+ */
 public class AddRoleController {
     @FXML
     private ChoiceBox<String> roleChoices;
@@ -57,12 +66,20 @@ public class AddRoleController {
     private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
     private final TreeMap<Integer, Admin> adminList = AdminDatabase.getInstance().read();
 
+    /**
+     * A private method that will be triggered when
+     * the scene initializes and trigger populateData method
+     * and addSelected method
+     */
     @FXML
     private void initialize() {
         addSelected();
         populateData();
     }
 
+    /**
+     * A private method that setup all the inputs
+     */
     private void populateData() {
         RoleStringConverter roleStringConverter = new RoleStringConverter();
 
@@ -75,6 +92,10 @@ public class AddRoleController {
         phoneNoField.setTextFormatter(new PhoneFormatter().getInstance());
     }
 
+    /**
+     * A private method that setup all the inputs
+     * for the add function
+     */
     private void addSelected() {
         addCheck.setSelected(true);
         editDltCheck.setSelected(false);
@@ -86,6 +107,10 @@ public class AddRoleController {
         clearAll();
     }
 
+    /**
+     * A private method that setup all the inputs
+     * for the edit or delete function
+     */
     private void editDltSelected() {
         addCheck.setSelected(false);
         editDltCheck.setSelected(true);
@@ -97,18 +122,30 @@ public class AddRoleController {
         clearAll();
     }
 
+    /**
+     * A private method that clears ComboBox and inputs
+     */
     private void clearAll() {
         roleChoices.setValue(null);
         userChoices.getItems().clear();
         clearText();
     }
 
+    /**
+     * A private method that clears text fields
+     */
     private void clearText() {
         usernameField.setText("");
         passwordField.setText("");
         phoneNoField.setText("");
     }
 
+    /**
+     * A private method that setup all the add functions
+     * by calling addSelected and editDltSelected methods
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onAddClick(MouseEvent mouseEvent) {
         if (addCheck.isSelected()) {
@@ -118,6 +155,12 @@ public class AddRoleController {
         }
     }
 
+    /**
+     * A private method that setup all the edit or delete functions
+     * by calling addSelected and editDltSelected methods
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onEditDltClick(MouseEvent mouseEvent) {
         if (editDltCheck.isSelected()) {
@@ -127,11 +170,20 @@ public class AddRoleController {
         }
     }
 
+    /**
+     * A private method that calls onSelectRole method
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void onRoleRequest(ActionEvent actionEvent) {
         onSelectRole();
     }
 
+    /**
+     * A private method that setups the userChoices ComboBox
+     * by the Role selected in roleChoices ComboBox
+     */
     private void onSelectRole() {
         userChoices.getItems().clear();
 
@@ -156,6 +208,12 @@ public class AddRoleController {
         }
     }
 
+    /**
+     * A private method that setup all the text fields that is
+     * selected in the userChoices ComboBox
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void onUserRequest(ActionEvent actionEvent) {
         if (userChoices.getValue() != null) {
@@ -169,6 +227,11 @@ public class AddRoleController {
         }
     }
 
+    /**
+     * A private method that creates the new Role with validation
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onCreate(MouseEvent mouseEvent) {
         if (isValid()) {
@@ -194,6 +257,11 @@ public class AddRoleController {
         }
     }
 
+    /**
+     * A private method that edits the selected Role with validation
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onEdit(MouseEvent mouseEvent) {
         if (!inputValidate(mouseEvent)) {
@@ -219,6 +287,11 @@ public class AddRoleController {
         userChoices.setValue(selectedUser);
     }
 
+    /**
+     * A private method that deletes the selected Role with validation
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onDlt(MouseEvent mouseEvent) {
         if (!isUserChoice(mouseEvent)) {
@@ -244,6 +317,14 @@ public class AddRoleController {
         onSelectRole();
     }
 
+    /**
+     * A private method that prompts the user on confirmation at deleting the Role object
+     * that is pass into this method
+     *
+     * @param role the Role that wants to be deleted
+     * @param mouseEvent the mouse event
+     * @return boolean value that determine whether the Role is agreed to delete
+     */
     private boolean deleteProperty(Role role, MouseEvent mouseEvent) {
         PropertyFilterBuilder pfb = new PropertyFilterBuilder();
 
@@ -269,6 +350,14 @@ public class AddRoleController {
             return false;
     }
 
+    /**
+     * A private method that prompts the user on confirmation at unlinking the Property object
+     * that is pass into this method
+     *
+     * @param tenant the Tenant that wants to be unlinked
+     * @param mouseEvent the mouse event
+     * @return boolean value that determine whether the Property is agreed to unlink
+     */
     private boolean unlinkProperty(Tenant tenant, MouseEvent mouseEvent) {
         ArrayList<Property> properties = new PropertyFilterBuilder().setTenant(tenant).build().getResult();
         if (properties.isEmpty())
@@ -288,11 +377,21 @@ public class AddRoleController {
             return false;
     }
 
-
+    /**
+     * A private method that validates inputs
+     *
+     * @return boolean value that determine whether inputs value are valid
+     */
     private boolean isValid() {
         return roleChoices.getValue() != null && !usernameField.getText().isEmpty() && !passwordField.getText().isEmpty() && !phoneNoField.getText().isEmpty();
     }
 
+    /**
+     * A private method that validates the userChoice value with alert
+     *
+     * @param mouseEvent the mouse event
+     * @return boolean value that determine whether inputs value are valid
+     */
     private boolean isUserChoice(MouseEvent mouseEvent) {
         if (userChoices.getValue() == null) {
             Utils.showAlert("Please select a user", false, mouseEvent);
@@ -301,6 +400,12 @@ public class AddRoleController {
         return true;
     }
 
+    /**
+     * A private method that validates the input value with alert
+     *
+     * @param mouseEvent the mouse event
+     * @return boolean value that determine whether inputs value are valid
+     */
     private boolean inputValidate(MouseEvent mouseEvent) {
         if (!isUserChoice(mouseEvent))
             return false;
@@ -312,21 +417,41 @@ public class AddRoleController {
         return true;
     }
 
+    /**
+     * A private method that initializes ViewBoard scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickHomeBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToViewBoardPage();
     }
 
+    /**
+     * A private method that initializes AddMenu scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToAddMenuPage();
     }
 
+    /**
+     * A private method that initializes EditProfile scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickProfileBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToEditProfilePage();
     }
 
+    /**
+     * A private method that initializes Login scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();

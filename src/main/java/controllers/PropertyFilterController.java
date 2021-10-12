@@ -18,6 +18,15 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.TreeMap;
 
+/**
+ * <h1>PropertyFilterController Class</h1>
+ * The PropertyFilterController class is a controller class that
+ * aids in controlling the PropertyFilter component
+ *
+ * @author Boe Chang Horn
+ * @version 1.0
+ * @since 2021-10-12
+ */
 public class PropertyFilterController {
     public static final String[] STATUSES = {Utils.ACTIVE, Utils.INACTIVE};
     public static final String[] SORT_CHOICES = {Utils.LOWEST_FIRST, Utils.HIGHEST_FIRST};
@@ -87,6 +96,11 @@ public class PropertyFilterController {
     private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
     private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
 
+    /**
+     * A private method that will be triggered when
+     * the scene initializes and trigger populateData, initCheck method
+     * and add event filter for button
+     */
     @FXML
     private void initialize() {
         populateData();
@@ -97,6 +111,10 @@ public class PropertyFilterController {
                 ActionEvent.ACTION, event -> setPropertyFilterHolder());
     }
 
+    /**
+     * A private method that sets the data fields of PropertyFilterHolder
+     * object that stored in AppHolder instance
+     */
     private void setPropertyFilterHolder() {
         AppHolder holder = AppHolder.getInstance();
         PropertyFilterHolder propertyFilterHolder = new PropertyFilterHolder();
@@ -134,21 +152,24 @@ public class PropertyFilterController {
         holder.setPropertyFilterHolder((propertyFilterHolder));
     }
 
+    /**
+     * A private method that setups the all the inputs
+     */
     @FXML
     private void populateData() {
         PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
         RoleStringConverter roleStringConverter = new RoleStringConverter();
         IntegerFormatter integerFormatter = new IntegerFormatter();
-        DoubleFormatter doubleFormatter1 = new DoubleFormatter();
-        DoubleFormatter doubleFormatter2 = new DoubleFormatter();
+        RinggitFormatter ringgitFormatter1 = new RinggitFormatter();
+        RinggitFormatter ringgitFormatter2 = new RinggitFormatter();
 
         typeChoices.getItems().addAll(PropertyType.values());
         typeChoices.setConverter(propertyTypeStringConverter);
         statusChoices.getItems().addAll(STATUSES);
         stateChoices.getItems().addAll(Utils.STATES);
         postcodeField.setTextFormatter(new PostcodeFormatter().getInstance());
-        minRate.setTextFormatter(doubleFormatter1.getInstance());
-        maxRate.setTextFormatter(doubleFormatter2.getInstance());
+        minRate.setTextFormatter(ringgitFormatter1.getInstance());
+        maxRate.setTextFormatter(ringgitFormatter2.getInstance());
         sortChoices.getItems().addAll(SORT_CHOICES);
         ownerChoices.getItems().addAll(ownerList.values());
         agentChoices.getItems().addAll(agentList.values());
@@ -193,16 +214,28 @@ public class PropertyFilterController {
         }
     }
 
-
+    /**
+     * A private method that determines whether disables sortChoices input
+     * based on sortChecked value
+     */
     private void checkSorting() {
         sortChoices.setDisable(!sortChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkSorting method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onSortingCheck(MouseEvent mouseEvent) {
         checkSorting();
     }
 
+    /**
+     * A private method that determines whether disables isWifi, isFridge, isTv, isAirCond, isWaterHeater
+     * and isSwimmingPool inputs based on facilitiesChecked value
+     */
     private void checkFacilities() {
         isWifi.setDisable(!facilitiesChecked.isSelected());
         isFridge.setDisable(!facilitiesChecked.isSelected());
@@ -212,7 +245,11 @@ public class PropertyFilterController {
         isSwimmingPool.setDisable(!facilitiesChecked.isSelected());
     }
 
-
+    /**
+     * A private method that triggers checkFacilities method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onFacilitiesCheck(MouseEvent mouseEvent) {
         checkFacilities();
@@ -224,83 +261,163 @@ public class PropertyFilterController {
         postcodeField.setDisable(!addressChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkAddress method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onAddressCheck(MouseEvent mouseEvent) {
         checkAddress();
     }
 
+    /**
+     * A private method that determines whether disables minRate input
+     * based on minRateChecked value
+     */
     private void checkMinRate() {
         minRate.setDisable(!minRateChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkMinRate method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onMinRateCheck(MouseEvent mouseEvent) {
         checkMinRate();
     }
 
+    /**
+     * A private method that determines whether disables maxRate input
+     * based on maxRateChecked value
+     */
     private void checkMaxRate() {
         maxRate.setDisable(!maxRateChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkMaxRate method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onMaxRateCheck(MouseEvent mouseEvent) {
         checkMaxRate();
     }
 
+    /**
+     * A private method that determines whether disables statusChoices input
+     * based on statusChecked value
+     */
     private void checkStatus() {
         statusChoices.setDisable(!statusChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkStatus method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onStatusCheck(MouseEvent mouseEvent) {
         checkStatus();
     }
 
+    /**
+     * A private method that determines whether disables isCommented input
+     * based on commentsChecked value
+     */
     private void checkComments() {
         isCommented.setDisable(!commentsChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkComments method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onCommentsCheck(MouseEvent mouseEvent) {
         checkComments();
     }
 
+    /**
+     * A private method that determines whether disables typeChoices input
+     * based on typeChecked value
+     */
     private void checkPropertyType() {
         typeChoices.setDisable(!typeChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkPropertyType method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onPropertyTypeCheck(MouseEvent mouseEvent) {
         checkPropertyType();
     }
 
+    /**
+     * A private method that determines whether disables ownerChoices input
+     * based on ownerChecked value
+     */
     private void checkOwner() {
         ownerChoices.setDisable(!ownerChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkOwner method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onOwnerCheck(MouseEvent mouseEvent) {
         checkOwner();
     }
 
+    /**
+     * A private method that determines whether disables agentChoices input
+     * based on agentChecked value
+     */
     private void checkAgent() {
         agentChoices.setDisable(!agentChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkAgent method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onAgentCheck(MouseEvent mouseEvent) {
         checkAgent();
     }
 
+    /**
+     * A private method that determines whether disables tenantChoices input
+     * based on tenantChecked value
+     */
     private void checkTenant() {
         tenantChoices.setDisable(!tenantChecked.isSelected());
     }
 
+    /**
+     * A private method that triggers checkTenant method
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onTenantCheck(MouseEvent mouseEvent) {
         checkTenant();
     }
 
+    /**
+     * A private method that triggers all the checking methods for all the inputs
+     */
     private void initCheck() {
         checkPropertyType();
         checkStatus();

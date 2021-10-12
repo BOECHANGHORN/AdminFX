@@ -18,6 +18,15 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.util.TreeMap;
 
+/**
+ * <h1>UpdatePropertyController Class</h1>
+ * The UpdatePropertyController class is a controller class that
+ * connect the UpdateProperty screen with the models
+ *
+ * @author Boe Chang Horn
+ * @version 1.0
+ * @since 2021-10-12
+ */
 public class UpdatePropertyController {
     @FXML
     private TextField name;
@@ -78,13 +87,22 @@ public class UpdatePropertyController {
 
     private final Property selectedProperty = AppHolder.getInstance().getSelectedProperty();
 
-
+    /**
+     * A private method that will be triggered when
+     * the scene initializes and trigger populateData method
+     */
     @FXML
     private void initialize() {
         // Setup Input
         populateData();
     }
 
+    /**
+     * A private method that triggers updating selected property data
+     * and will validate input value before updating
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onUpdate(MouseEvent mouseEvent) {
         if (selectedProperty != null) {
@@ -123,11 +141,15 @@ public class UpdatePropertyController {
         }
     }
 
+    /**
+     * A private method that populates all the inputs by using the property object
+     * data and setups input
+     */
     private void populateData() {
         if (selectedProperty != null) {
             PropertyTypeStringConverter propertyTypeStringConverter = new PropertyTypeStringConverter();
             IntegerFormatter integerFormatter2 = new IntegerFormatter();
-            DoubleFormatter doubleFormatter = new DoubleFormatter();
+            RinggitFormatter doubleFormatter = new RinggitFormatter();
 
             ownerChoices.getItems().addAll(ownerList.values());
             agentChoices.getItems().addAll(agentList.values());
@@ -176,31 +198,62 @@ public class UpdatePropertyController {
 
     }
 
+    /**
+     * A private method that determines whether tenantChoices is visible
+     * based on isTenant value
+     *
+     * @param mouseEvent the mouse Event
+     */
     @FXML
     private void onTenantCheck(MouseEvent mouseEvent) {
         tenantChoices.setVisible(isTenant.isSelected());
     }
 
+    /**
+     * A private method that validates inputs
+     *
+     * @return boolean value that determine whether inputs value are valid
+     */
     private boolean isValid() {
         return !name.getText().isEmpty() && typeChoices.getValue() != null && ownerChoices.getValue() != null && agentChoices.getValue() != null
                 && stateChoices.getValue() != null && !address.getText().isEmpty() && !postcode.getText().isEmpty();
     }
 
+    /**
+     * A private method that initializes ViewBoard scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickHomeBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToViewBoardPage();
     }
 
+    /**
+     * A private method that initializes AddMenu scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToAddMenuPage();
     }
 
+    /**
+     * A private method that initializes EditProfile scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onClickProfileBtn(MouseEvent mouseEvent) throws IOException {
         Main.goToEditProfilePage();
     }
 
+    /**
+     * A private method that initializes Login scene
+     *
+     * @param mouseEvent the mouse event
+     */
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();
