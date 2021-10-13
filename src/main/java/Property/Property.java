@@ -3,6 +3,11 @@ package Property;
 import Agent.Agent;
 import Owner.Owner;
 import Tenant.Tenant;
+import Agent.AgentDatabase;
+import Owner.OwnerDatabase;
+import Tenant.TenantDatabase;
+
+import java.io.Serializable;
 
 /**
  * <h1>Property Class</h1>
@@ -13,18 +18,23 @@ import Tenant.Tenant;
  * @version 1.0
  * @since 2021-10-08
  */
-public class Property {
+public class Property implements Serializable{
+    private static final long serialVersionUID = 6543585098267757680L;
+
     private int id;
     private String name;
     private PropertyType type;
-    private Owner owner;
-    private Agent agent;
+    transient private Owner owner;
+    private int ownerID;
+    transient private Agent agent;
+    private int agentID;
     private int roomNum;
     private int bathRoomNum;
     private PropertyAddress address;
     private int size;
     private PropertyFacilities facilities;
-    private Tenant tenant; //available if null else n/a
+    transient private Tenant tenant; //available if null else n/a
+    private int tenantID; //available if 0 else n/a
     private String comment;
     private double rate;
     private boolean published;
@@ -39,16 +49,50 @@ public class Property {
         this.name = propertyBuilder.name;
         this.type = propertyBuilder.type;
         this.owner = propertyBuilder.owner;
+        this.ownerID = propertyBuilder.owner.getId();
         this.agent = propertyBuilder.agent;
+        this.agentID = propertyBuilder.agent.getId();
         this.roomNum = propertyBuilder.roomNum;
         this.bathRoomNum = propertyBuilder.bathRoomNum;
         this.address = propertyBuilder.address;
         this.size = propertyBuilder.size;
         this.facilities = propertyBuilder.facilities;
         this.tenant = propertyBuilder.tenant;
+        this.tenantID = this.tenant == null ? 0 : this.tenant.getId();
         this.comment = propertyBuilder.comment;
         this.rate = propertyBuilder.rate;
         this.published = propertyBuilder.published;
+    }
+
+    /**
+     * For PropertyDatabase to avoid mal-reference
+     *
+     */
+    protected void setOwnerViaID() {
+        Owner owner = OwnerDatabase.getInstance().searchByID(ownerID);
+        setOwner(owner);
+    }
+
+    /**
+     * For PropertyDatabase to avoid mal-reference
+     *
+     */
+    protected void setAgentViaID() {
+        Agent agent = AgentDatabase.getInstance().searchByID(agentID);
+        setAgent(agent);
+    }
+
+    /**
+     * For PropertyDatabase to avoid mal-reference
+     *
+     */
+    protected void setTenantViaID() {
+        if (tenantID == 0)
+            setTenant(null);
+        else {
+            Tenant tenant = TenantDatabase.getInstance().searchByID(tenantID);
+            setTenant(tenant);
+        }
     }
 
     /**
@@ -121,6 +165,7 @@ public class Property {
      */
     public void setOwner(Owner owner) {
         this.owner = owner;
+        this.ownerID = owner.getId();
     }
 
     /**
@@ -139,6 +184,7 @@ public class Property {
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
+        this.agentID = agent.getId();
     }
 
     /**
@@ -247,6 +293,7 @@ public class Property {
      */
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+        this.tenantID = tenant == null ? 0 : tenant.getId();
     }
 
     /**

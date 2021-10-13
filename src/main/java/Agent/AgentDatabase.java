@@ -1,28 +1,57 @@
 package Agent;
 
-import CSV.CSV;
-import CSV.ReadWriteRole;
+import ReadWrite.ReadWriteRole;
 import Initializer.Initialization;
-import Phone.Phone;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.TreeMap;
 
 /**
  * <h1>AgentDatabase Class</h1>
  * The AgentDatabase class is a DAO class of the Agent class which implements the Singleton
- * design pattern that is responsible for the search and CRUD of Agent object in the CSV.
+ * design pattern that is responsible for the search and CRUD of Agent object in a Serializable file.
  *
  * @author Tan Kai Yuan
  * @version 1.0
  * @since 2021-10-08
  */
 public class AgentDatabase implements ReadWriteRole<Agent> {
-    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//agent.CSV");
+    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//agent.bin");
 
-    private final TreeMap<Integer, Agent> agentList;
+    private TreeMap<Integer, Agent> agentList;
     private final static AgentDatabase instance = new AgentDatabase();
+
+    /**
+     * A private method to serialize agentList
+     */
+    private void serialize() {
+        try {
+            FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(agentList);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A private method to deserialize agentList
+     */
+    private void deserialize() {
+        try {
+            FileInputStream fis = new FileInputStream(FILE_PATH);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            agentList = (TreeMap<Integer, Agent>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            //No serialization found
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * A private method that initialize the singleton
@@ -38,7 +67,7 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
      */
     @Override
     public void init() {
-        readData();
+        deserialize();
     }
 
     /**
@@ -91,15 +120,14 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
     //CRUD
 
     /**
-     * Append new data into agentList
-     * call appendData method to append data into CSV
+     * Append new data into agentList and Serialize
      *
      * @param agent the new Agent object to be written
      */
     @Override
     public void create(Agent agent) {
         agentList.put(agent.getId(), agent);
-        appendData(agent);
+        serialize();
     }
 
     /**
@@ -113,103 +141,23 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
     }
 
     /**
-     * update to change the data in the CSV by
-     * calling changeData method
+     * Update data by Serialize the agentList
      *
      * @param agent the new Agent object to be update
      */
     @Override
     public void update(Agent agent) {
-        changeData(agent);
+        serialize();
     }
 
     /**
-     * remove the object from agentList and
-     * delete it from CSV file
+     * remove the object from agentList and Serialize
      *
      * @param agent the new Agent object to be delete
      */
     @Override
     public void delete(Agent agent) {
-        deleteData(agent);
         agentList.remove(agent.getId());
-    }
-
-    /**
-     * read data from the CSV file and convert it to
-     * Agent object and append into agentList
-     */
-    @Override
-    public void readData() {
-        ArrayList<ArrayList<String>> rawData = CSV.readCSV(FILE_PATH);
-
-        for (ArrayList<String> rawRow : rawData) {
-            int id = Integer.parseInt(rawRow.get(0));
-            String userName = rawRow.get(1);
-            String password = rawRow.get(2);
-            Phone phone = new Phone(rawRow.get(3));
-
-            Agent agent = new Agent(id, userName, password, phone);
-            agentList.put(agent.getId(), agent);
-        }
-    }
-
-    /**
-     * convert Agent object into String Array to be written in
-     * the CSV file
-     *
-     * @param agent the new Agent object to become String Array
-     */
-    private ArrayList<String> rawAgent(Agent agent) {
-        ArrayList<String> result = new ArrayList<>();
-
-        result.add(Integer.toString(agent.getId())); //id
-        result.add(agent.getUserName()); //userName
-        result.add(agent.getPassword());
-        result.add(agent.getPhone().getNumber()); //phone
-
-        return result;
-    }
-
-    /**
-     * write data from the agentList to the CSV
-     */
-    @Override
-    public void writeData() {
-        ArrayList<ArrayList<String>> rawData = new ArrayList<>();
-
-        for (Agent agent : agentList.values())
-            rawData.add(rawAgent(agent));
-
-        CSV.writeCSV(rawData, FILE_PATH);
-    }
-
-    /**
-     * write new data to the CSV
-     *
-     * @param agent the Agent object to be written
-     */
-    private void appendData(Agent agent) {
-        CSV.appendCSV(rawAgent(agent), FILE_PATH);
-    }
-
-    /**
-     * change data in the CSV
-     *
-     * @param agent the Agent object to be change
-     */
-    private void changeData(Agent agent) {
-        int pos = agentList.headMap(agent.getId()).size();
-        CSV.changeCSV(rawAgent(agent), pos, FILE_PATH);
-    }
-
-    /**
-     * delete data in the CSV
-     *
-     * @param agent the Agent object to be deleted
-     */
-    private void deleteData(Agent agent) {
-        int pos = agentList.headMap(agent.getId()).size();
-        CSV.deleteCSV(pos, FILE_PATH);
+        serialize();
     }
 }

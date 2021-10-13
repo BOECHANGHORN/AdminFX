@@ -3,6 +3,8 @@ package Owner;
 import Phone.Phone;
 import Role.Role;
 
+import java.io.Serializable;
+
 
 /**
  * <h1>Owner Class</h1>
@@ -13,7 +15,9 @@ import Role.Role;
  * @version 1.0
  * @since 2021-10-08
  */
-public class Owner extends Role {
+public class Owner extends Role implements Serializable {
+
+    private static final long serialVersionUID = 6543585098267757692L;
 
     /**
      * Instantiates a new Owner.

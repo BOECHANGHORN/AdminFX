@@ -3,6 +3,10 @@ package Admin;
 import Phone.Phone;
 import Role.Role;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 
 /**
  * <h1>Admin Class</h1>
@@ -13,7 +17,9 @@ import Role.Role;
  * @version 1.0
  * @since 2021-10-08
  */
-public class Admin extends Role {
+public class Admin extends Role implements Serializable {
+
+    private static final long serialVersionUID = 6543585098267757690L;
 
     /**
      * Instantiates a new Admin.

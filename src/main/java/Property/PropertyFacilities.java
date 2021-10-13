@@ -1,5 +1,7 @@
 package Property;
 
+import java.io.Serializable;
+
 /**
  * <h1>PropertyFacilities Class</h1>
  * The PropertyFacilities class is a model class stores
@@ -9,7 +11,7 @@ package Property;
  * @version 1.0
  * @since 2021 -10-08
  */
-public class PropertyFacilities {
+public class PropertyFacilities implements Serializable {
     private boolean swimmingPool;
     private boolean wifi;
     private int tv;

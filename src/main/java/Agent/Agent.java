@@ -3,6 +3,8 @@ package Agent;
 import Phone.Phone;
 import Role.Role;
 
+import java.io.Serializable;
+
 
 /**
  * <h1>Agent Class</h1>
@@ -13,8 +15,9 @@ import Role.Role;
  * @version 1.0
  * @since 2021-10-08
  */
-public class Agent extends Role {
+public class Agent extends Role implements Serializable {
 
+    private static final long serialVersionUID = 6543585098267757691L;
     /**
      * Instantiates a new Agent.
      *

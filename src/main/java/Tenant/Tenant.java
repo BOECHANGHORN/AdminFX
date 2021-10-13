@@ -3,6 +3,8 @@ package Tenant;
 import Phone.Phone;
 import Role.Role;
 
+import java.io.Serializable;
+
 
 /**
  * <h1>Tenant Class</h1>
@@ -13,7 +15,9 @@ import Role.Role;
  * @version 1.0
  * @since 2021-10-08
  */
-public class Tenant extends Role {
+public class Tenant extends Role implements Serializable {
+
+    private static final long serialVersionUID = 6543585098267757693L;
 
     /**
      * Instantiates a new Tenant.

@@ -1,28 +1,57 @@
 package Owner;
 
-import CSV.CSV;
-import CSV.ReadWriteRole;
+import ReadWrite.ReadWriteRole;
 import Initializer.Initialization;
-import Phone.Phone;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.TreeMap;
 
 /**
  * <h1>OwnerDatabase Class</h1>
  * The OwnerDatabase class is a DAO class of the Owner class which implements the Singleton
- * design pattern that is responsible for the search and CRUD of Owner object in the CSV.
+ * design pattern that is responsible for the search and CRUD of Owner object in a Serializable file.
  *
  * @author Tan Kai Yuan
  * @version 1.0
  * @since 2021-10-08
  */
 public class OwnerDatabase implements ReadWriteRole<Owner> {
-    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//owner.CSV");
+    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//owner.bin");
 
-    private final TreeMap<Integer, Owner> ownerList;
+    private TreeMap<Integer, Owner> ownerList;
     private final static OwnerDatabase instance = new OwnerDatabase();
+
+    /**
+     * A private method to serialize ownerList
+     */
+    private void serialize() {
+        try {
+            FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(ownerList);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A private method to deserialize ownerList
+     */
+    private void deserialize() {
+        try {
+            FileInputStream fis = new FileInputStream(FILE_PATH);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ownerList = (TreeMap<Integer, Owner>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            //No serialization found
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * A private method that initialize the singleton
@@ -38,7 +67,7 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
      */
     @Override
     public void init() {
-        readData();
+        deserialize();
     }
 
     /**
@@ -91,15 +120,14 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
     //CRUD
 
     /**
-     * Append new data into ownerList
-     * call appendData method to append data into CSV
+     * Append new data into ownerList and Serialize
      *
      * @param owner the new Owner object to be written
      */
     @Override
     public void create(Owner owner) {
         ownerList.put(owner.getId(), owner);
-        appendData(owner);
+        serialize();
     }
 
     /**
@@ -113,103 +141,23 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
     }
 
     /**
-     * update to change the data in the CSV by
-     * calling changeData method
+     * Update data by Serialize the ownerList
      *
      * @param owner the new Owner object to be update
      */
     @Override
     public void update(Owner owner) {
-        changeData(owner);
+        serialize();
     }
 
     /**
-     * remove the object from ownerList and
-     * delete it from CSV file
+     * remove the object from ownerList and Serialize
      *
      * @param owner the new Owner object to be delete
      */
     @Override
     public void delete(Owner owner) {
-        deleteData(owner);
         ownerList.remove(owner.getId());
-    }
-
-    /**
-     * read data from the CSV file and convert it to
-     * Owner object and append into ownerList
-     */
-    @Override
-    public void readData() {
-        ArrayList<ArrayList<String>> rawData = CSV.readCSV(FILE_PATH);
-
-        for (ArrayList<String> rawRow : rawData) {
-            int id = Integer.parseInt(rawRow.get(0));
-            String userName = rawRow.get(1);
-            String password = rawRow.get(2);
-            Phone phone = new Phone(rawRow.get(3));
-
-            Owner owner = new Owner(id, userName, password, phone);
-            ownerList.put(owner.getId(), owner);
-        }
-    }
-
-    /**
-     * convert Owner object into String Array to be written in
-     * the CSV file
-     *
-     * @param owner the new Owner object to become String Array
-     */
-    private ArrayList<String> rawOwner(Owner owner) {
-        ArrayList<String> result = new ArrayList<>();
-
-        result.add(Integer.toString(owner.getId())); //id
-        result.add(owner.getUserName()); //userName
-        result.add(owner.getPassword());
-        result.add(owner.getPhone().getNumber()); //phone
-
-        return result;
-    }
-
-    /**
-     * write data from the ownerList to the CSV
-     */
-    @Override
-    public void writeData() {
-        ArrayList<ArrayList<String>> rawData = new ArrayList<>();
-
-        for (Owner owner : ownerList.values())
-            rawData.add(rawOwner(owner));
-
-        CSV.writeCSV(rawData, FILE_PATH);
-    }
-
-    /**
-     * write new data to the CSV
-     *
-     * @param owner the Owner object to be written
-     */
-    private void appendData(Owner owner) {
-        CSV.appendCSV(rawOwner(owner), FILE_PATH);
-    }
-
-    /**
-     * change data in the CSV
-     *
-     * @param owner the Owner object to be change
-     */
-    private void changeData(Owner owner) {
-        int pos = ownerList.headMap(owner.getId()).size();
-        CSV.changeCSV(rawOwner(owner), pos, FILE_PATH);
-    }
-
-    /**
-     * delete data in the CSV
-     *
-     * @param owner the Owner object to be deleted
-     */
-    private void deleteData(Owner owner) {
-        int pos = ownerList.headMap(owner.getId()).size();
-        CSV.deleteCSV(pos, FILE_PATH);
+        serialize();
     }
 }

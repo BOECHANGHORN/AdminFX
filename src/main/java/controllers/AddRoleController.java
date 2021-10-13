@@ -4,6 +4,7 @@ import Admin.Admin;
 import Admin.AdminDatabase;
 import Agent.Agent;
 import Agent.AgentDatabase;
+import AppHolder.AppHolder;
 import Owner.Owner;
 import Owner.OwnerDatabase;
 import Phone.Phone;
@@ -222,6 +223,8 @@ public class AddRoleController {
             usernameField.setText(role.getUserName());
             passwordField.setText(role.getPassword());
             phoneNoField.setText(role.getPhone().getNumber());
+
+            dltBtn.setDisable(role == AppHolder.getInstance().getUser()); //prevent delete ourselves
         } else {
             clearText();
         }

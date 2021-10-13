@@ -1,5 +1,7 @@
 package Phone;
 
+import java.io.Serializable;
+
 /**
  * <h1>Phone Class</h1>
  * The Phone class store the property of a phone number, the reason to
@@ -9,7 +11,7 @@ package Phone;
  * @version 1.0
  * @since 2021 -10-08
  */
-public class Phone {
+public class Phone implements Serializable {
     private String number;
 
     /**

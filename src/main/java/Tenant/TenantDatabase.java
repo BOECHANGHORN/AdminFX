@@ -1,28 +1,57 @@
 package Tenant;
 
-import CSV.CSV;
-import CSV.ReadWriteRole;
+import ReadWrite.ReadWriteRole;
 import Initializer.Initialization;
-import Phone.Phone;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.TreeMap;
 
 /**
  * <h1>TenantDatabase Class</h1>
  * The TenantDatabase class is a DAO class of the Tenant class which implements the Singleton
- * design pattern that is responsible for the search and CRUD of Tenant object in the CSV.
+ * design pattern that is responsible for the search and CRUD of Tenant object in a Serializable file.
  *
  * @author Tan Kai Yuan
  * @version 1.0
  * @since 2021-10-08
  */
 public class TenantDatabase implements ReadWriteRole<Tenant> {
-    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//tenant.CSV");
+    private final File FILE_PATH = new File(Initialization.CUR_PATH + "//tenant.bin");
 
-    private final TreeMap<Integer, Tenant> tenantList;
+    private TreeMap<Integer, Tenant> tenantList;
     private final static TenantDatabase instance = new TenantDatabase();
+
+    /**
+     * A private method to serialize tenantList
+     */
+    private void serialize() {
+        try {
+            FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(tenantList);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A private method to deserialize tenantList
+     */
+    private void deserialize() {
+        try {
+            FileInputStream fis = new FileInputStream(FILE_PATH);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            tenantList = (TreeMap<Integer, Tenant>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            //No serialization found
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * A private method that initialize the singleton
@@ -38,7 +67,7 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
      */
     @Override
     public void init() {
-        readData();
+        deserialize();
     }
 
     /**
@@ -91,15 +120,14 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
     //CRUD
 
     /**
-     * Append new data into tenantList
-     * call appendData method to append data into CSV
+     * Append new data into tenantList and Serialize
      *
      * @param tenant the new Tenant object to be written
      */
     @Override
     public void create(Tenant tenant) {
         tenantList.put(tenant.getId(), tenant);
-        appendData(tenant);
+        serialize();
     }
 
     /**
@@ -113,103 +141,23 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
     }
 
     /**
-     * update to change the data in the CSV by
-     * calling changeData method
+     * Update data by Serialize the tenantList
      *
      * @param tenant the new Tenant object to be update
      */
     @Override
     public void update(Tenant tenant) {
-        changeData(tenant);
+        serialize();
     }
 
     /**
-     * remove the object from tenantList and
-     * delete it from CSV file
+     * remove the object from tenantList and Serialize
      *
      * @param tenant the new Tenant object to be delete
      */
     @Override
     public void delete(Tenant tenant) {
-        deleteData(tenant);
         tenantList.remove(tenant.getId());
-    }
-
-    /**
-     * read data from the CSV file and convert it to
-     * Tenant object and append into tenantList
-     */
-    @Override
-    public void readData() {
-        ArrayList<ArrayList<String>> rawData = CSV.readCSV(FILE_PATH);
-
-        for (ArrayList<String> rawRow : rawData) {
-            int id = Integer.parseInt(rawRow.get(0));
-            String userName = rawRow.get(1);
-            String password = rawRow.get(2);
-            Phone phone = new Phone(rawRow.get(3));
-
-            Tenant tenant = new Tenant(id, userName, password, phone);
-            tenantList.put(tenant.getId(), tenant);
-        }
-    }
-
-    /**
-     * convert Tenant object into String Array to be written in
-     * the CSV file
-     *
-     * @param tenant the new Tenant object to become String Array
-     */
-    private ArrayList<String> rawTenant(Tenant tenant) {
-        ArrayList<String> result = new ArrayList<>();
-
-        result.add(Integer.toString(tenant.getId())); //id
-        result.add(tenant.getUserName()); //userName
-        result.add(tenant.getPassword());
-        result.add(tenant.getPhone().getNumber()); //phone
-
-        return result;
-    }
-
-    /**
-     * write data from the tenantList to the CSV
-     */
-    @Override
-    public void writeData() {
-        ArrayList<ArrayList<String>> rawData = new ArrayList<>();
-
-        for (Tenant tenant : tenantList.values())
-            rawData.add(rawTenant(tenant));
-
-        CSV.writeCSV(rawData, FILE_PATH);
-    }
-
-    /**
-     * write new data to the CSV
-     *
-     * @param tenant the Tenant object to be written
-     */
-    private void appendData(Tenant tenant) {
-        CSV.appendCSV(rawTenant(tenant), FILE_PATH);
-    }
-
-    /**
-     * change data in the CSV
-     *
-     * @param tenant the Tenant object to be change
-     */
-    private void changeData(Tenant tenant) {
-        int pos = tenantList.headMap(tenant.getId()).size();
-        CSV.changeCSV(rawTenant(tenant), pos, FILE_PATH);
-    }
-
-    /**
-     * delete data in the CSV
-     *
-     * @param tenant the Tenant object to be deleted
-     */
-    private void deleteData(Tenant tenant) {
-        int pos = tenantList.headMap(tenant.getId()).size();
-        CSV.deleteCSV(pos, FILE_PATH);
+        serialize();
     }
 }

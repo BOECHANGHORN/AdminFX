@@ -1,5 +1,7 @@
 package Property;
 
+import java.io.Serializable;
+
 /**
  * <h1>PropertyType Class</h1>
  * The PropertyAddress class is an enum class that stores
@@ -9,7 +11,7 @@ package Property;
  * @version 1.0
  * @since 2021 -10-08
  */
-public enum PropertyType {
+public enum PropertyType implements Serializable {
     CONDOMINIUM,
     SINGLESTOREY,
     DOUBLESTOREY,
