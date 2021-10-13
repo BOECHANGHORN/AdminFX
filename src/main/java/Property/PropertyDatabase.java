@@ -110,7 +110,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
      */
     @Override
     public int getNewID() {
-        return propertyList.lastKey() + 1;
+        return propertyList.size() == 0 ? 1 : propertyList.lastKey() + 1;
     }
 
     //CRUD

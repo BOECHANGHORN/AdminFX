@@ -114,7 +114,7 @@ public class AdminDatabase implements ReadWriteRole<Admin> {
      */
     @Override
     public int getNewID() {
-        return adminList.lastKey() + 1;
+        return adminList.size() == 0 ? 1 : adminList.lastKey() + 1;
     }
 
     //CRUD

@@ -114,7 +114,7 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
      */
     @Override
     public int getNewID() {
-        return tenantList.lastKey() + 1;
+        return tenantList.size() == 0 ? 1: tenantList.lastKey() + 1;
     }
 
     //CRUD

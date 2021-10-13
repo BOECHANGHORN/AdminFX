@@ -114,7 +114,7 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
      */
     @Override
     public int getNewID() {
-        return agentList.lastKey() + 1;
+        return agentList.size() == 0 ? 1 : agentList.lastKey() + 1;
     }
 
     //CRUD

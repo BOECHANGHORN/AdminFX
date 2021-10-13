@@ -114,7 +114,7 @@ public class OwnerDatabase implements ReadWriteRole<Owner> {
      */
     @Override
     public int getNewID() {
-        return ownerList.lastKey() + 1;
+        return ownerList.size() == 0 ? 1 : ownerList.lastKey() + 1;
     }
 
     //CRUD
