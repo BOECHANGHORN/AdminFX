@@ -137,7 +137,7 @@ public class AgentDatabase implements ReadWriteRole<Agent> {
      */
     @Override
     public TreeMap<Integer, Agent> read() {
-        return agentList;
+        return new TreeMap<>(agentList);
     }
 
     /**

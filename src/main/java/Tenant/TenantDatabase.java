@@ -137,7 +137,7 @@ public class TenantDatabase implements ReadWriteRole<Tenant> {
      */
     @Override
     public TreeMap<Integer, Tenant> read() {
-        return tenantList;
+        return new TreeMap<>(tenantList);
     }
 
     /**

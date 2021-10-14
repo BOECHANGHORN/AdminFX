@@ -137,7 +137,7 @@ public class AdminDatabase implements ReadWriteRole<Admin> {
      */
     @Override
     public TreeMap<Integer, Admin> read() {
-        return adminList;
+        return new TreeMap<>(adminList);
     }
 
     /**

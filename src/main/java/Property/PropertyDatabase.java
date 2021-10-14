@@ -133,7 +133,7 @@ public class PropertyDatabase implements ReadWrite<Property> {
      */
     @Override
     public TreeMap<Integer, Property> read() {
-        return propertyList;
+        return new TreeMap<>(propertyList);
     }
 
     /**
