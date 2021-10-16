@@ -161,7 +161,7 @@ public class PropertyFilter {
      */
     private void filterAddress(PropertyAddress adrs) {
         if (adrs.getDetailAddress() != null && !adrs.getDetailAddress().isEmpty())
-            properties.removeIf(p -> !p.getAddress().getDetailAddress().contains(adrs.getDetailAddress()));
+            properties.removeIf(p -> !p.getAddress().getDetailAddress().toLowerCase().contains(adrs.getDetailAddress().toLowerCase()));
         if (adrs.getState() != null && !adrs.getState().isEmpty())
             properties.removeIf(p -> !p.getAddress().getState().contains(adrs.getState()));
         if (adrs.getPostalCode() != null && !adrs.getPostalCode().isEmpty())

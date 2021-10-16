@@ -193,6 +193,7 @@ public class AddPropertyController {
         agentChoices.setValue(null);
         tenantChoices.setValue(null);
         isTenant.setSelected(false);
+        tenantChoices.setVisible(false);
         stateChoices.setValue(null);
         address.setText("");
         postcode.setTextFormatter(null);
