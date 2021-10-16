@@ -38,10 +38,10 @@ public class AddPropertyController {
     private ComboBox<Role> agentChoices;
     @FXML
     private Spinner<Integer> roomNum;
-    private final SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> roomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private Spinner<Integer> bathRoomNum;
-    private final SpinnerValueFactory<Integer> bathRoomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> bathRoomNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private TextArea address;
     @FXML
@@ -54,16 +54,16 @@ public class AddPropertyController {
     private CheckBox swimmingPool;
     @FXML
     private Spinner<Integer> tvNum;
-    private final SpinnerValueFactory<Integer> tvNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> tvNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private Spinner<Integer> fridgeNum;
-    private final SpinnerValueFactory<Integer> fridgeNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> fridgeNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private Spinner<Integer> airConNum;
-    private final SpinnerValueFactory<Integer> airConNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> airConNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private Spinner<Integer> waterHeaterNum;
-    private final SpinnerValueFactory<Integer> waterHeaterNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+    private final SpinnerValueFactory<Integer> waterHeaterNumVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
     @FXML
     private TextField sizeTxt;
     @FXML
