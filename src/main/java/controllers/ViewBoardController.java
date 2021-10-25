@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static com.app.main.Main.switchScene;
+
 /**
  * <h1>ViewBoardController Class</h1>
  * The ViewBoardController class is a controller class that
@@ -253,13 +255,13 @@ public class ViewBoardController {
     }
 
     /**
-     * A private method that initializes AddMenu scene
+     * A private method that initializes AddProperty scene
      *
      * @param mouseEvent the mouse event
      */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddMenuPage();
+        Main.goToAddPropertyPage();
     }
 
     /**
@@ -280,5 +282,15 @@ public class ViewBoardController {
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();
+    }
+
+    /**
+     * A private method that initializes ManageRole scene
+     *
+     * @param mouseEvent the mouse event
+     */
+    @FXML
+    public void onClickManageRole(MouseEvent mouseEvent) throws IOException {
+        Main.goToManageRolePage();
     }
 }

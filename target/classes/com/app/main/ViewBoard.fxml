@@ -46,6 +46,11 @@
                         <Image url="@../../../images/user.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" onMouseClicked="#onClickManageRole" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../../../images/role.png" />
+                     </image>
+                  </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" layoutX="22.0" layoutY="114.0" onMouseClicked="#onLogout" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../../../images/logout.png" />

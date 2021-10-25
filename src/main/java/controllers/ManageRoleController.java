@@ -1,12 +1,8 @@
 package controllers;
 
-import Admin.Admin;
-import Admin.AdminDatabase;
 import Agent.Agent;
-import Agent.AgentDatabase;
 import AppHolder.AppHolder;
 import Owner.Owner;
-import Owner.OwnerDatabase;
 import Phone.Phone;
 import Property.Property;
 import Property.PropertyDatabase;
@@ -14,7 +10,6 @@ import Property.PropertySearch.PropertyFilterBuilder;
 import Role.Role;
 import Role.RoleDatabase;
 import Tenant.Tenant;
-import Tenant.TenantDatabase;
 import Utils.AutoCompleteRoleBox;
 import Utils.PhoneFormatter;
 import Utils.RoleStringConverter;
@@ -27,18 +22,17 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 /**
- * <h1>AddRoleController Class</h1>
- * The AddRoleController class is a controller class that
+ * <h1>ManageRoleController Class</h1>
+ * The ManageRoleController class is a controller class that
  * connect the AddRole screen with the models
  *
  * @author Boe Chang Horn
  * @version 1.0
  * @since 2021-10-12
  */
-public class AddRoleController {
+public class ManageRoleController {
     @FXML
     private ChoiceBox<String> roleChoices;
     @FXML
@@ -413,13 +407,13 @@ public class AddRoleController {
     }
 
     /**
-     * A private method that initializes AddMenu scene
+     * A private method that initializes AddProperty scene
      *
      * @param mouseEvent the mouse event
      */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddMenuPage();
+        Main.goToAddPropertyPage();
     }
 
     /**
@@ -440,5 +434,15 @@ public class AddRoleController {
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();
+    }
+
+    /**
+     * A private method that initializes ManageRole scene
+     *
+     * @param mouseEvent the mouse event
+     */
+    @FXML
+    public void onClickManageRole(MouseEvent mouseEvent) throws IOException {
+        Main.goToManageRolePage();
     }
 }

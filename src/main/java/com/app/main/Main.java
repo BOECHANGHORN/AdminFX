@@ -2,9 +2,11 @@ package com.app.main;
 
 import Initializer.Initialization;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,6 +53,13 @@ public class Main extends Application {
     }
 
     /**
+     * Initialize ManageRole scene
+     */
+    public static void goToManageRolePage() throws IOException {
+        switchScene("ManageRole.fxml");
+    }
+
+    /**
      * Initialize Login scene
      */
     public static void goToLoginPage() throws IOException {
@@ -72,10 +81,10 @@ public class Main extends Application {
     }
 
     /**
-     * Initialize AddMenu scene
+     * Initialize AddProperty scene
      */
-    public static void goToAddMenuPage() throws IOException {
-        switchScene("AddMenu.fxml");
+    public static void goToAddPropertyPage() throws IOException {
+        switchScene("AddProperty.fxml");
     }
 
     public static void main(String[] args) {

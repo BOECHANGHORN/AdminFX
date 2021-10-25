@@ -234,13 +234,13 @@ public class AddPropertyController {
     }
 
     /**
-     * A private method that initializes AddMenu scene
+     * A private method that initializes AddProperty scene
      *
      * @param mouseEvent the mouse event
      */
     @FXML
     private void onClickAddBtn(MouseEvent mouseEvent) throws IOException {
-        Main.goToAddMenuPage();
+        Main.goToAddPropertyPage();
     }
 
     /**
@@ -261,5 +261,15 @@ public class AddPropertyController {
     @FXML
     private void onLogout(MouseEvent mouseEvent) throws IOException {
         Main.goToLoginPage();
+    }
+
+    /**
+     * A private method that initializes ManageRole scene
+     *
+     * @param mouseEvent the mouse event
+     */
+    @FXML
+    public void onClickManageRole(MouseEvent mouseEvent) throws IOException {
+        Main.goToManageRolePage();
     }
 }
