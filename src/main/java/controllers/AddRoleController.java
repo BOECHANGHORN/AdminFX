@@ -62,11 +62,6 @@ public class AddRoleController {
     @FXML
     private Label userLabel;
 
-    private final TreeMap<Integer, Owner> ownerList = OwnerDatabase.getInstance().read();
-    private final TreeMap<Integer, Agent> agentList = AgentDatabase.getInstance().read();
-    private final TreeMap<Integer, Tenant> tenantList = TenantDatabase.getInstance().read();
-    private final TreeMap<Integer, Admin> adminList = AdminDatabase.getInstance().read();
-
     /**
      * A private method that will be triggered when
      * the scene initializes and trigger populateData method
@@ -192,20 +187,7 @@ public class AddRoleController {
             if (roleChoices.getValue() == null)
                 return;
 
-            switch (roleChoices.getValue()) {
-                case "Owner":
-                    userChoices.getItems().addAll(ownerList.values());
-                    break;
-                case "Agent":
-                    userChoices.getItems().addAll(agentList.values());
-                    break;
-                case "Tenant":
-                    userChoices.getItems().addAll(tenantList.values());
-                    break;
-                case "Admin":
-                    userChoices.getItems().addAll(adminList.values());
-                    break;
-            }
+            userChoices.getItems().addAll(RoleDatabase.read(roleChoices.getValue()));
         }
     }
 

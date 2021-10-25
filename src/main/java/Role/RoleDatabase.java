@@ -9,6 +9,9 @@ import Owner.OwnerDatabase;
 import Tenant.Tenant;
 import Tenant.TenantDatabase;
 
+import java.util.ArrayList;
+import java.util.TreeMap;
+
 /**
  * <h1>RoleDatabase Class</h1>
  * The RoleDatabase class is a Facade design pattern class
@@ -104,6 +107,26 @@ public class RoleDatabase {
             default:
                 AdminDatabase.getInstance().update((Admin) role);
                 break;
+        }
+
+    }
+
+    /**
+     * Retrieve all the specific Role objects
+     *
+     * @param role the specific role
+     * @return all the specific role objects
+     */
+    public static ArrayList<Role> read(String role) {
+        switch (role) {
+            case "Agent":
+                return new ArrayList<>(AgentDatabase.getInstance().read().values());
+            case "Owner":
+                return new ArrayList<>(OwnerDatabase.getInstance().read().values());
+            case "Tenant":
+                return new ArrayList<>(TenantDatabase.getInstance().read().values());
+            default:
+                return new ArrayList<>(AdminDatabase.getInstance().read().values());
         }
 
     }
