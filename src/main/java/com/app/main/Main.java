@@ -56,7 +56,7 @@ public class Main extends Application {
      * Initialize ManageRole scene
      */
     public static void goToManageRolePage() throws IOException {
-        switchScene("ManageRole.fxml");
+        switchScene("ManageUser.fxml");
     }
 
     /**

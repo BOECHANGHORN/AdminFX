@@ -24,15 +24,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * <h1>ManageRoleController Class</h1>
- * The ManageRoleController class is a controller class that
+ * <h1>ManageUserController Class</h1>
+ * The ManageUserController class is a controller class that
  * connect the AddRole screen with the models
  *
  * @author Boe Chang Horn
  * @version 1.0
  * @since 2021-10-12
  */
-public class ManageRoleController {
+public class ManageUserController {
     @FXML
     private ChoiceBox<String> roleChoices;
     @FXML
