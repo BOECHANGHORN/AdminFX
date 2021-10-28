@@ -9,10 +9,26 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * <h1>AutoCompleteRoleBox Class</h1>
+ * The AutoCompleteRoleBox is an AutoCompleteBox created by Adam Mudianto
+ * for comboBox modified by Tan Kai Yuan for Role comboBox usage
+ *
+ * Source = https://www.techgalery.com/2019/08/javafx-combo-box-with-search.html
+ *
+ * @author Adam Mudianto (Modified by Tan Kai Yuan)
+ * @version 1.0
+ * @since 2021-10-08
+ *
+ */
 public class AutoCompleteRoleBox implements EventHandler {
     private final ComboBox<Role> comboBox;
     private final ObservableList<Role> data;
 
+    /**
+     * Gets text formatter
+     * @param comboBox the role comboBox to be modified
+     */
     public AutoCompleteRoleBox(final ComboBox comboBox) {
         this.comboBox = comboBox;
         this.data = comboBox.getItems();
@@ -20,6 +36,11 @@ public class AutoCompleteRoleBox implements EventHandler {
         this.doAutoCompleteBox();
     }
 
+    /**
+     * Initialize the auto complete box by getting the String Converter and
+     * adding the listener when the box is triggered (typing, enter and etc.)
+     *
+     */
     private void doAutoCompleteBox() {
         this.comboBox.setEditable(true);
 
@@ -41,6 +62,10 @@ public class AutoCompleteRoleBox implements EventHandler {
 
     }
 
+    /**
+     * To handle all the keyboard event
+     *
+     */
     @Override
     public void handle(Event e) {
         if (!(e instanceof KeyEvent))
@@ -89,6 +114,10 @@ public class AutoCompleteRoleBox implements EventHandler {
         this.comboBox.show();
     }
 
+    /**
+     * Move the caret (text pointer) to the end of the selected text
+     *
+     */
     private void moveCaret(int textLength) {
         this.comboBox.getEditor().positionCaret(textLength);
     }
