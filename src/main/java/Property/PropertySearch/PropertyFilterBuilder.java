@@ -45,7 +45,7 @@ public class PropertyFilterBuilder {
      * Sets type.
      *
      * @param type the type
-     * @return the type
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setType(PropertyType type) {
         this.type = type;
@@ -65,7 +65,7 @@ public class PropertyFilterBuilder {
      * Sets name.
      *
      * @param name the name
-     * @return the name
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setName(String name) {
         this.name = name;
@@ -85,7 +85,7 @@ public class PropertyFilterBuilder {
      * Sets owner.
      *
      * @param owner the owner
-     * @return the owner
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setOwner(Owner owner) {
         this.owner = owner;
@@ -105,7 +105,7 @@ public class PropertyFilterBuilder {
      * Sets agent.
      *
      * @param agent the agent
-     * @return the agent
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setAgent(Agent agent) {
         this.agent = agent;
@@ -125,7 +125,7 @@ public class PropertyFilterBuilder {
      * Sets tenant.
      *
      * @param tenant the tenant
-     * @return the tenant
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setTenant(Tenant tenant) {
         this.tenant = tenant;
@@ -145,7 +145,7 @@ public class PropertyFilterBuilder {
      * Sets tenant opt.
      *
      * @param tenantOpt the tenant opt
-     * @return the tenant opt
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setTenantOpt(Tenant tenantOpt) {
         this.tenantOpt = tenantOpt;
@@ -165,7 +165,7 @@ public class PropertyFilterBuilder {
      * Sets availability.
      *
      * @param availability the availability
-     * @return the availability
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setAvailability(Boolean availability) {
         this.availability = availability;
@@ -185,7 +185,7 @@ public class PropertyFilterBuilder {
      * Sets comment.
      *
      * @param comment the comment
-     * @return the comment
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setComment(boolean comment) {
         this.comment = comment;
@@ -205,7 +205,7 @@ public class PropertyFilterBuilder {
      * Sets facilities picker.
      *
      * @param facilitiesPicker the facilities picker
-     * @return the facilities picker
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setFacilitiesPicker(FacilitiesPicker facilitiesPicker) {
         this.facilitiesPicker = facilitiesPicker;
@@ -225,7 +225,7 @@ public class PropertyFilterBuilder {
      * Sets property address.
      *
      * @param propertyAddress the property address
-     * @return the property address
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setPropertyAddress(PropertyAddress propertyAddress) {
         this.propertyAddress = propertyAddress;
@@ -245,7 +245,7 @@ public class PropertyFilterBuilder {
      * Sets rental low bound.
      *
      * @param rentalLowBound the rental low bound
-     * @return the rental low bound
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setRentalLowBound(double rentalLowBound) {
         this.rentalLowBound = rentalLowBound;
@@ -265,7 +265,7 @@ public class PropertyFilterBuilder {
      * Sets rental up bound.
      *
      * @param rentalUpBound the rental up bound
-     * @return the rental up bound
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setRentalUpBound(double rentalUpBound) {
         this.rentalUpBound = rentalUpBound;
@@ -285,7 +285,7 @@ public class PropertyFilterBuilder {
      * Sets published.
      *
      * @param published the published
-     * @return the published
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setPublished(Boolean published) {
         this.published = published;
@@ -305,7 +305,7 @@ public class PropertyFilterBuilder {
      * Sets ascending.
      *
      * @param ascending the ascending
-     * @return the ascending
+     * @return the PropertyFilterBuilder
      */
     public PropertyFilterBuilder setAscending(Boolean ascending) {
         this.ascending = ascending;

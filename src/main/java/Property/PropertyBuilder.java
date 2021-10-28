@@ -86,7 +86,7 @@ public class PropertyBuilder {
      * Sets type.
      *
      * @param type the type
-     * @return the type
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setType(PropertyType type) {
         this.type = type;
@@ -97,7 +97,7 @@ public class PropertyBuilder {
      * Sets owner.
      *
      * @param owner the owner
-     * @return the owner
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setOwner(Owner owner) {
         this.owner = owner;
@@ -108,7 +108,7 @@ public class PropertyBuilder {
      * Sets agent.
      *
      * @param agent the agent
-     * @return the agent
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setAgent(Agent agent) {
         this.agent = agent;
@@ -119,7 +119,7 @@ public class PropertyBuilder {
      * Sets room num.
      *
      * @param roomNum the room num
-     * @return the room num
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setRoomNum(int roomNum) {
         this.roomNum = roomNum;
@@ -130,7 +130,7 @@ public class PropertyBuilder {
      * Sets bath room num.
      *
      * @param bathRoomNum the bath room num
-     * @return the bath room num
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setBathRoomNum(int bathRoomNum) {
         this.bathRoomNum = bathRoomNum;
@@ -141,7 +141,7 @@ public class PropertyBuilder {
      * Sets address.
      *
      * @param address the address
-     * @return the address
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setAddress(PropertyAddress address) {
         this.address = address;
@@ -152,7 +152,7 @@ public class PropertyBuilder {
      * Sets size.
      *
      * @param size the size
-     * @return the size
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setSize(int size) {
         this.size = size;
@@ -163,7 +163,7 @@ public class PropertyBuilder {
      * Sets facilities.
      *
      * @param facilities the facilities
-     * @return the facilities
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setFacilities(PropertyFacilities facilities) {
         this.facilities = facilities;
@@ -174,7 +174,7 @@ public class PropertyBuilder {
      * Sets tenant.
      *
      * @param tenant the tenant
-     * @return the tenant
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setTenant(Tenant tenant) {
         this.tenant = tenant;
@@ -185,7 +185,7 @@ public class PropertyBuilder {
      * Sets comment.
      *
      * @param comment the comment
-     * @return the comment
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setComment(String comment) {
         this.comment = comment;
@@ -196,7 +196,7 @@ public class PropertyBuilder {
      * Sets rate.
      *
      * @param rate the rate
-     * @return the rate
+     * @return the PropertyBuilder
      */
     public PropertyBuilder setRate(double rate) {
         this.rate = rate;
@@ -207,9 +207,11 @@ public class PropertyBuilder {
      * Sets published.
      *
      * @param published the published
+     * @return the PropertyBuilder
      */
-    public void setPublished(boolean published) {
+    public PropertyBuilder setPublished(boolean published) {
         this.published = published;
+        return this;
     }
 
     /**
